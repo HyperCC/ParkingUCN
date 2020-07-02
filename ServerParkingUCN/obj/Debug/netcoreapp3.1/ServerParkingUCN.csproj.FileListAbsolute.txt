@@ -1,0 +1,13 @@
+X:\Proyectos\ServerParkingUCN\bin\Debug\netcoreapp3.1\ServerParkingUCN.exe
+X:\Proyectos\ServerParkingUCN\bin\Debug\netcoreapp3.1\ServerParkingUCN.deps.json
+X:\Proyectos\ServerParkingUCN\bin\Debug\netcoreapp3.1\ServerParkingUCN.runtimeconfig.json
+X:\Proyectos\ServerParkingUCN\bin\Debug\netcoreapp3.1\ServerParkingUCN.runtimeconfig.dev.json
+X:\Proyectos\ServerParkingUCN\bin\Debug\netcoreapp3.1\ServerParkingUCN.dll
+X:\Proyectos\ServerParkingUCN\bin\Debug\netcoreapp3.1\ServerParkingUCN.pdb
+X:\Proyectos\ServerParkingUCN\obj\Debug\netcoreapp3.1\ServerParkingUCN.csprojAssemblyReference.cache
+X:\Proyectos\ServerParkingUCN\obj\Debug\netcoreapp3.1\ServerParkingUCN.csproj.CoreCompileInputs.cache
+X:\Proyectos\ServerParkingUCN\obj\Debug\netcoreapp3.1\ServerParkingUCN.AssemblyInfoInputs.cache
+X:\Proyectos\ServerParkingUCN\obj\Debug\netcoreapp3.1\ServerParkingUCN.AssemblyInfo.cs
+X:\Proyectos\ServerParkingUCN\obj\Debug\netcoreapp3.1\ServerParkingUCN.dll
+X:\Proyectos\ServerParkingUCN\obj\Debug\netcoreapp3.1\ServerParkingUCN.pdb
+X:\Proyectos\ServerParkingUCN\obj\Debug\netcoreapp3.1\ServerParkingUCN.genruntimeconfig.cache
