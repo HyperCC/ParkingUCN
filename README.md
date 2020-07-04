@@ -2,7 +2,7 @@
 
   Registration and control of vehicular access to UCN.
 
-  ** UCN  -  .NET Core -  Android Studio  -  Laravel  -  Intellij  **
+  **UCN  -  .NET Core -  Android Studio  -  Laravel  -  Intellij**
 
 
 ## Description
@@ -14,20 +14,22 @@
 
 
 ##  Technologies
-  - Java
-  - C# 
-  - Laravel
+  - Java 1.8.0_251
+  - PHP 7.4.7
+  - C# 8
+  - .NET Core 3.1
+  - Laravel 7.18.0
+  - Bootstrap 4.5
+  - Intellij Idea 2020.1.2
+  - Android Studio 4.2 Cannary 3
   - HTML, CSS, Javascript
-  - Bootstrap 4
-  - Intellij Idea
-  - Android Studio
   
    
 ##  Contact
   Created by engineering students:
-  - [Pablo Castillo](https://github.com/Pablo-Castillo)
-  - [Charlie Condorcet](https://github.com/charliecondorcet)
-  - [Jorge Pizarro](https://github.com/JorgePT93)
+  - [Pablo Castillo](https://github.com/Pablo-Castillo)	-	<pablo.castillo01@alumnos.ucn.cl>
+  - [Charlie Condorcet](https://github.com/charliecondorcet)	-	<ccm059@alumnos.ucn.cl>
+  - [Jorge Pizarro](https://github.com/JorgePT93)	-	<jorge.pizarro93@gmail.com>
   
   
 ##  License
