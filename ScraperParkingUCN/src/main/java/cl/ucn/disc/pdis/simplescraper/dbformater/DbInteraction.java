@@ -62,9 +62,11 @@ public final class DbInteraction {
     public DbInteraction() throws SQLException {
 
         // Use sqlite database to replace h2.
-        databaseURL = "jdbc:sqlite:functionarydb.db";
+        databaseURL = "jdbc:sqlite:Database/funcionarios.db";
+
         // Create a connection source to our database.
         this.connectionSource = new JdbcConnectionSource(databaseURL);
+
         // Instance the DAO.
         functionaryDao = DaoManager.createDao(connectionSource, Functionary.class);
 
@@ -90,12 +92,12 @@ public final class DbInteraction {
                                     String oficina, String direccion) {
 
         // Save variables like null if is empty.
-        cargo = EmptyToNUll(cargo);
-        unidad = EmptyToNUll(unidad);
-        email = EmptyToNUll(email);
-        telefono = EmptyToNUll(telefono);
-        oficina = EmptyToNUll(oficina);
-        direccion = EmptyToNUll(direccion);
+        cargo = EmptyToNull(cargo);
+        unidad = EmptyToNull(unidad);
+        email = EmptyToNull(email);
+        telefono = EmptyToNull(telefono);
+        oficina = EmptyToNull(oficina);
+        direccion = EmptyToNull(direccion);
 
         // Add new valid functionary to database.
         Functionary functionary = new Functionary(
@@ -127,9 +129,8 @@ public final class DbInteraction {
      * @param var
      * @return
      */
-    public String EmptyToNUll(String var) {
-        var = var.isEmpty() ? null : var;
-        return var;
+    public String EmptyToNull(String var) {
+        return var.isEmpty() ? null : var;
     }
 
     /**

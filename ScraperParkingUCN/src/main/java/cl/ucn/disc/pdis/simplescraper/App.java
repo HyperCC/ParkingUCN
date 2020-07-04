@@ -56,7 +56,7 @@ public class App {
         // Auxiliaries.
         int id = 1;
         int canVoids = 0;
-        int maxCod = 29800;
+        int maxCod = 200;
         String url = "http://online.ucn.cl/directoriotelefonicoemail/fichaGenerica/?cod=";
         PrintWriter printWriter = new PrintWriter("records.txt", "UTF-8");
 
@@ -158,7 +158,7 @@ public class App {
 
                 } else {
                     log.info("The new functionary is not added.");
-                    
+
                 }
 
             } else {
