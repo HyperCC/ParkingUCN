@@ -53,9 +53,7 @@ public class App {
         Esto ultimo verificado buscando ultimos profesores agregados este semestre con id 29700 aprox.
         */
 
-        /**
-         * Auxiliaries.
-         */
+        // Auxiliaries.
         int id = 1;
         int canVoids = 0;
         int maxCod = 29800;
@@ -65,9 +63,7 @@ public class App {
         // Random variable to interleave time.
         Random random = new Random();
 
-        /**
-         * Data extracted from telephone directory.
-         */
+        // Data extracted from telephone directory.
         String nombre = "";
         String cargo = "";
         String unidad = "";
@@ -76,9 +72,7 @@ public class App {
         String oficina = "";
         String direccion = "";
 
-        /**
-         * The database instance.
-         */
+        // The database instance.
         DbInteraction theDatabase = new DbInteraction();
 
         log.info("Initialization of scraping..");
@@ -92,16 +86,19 @@ public class App {
 
             // Timeout in server.
             try {
-                document = Jsoup.connect(actualUrl.toString()).get();
 
+                document = Jsoup.connect(actualUrl.toString()).get();
             } catch (SocketTimeoutException e) {
+
                 log.error("Timeout for http request. Details: {}", e.getMessage());
             }
 
             // Verify the index value.
             try {
+
                 nombre = document.getElementById("lblNombre").text();
             } catch (NullPointerException e) {
+
                 log.error("Value null for timout recent. Details: {}", e);
                 nombre = "";
             }
@@ -112,10 +109,11 @@ public class App {
                 cargo = document.getElementById("lblCargo").text();
                 unidad = document.getElementById("lblUnidad").text();
                 email = document.getElementById("lblEmail").text();
-
                 telefono = document.getElementById("lblTelefono").text();
-                // Formate to fone number.
+
+                // Format to phone number.
                 if (!telefono.isEmpty()) {
+
                     telefono = telefono.substring(5, telefono.length());
                 }
 
@@ -135,7 +133,7 @@ public class App {
 
                 log.debug("New identified: {}", sbFunctionary.toString());
 
-                // Add new valid functionary to dabatase.
+                // Add new valid functionary to database.
                 boolean notExistInDb = theDatabase.formatToDatabase(nombre, cargo, unidad, email, telefono, oficina, direccion);
 
                 // Check if the new functionary is added. The db and csv must be same.
@@ -149,6 +147,7 @@ public class App {
                         Thread.sleep(1000 + random.nextInt(1000));
 
                     } catch (InterruptedException e) {
+
                         log.error("Thread is interrupted either before or during the activity. Details: {}", e.getMessage());
                     }
 
@@ -164,13 +163,16 @@ public class App {
                 // If 10 connections to the server happen in a row with no data returned.
                 canVoids++;
                 if (canVoids >= 10) {
+
                     // Time to wait not to do DDoS.
                     try {
                         Thread.sleep(1000 + random.nextInt(1000));
 
                     } catch (InterruptedException e) {
+
                         log.error("Thread is interrupted either before or during the activity. Details: {}", e.getMessage());
                     }
+
                     canVoids = 0;
                 }
             }
@@ -179,6 +181,7 @@ public class App {
 
         // End of record insertion.
         printWriter.close();
+
         //connectionSource.close();
         log.info("End of insertions.");
         theDatabase.CloseDBConnection();
