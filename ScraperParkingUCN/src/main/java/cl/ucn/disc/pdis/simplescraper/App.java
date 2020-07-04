@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cl.ucn.disc.pdis.simplescraper.mainapp;
+package cl.ucn.disc.pdis.simplescraper;
 
 import cl.ucn.disc.pdis.simplescraper.dbformater.DbInteraction;
 import org.jsoup.Jsoup;
