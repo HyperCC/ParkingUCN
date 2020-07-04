@@ -86,21 +86,21 @@ public class App {
 
             // Timeout in server.
             try {
-
                 document = Jsoup.connect(actualUrl.toString()).get();
-            } catch (SocketTimeoutException e) {
 
+            } catch (SocketTimeoutException e) {
                 log.error("Timeout for http request. Details: {}", e.getMessage());
+
             }
 
             // Verify the index value.
             try {
-
                 nombre = document.getElementById("lblNombre").text();
-            } catch (NullPointerException e) {
 
+            } catch (NullPointerException e) {
                 log.error("Value null for timout recent. Details: {}", e);
                 nombre = "";
+
             }
 
             if (!nombre.isEmpty()) {
@@ -123,6 +123,8 @@ public class App {
                 // Concatenation of Functionary data.
                 StringBuilder sbFunctionary = new StringBuilder();
                 sbFunctionary.append(id).append(",")
+                        // The id original from the web contacts.
+                        .append(i).append(",")
                         .append(nombre).append(",")
                         .append(cargo).append(",")
                         .append(unidad).append(",")
@@ -134,7 +136,7 @@ public class App {
                 log.debug("New identified: {}", sbFunctionary.toString());
 
                 // Add new valid functionary to database.
-                boolean notExistInDb = theDatabase.formatToDatabase(nombre, cargo, unidad, email, telefono, oficina, direccion);
+                boolean notExistInDb = theDatabase.formatToDatabase(i, nombre, cargo, unidad, email, telefono, oficina, direccion);
 
                 // Check if the new functionary is added. The db and csv must be same.
                 if (notExistInDb) {
@@ -147,8 +149,8 @@ public class App {
                         Thread.sleep(1000 + random.nextInt(1000));
 
                     } catch (InterruptedException e) {
-
                         log.error("Thread is interrupted either before or during the activity. Details: {}", e.getMessage());
+
                     }
 
                     // ID real to csv file.
@@ -156,6 +158,7 @@ public class App {
 
                 } else {
                     log.info("The new functionary is not added.");
+                    
                 }
 
             } else {
@@ -169,8 +172,8 @@ public class App {
                         Thread.sleep(1000 + random.nextInt(1000));
 
                     } catch (InterruptedException e) {
-
                         log.error("Thread is interrupted either before or during the activity. Details: {}", e.getMessage());
+
                     }
 
                     canVoids = 0;

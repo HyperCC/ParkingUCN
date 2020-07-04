@@ -62,7 +62,7 @@ public final class StorageTest {
             Dao<Functionary, Long> daoFunctionary = DaoManager.createDao(connectionSource, Functionary.class);
 
             // New Functionary
-            Functionary functionary = new Functionary("Andres Cervantes", "Profesor", "Informatica", "andres@ucn.cl", "9 99998888", "depto. informatica", "angamos 675");
+            Functionary functionary = new Functionary(32234,"Andres Cervantes", "Profesor", "Informatica", "andres@ucn.cl", "9 99998888", "depto. informatica", "angamos 675");
 
             // Insert Functionary into the database
             int tuples = daoFunctionary.create(functionary);

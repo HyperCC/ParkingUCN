@@ -99,7 +99,8 @@ public final class Functionary {
      * @param oficina
      * @param direccion
      */
-    public Functionary(String nombre, String cargo, String unidad, String email, String telefono, String oficina, String direccion) {
+    public Functionary(int webId, String nombre, String cargo, String unidad, String email, String telefono, String oficina, String direccion) {
+        this.webId = webId;
         this.nombre = nombre;
         this.cargo = cargo;
         this.unidad = unidad;

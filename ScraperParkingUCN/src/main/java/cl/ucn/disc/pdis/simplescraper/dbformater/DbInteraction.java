@@ -86,7 +86,7 @@ public final class DbInteraction {
      * @throws SQLException
      * @throws IOException
      */
-    public boolean formatToDatabase(String nombre, String cargo, String unidad, String email, String telefono,
+    public boolean formatToDatabase(int webId, String nombre, String cargo, String unidad, String email, String telefono,
                                     String oficina, String direccion) {
 
         // Save variables like null if is empty.
@@ -98,7 +98,9 @@ public final class DbInteraction {
         direccion = EmptyToNUll(direccion);
 
         // Add new valid functionary to database.
-        Functionary functionary = new Functionary(nombre,
+        Functionary functionary = new Functionary(
+                webId,
+                nombre,
                 cargo,
                 unidad,
                 email,
