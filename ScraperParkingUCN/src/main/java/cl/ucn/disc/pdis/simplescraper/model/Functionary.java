@@ -34,6 +34,12 @@ public final class Functionary {
     private int id;
 
     /**
+     * The web id from UCN directory.
+     */
+    @DatabaseField(canBeNull = false)
+    private int webId;
+
+    /**
      * The Nombre.
      */
     @DatabaseField(canBeNull = false)
