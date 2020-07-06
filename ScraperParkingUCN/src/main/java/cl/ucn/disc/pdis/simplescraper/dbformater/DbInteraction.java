@@ -21,6 +21,7 @@ import cl.ucn.disc.pdis.simplescraper.model.Functionary;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import org.slf4j.Logger;
@@ -140,6 +141,35 @@ public final class DbInteraction {
      */
     public void CloseDBConnection() throws IOException {
         this.connectionSource.close();
+    }
+
+    /**
+     * Get name of Functionary by id.
+     *
+     * @param id
+     * @return the name by id.
+     * @throws SQLException
+     */
+    public String GetFunctionaryById(int id) throws SQLException {
+
+        String val = Integer.toString(id);
+        QueryBuilder<Functionary, String> consulta = this.functionaryDao.queryBuilder();
+        Functionary functionary = consulta.where().eq("id", val).queryForFirst();
+
+        return functionary.getNombre();
+    }
+
+    /**
+     * Get length of records from DB.
+     *
+     * @return length of records from DB.
+     * @throws SQLException
+     */
+    public long GetLengthFunctionary() throws SQLException {
+
+        QueryBuilder<Functionary, String> consulta = this.functionaryDao.queryBuilder();
+        long lengthReg = consulta.countOf();
+        return lengthReg;
     }
 
 }
