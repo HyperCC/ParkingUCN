@@ -18,6 +18,7 @@ package cl.ucn.disc.pdis.simplescraper.dbformater;
 
 import cl.ucn.disc.pdis.simplescraper.App;
 import cl.ucn.disc.pdis.simplescraper.model.Functionary;
+import cl.ucn.disc.pdis.simplescraper.model.PublicInfo;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -58,6 +59,11 @@ public final class DbInteraction {
     private Dao<Functionary, String> functionaryDao;
 
     /**
+     * The Dao to PublicInfo model
+     */
+    private Dao<PublicInfo, String> publicInfoDao;
+
+    /**
      * Constructor to initializate the database.
      */
     public DbInteraction() throws SQLException {
@@ -73,6 +79,12 @@ public final class DbInteraction {
 
         // if you need to create the ’accounts’ table make this call.
         TableUtils.createTableIfNotExists(connectionSource, Functionary.class);
+
+        // Instance the DAO for PublicInfo
+        publicInfoDao = DaoManager.createDao(connectionSource, PublicInfo.class);
+
+        // Table creation for PublicInfo.
+        TableUtils.createTableIfNotExists(connectionSource, PublicInfo.class);
     }
 
     /**
@@ -121,6 +133,41 @@ public final class DbInteraction {
         }
 
         log.debug("Added the new functionary to database.");
+        return true;
+    }
+
+    /**
+     * Format to PublicInfo data
+     *
+     * @param nombre
+     * @param rut
+     * @param sexo
+     * @param direccion
+     * @param comuna
+     * @return
+     * @throws SQLException
+     * @throws IOException
+     */
+    public boolean formatPublicInfo(String nombre, String rut, String sexo, String direccion, String comuna) {
+
+        // Add new valid functionary to database.
+        PublicInfo publicInfo = new PublicInfo(
+                nombre,
+                rut,
+                sexo,
+                direccion,
+                comuna);
+
+        // Duplicated Functionaries.
+        try {
+            this.publicInfoDao.createIfNotExists(publicInfo);
+
+        } catch (SQLException e) {
+            log.error("New public info {} no added. Details: {}", nombre, e.getMessage());
+            return false;
+        }
+
+        log.debug("Added the new public info to database.");
         return true;
     }
 
