@@ -136,7 +136,7 @@ public class App {
                 log.debug("New identified: {}", sbFunctionary.toString());
 
                 // Add new valid functionary to database.
-                boolean notExistInDb = theDatabase.formatToDatabase(i, nombre, cargo, unidad, email, telefono, oficina, direccion);
+                boolean notExistInDb = theDatabase.formatToFunctionary(i, nombre, cargo, unidad, email, telefono, oficina, direccion);
 
                 // Check if the new functionary is added. The db and csv must be same.
                 if (notExistInDb) {

@@ -35,80 +35,84 @@ public class CivilData {
      */
     public static void main(String[] args) throws IOException, SQLException {
 
+        // The singleton database instance.
         DbInteraction DB = new DbInteraction();
 
-        try {
+        for (int i = 0; i < DB.GetLengthFunctionary(); i++) {
 
-            for (int i = 0; i < DB.GetLengthFunctionary(); i++) {
+            String actualUrl = "https://www.nombrerutyfirma.com/buscar?term=" + DB.GetFunctionaryById(i + 1);
+            Document document = null;
 
-                String actualUrl = "https://www.nombrerutyfirma.com/buscar?term=" + DB.GetFunctionaryById(i+1);
-                Document document = null;
+            // Timeout in server.
+            try {
+                document = Jsoup.connect(actualUrl).get();
+
+            } catch (SocketTimeoutException e) {
+                log.error("Timeout for http request. Details: {}", e.getMessage());
+
+            }
+
+            ArrayList<String> allTrObtained = new ArrayList<>();
+
+            // Get all data with 'td' tag
+            // Must be only 5, if there are several results with the same name.
+            Elements trLabels = document.getElementsByTag("td");
+
+            // Parting of 'td' tags
+            for (int j = 0; j < 5; j++) {
 
                 try {
+                    // Get the content from the first 'td'.
+                    allTrObtained.add(trLabels.first().text().toString());
 
-                    document = Jsoup.connect(actualUrl).get();
-                } catch (SocketTimeoutException e) {
+                    // Delete the content from the 'td' stack.
+                    trLabels.remove(trLabels.first());
 
-                    log.error("Timeout for http request. Details: {}", e.getMessage());
-                }
-
-                ArrayList<String> variablesCompletas = new ArrayList<>();
-
-                //  get all data with 'td' tag
-                Elements enteraPo =document.getElementsByTag("td");
-
-                // parting of 'td' tags
-                for (int j = 0; j < 5; j++) {
-
-                    variablesCompletas.add(enteraPo.first().text().toString());
-                    enteraPo.remove(enteraPo.first());
-                }
-
-                // Here we already got all the data from nombrerutyfirma separated by position.
-                /*
-                for (int j = 0; j < variablesCompletas.size(); j++) {
-
-                    // All data of one person.
-                    System.out.println(variablesCompletas.get(j));
-                }*/
-
-                // Data extracted from telephone directory.
-                String nombre = variablesCompletas.get(0);
-                String rut = variablesCompletas.get(1);
-                String sexo = variablesCompletas.get(2);
-                String direccion = variablesCompletas.get(3);
-                String comuna = variablesCompletas.get(4);
-
-                // Add new valid functionary to database.
-                boolean notExistInDb = DB.formatPublicInfo(nombre, rut, sexo, direccion, comuna);
-
-                if (notExistInDb) {
-
-                    Random random = new Random();
-
-                    // Time to wait not to do DDoS.
-                    try {
-                        Thread.sleep(1000 + random.nextInt(1000));
-
-                    } catch (InterruptedException e) {
-                        log.error("Thread is interrupted either before or during the activity. Details: {}", e.getMessage());
-
-                    }
-
-                } else {
-                    log.info("The new functionary is not added.");
-
+                }catch (NullPointerException e) {
+                    log.debug("No data found. Details: {}",e.getMessage());
+                    allTrObtained.add("");
                 }
 
             }
 
-        } catch (Exception e) {
+            // Add new valid CivilFunctionary to database.
+            boolean notExistInDb = DB.formatToCivilFunctionary(
+                    // Nombre.
+                    allTrObtained.get(0),
+                    // Rut.
+                    allTrObtained.get(1),
+                    // Sexo.
+                    allTrObtained.get(2),
+                    // Direccion.
+                    allTrObtained.get(3),
+                    // ComunaCiudad
+                    allTrObtained.get(4));
 
-            e.printStackTrace();
+            // Check if the new functionary is added correctly.
+            if (notExistInDb) {
+
+                // Random variable to interleave time.
+                Random random = new Random();
+
+                // Time to wait not to do DDoS.
+                try {
+                    Thread.sleep(1000 + random.nextInt(1000));
+
+                } catch (InterruptedException e) {
+                    log.error("Thread is interrupted either before or during the activity. Details: {}", e.getMessage());
+
+                }
+
+            } else {
+                log.info("The new functionary is not added.");
+
+            }
+
         }
 
         //connectionSource.close();
-        log.info("End of insertions.");
+        log.info("End of insertions to CivilFunctionary.");
         DB.CloseDBConnection();
+
     }
 }

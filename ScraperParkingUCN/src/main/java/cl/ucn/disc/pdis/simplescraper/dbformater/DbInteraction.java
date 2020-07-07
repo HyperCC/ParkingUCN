@@ -101,8 +101,8 @@ public final class DbInteraction {
      * @throws SQLException
      * @throws IOException
      */
-    public boolean formatToDatabase(int webId, String nombre, String cargo, String unidad, String email, String telefono,
-                                    String oficina, String direccion) {
+    public boolean formatToFunctionary(int webId, String nombre, String cargo, String unidad, String email, String telefono,
+                                       String oficina, String direccion) {
 
         // Save variables like null if is empty.
         cargo = EmptyToNull(cargo);
@@ -148,7 +148,7 @@ public final class DbInteraction {
      * @throws SQLException
      * @throws IOException
      */
-    public boolean formatPublicInfo(String nombre, String rut, String sexo, String direccion, String comuna) {
+    public boolean formatToCivilFunctionary(String nombre, String rut, String sexo, String direccion, String comuna) {
 
         // Save variables like null if is empty. The name may not be found.
         nombre = EmptyToNull(nombre);
