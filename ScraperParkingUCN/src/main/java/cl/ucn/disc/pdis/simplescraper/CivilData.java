@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Random;
 
@@ -18,24 +17,25 @@ import java.util.ArrayList;
 /**
  * App to do scraping at nombrerutyfirma.cl
  *
- * @author Charlie Condorcet
+ * @author Castillo - Condorcet - Pizarro.
  */
-public class CivicData {
+public class CivilData {
 
     /**
      * The Logger
      */
-    private static final Logger log = LoggerFactory.getLogger(CivicData.class);
+    private static final Logger log = LoggerFactory.getLogger(CivilData.class);
 
     /**
      * Principal Main Class
      *
      * @param args
+     * @throws IOException
+     * @throws SQLException
      */
     public static void main(String[] args) throws IOException, SQLException {
 
         DbInteraction DB = new DbInteraction();
-        Random random = new Random();
 
         try {
 
@@ -84,6 +84,7 @@ public class CivicData {
 
                 if (notExistInDb) {
 
+                    Random random = new Random();
 
                     // Time to wait not to do DDoS.
                     try {

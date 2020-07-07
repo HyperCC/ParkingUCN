@@ -18,7 +18,7 @@ package cl.ucn.disc.pdis.simplescraper.dbformater;
 
 import cl.ucn.disc.pdis.simplescraper.App;
 import cl.ucn.disc.pdis.simplescraper.model.Functionary;
-import cl.ucn.disc.pdis.simplescraper.model.PublicInfo;
+import cl.ucn.disc.pdis.simplescraper.model.CivilFunctionary;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -34,7 +34,7 @@ import java.sql.SQLException;
 /**
  * Class to format the data and insert to db.
  *
- * @author Charlie Condorcet.
+ * @author Castillo - Condorcet - Pizarro.
  */
 public final class DbInteraction {
 
@@ -59,12 +59,12 @@ public final class DbInteraction {
     private Dao<Functionary, String> functionaryDao;
 
     /**
-     * The Dao to PublicInfo model
+     * The Dao to CivilFunctionary model
      */
-    private Dao<PublicInfo, String> publicInfoDao;
+    private Dao<CivilFunctionary, String> publicInfoDao;
 
     /**
-     * Constructor to initializate the database.
+     * Constructor to initialize the database.
      */
     public DbInteraction() throws SQLException {
 
@@ -74,21 +74,21 @@ public final class DbInteraction {
         // Create a connection source to our database.
         this.connectionSource = new JdbcConnectionSource(databaseURL);
 
-        // Instance the DAO.
+        // Instance the DAO to Functionary.
         functionaryDao = DaoManager.createDao(connectionSource, Functionary.class);
+
+        // Instance the DAO for PublicInfo
+        publicInfoDao = DaoManager.createDao(connectionSource, CivilFunctionary.class);
 
         // if you need to create the ’accounts’ table make this call.
         TableUtils.createTableIfNotExists(connectionSource, Functionary.class);
 
-        // Instance the DAO for PublicInfo
-        publicInfoDao = DaoManager.createDao(connectionSource, PublicInfo.class);
-
         // Table creation for PublicInfo.
-        TableUtils.createTableIfNotExists(connectionSource, PublicInfo.class);
+        TableUtils.createTableIfNotExists(connectionSource, CivilFunctionary.class);
     }
 
     /**
-     * Formater to save data in database.
+     * Make format to save the Functionaries in database.
      *
      * @param nombre
      * @param cargo
@@ -97,7 +97,7 @@ public final class DbInteraction {
      * @param telefono
      * @param oficina
      * @param direccion
-     * @return
+     * @return operation result
      * @throws SQLException
      * @throws IOException
      */
@@ -137,21 +137,28 @@ public final class DbInteraction {
     }
 
     /**
-     * Format to PublicInfo data
+     * Make format to save the CivilFunctionary in database.
      *
      * @param nombre
      * @param rut
      * @param sexo
      * @param direccion
      * @param comuna
-     * @return
+     * @return operation result
      * @throws SQLException
      * @throws IOException
      */
     public boolean formatPublicInfo(String nombre, String rut, String sexo, String direccion, String comuna) {
 
+        // Save variables like null if is empty. The name may not be found.
+        nombre = EmptyToNull(nombre);
+        rut = EmptyToNull(rut);
+        sexo = EmptyToNull(sexo);
+        direccion = EmptyToNull(direccion);
+        comuna = EmptyToNull(comuna);
+
         // Add new valid functionary to database.
-        PublicInfo publicInfo = new PublicInfo(
+        CivilFunctionary civilFunctionary = new CivilFunctionary(
                 nombre,
                 rut,
                 sexo,
@@ -160,7 +167,7 @@ public final class DbInteraction {
 
         // Duplicated Functionaries.
         try {
-            this.publicInfoDao.createIfNotExists(publicInfo);
+            this.publicInfoDao.createIfNotExists(civilFunctionary);
 
         } catch (SQLException e) {
             log.error("New public info {} no added. Details: {}", nombre, e.getMessage());
@@ -200,6 +207,8 @@ public final class DbInteraction {
     public String GetFunctionaryById(int id) throws SQLException {
 
         String val = Integer.toString(id);
+
+        // Build a query for get results from funcionarios.db
         QueryBuilder<Functionary, String> consulta = this.functionaryDao.queryBuilder();
         Functionary functionary = consulta.where().eq("id", val).queryForFirst();
 
@@ -214,8 +223,10 @@ public final class DbInteraction {
      */
     public long GetLengthFunctionary() throws SQLException {
 
+        // Build a query for get the length from funcionarios.db
         QueryBuilder<Functionary, String> consulta = this.functionaryDao.queryBuilder();
         long lengthReg = consulta.countOf();
+
         return lengthReg;
     }
 

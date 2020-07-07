@@ -31,7 +31,7 @@ import java.util.Random;
 /**
  * Principal App to do scraping.
  *
- * @author Charlie Condorect.
+ * @author Castillo - Condorcet - Pizarro.
  */
 public class App {
 

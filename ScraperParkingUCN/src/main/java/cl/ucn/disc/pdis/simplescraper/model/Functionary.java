@@ -22,7 +22,7 @@ import com.j256.ormlite.table.DatabaseTable;
 /**
  * The Functionary model class.
  *
- * @author Charlie Condorcet.
+ * @author Castillo - Condorcet - Pizarro.
  */
 @DatabaseTable(tableName = "functionary")
 public final class Functionary {

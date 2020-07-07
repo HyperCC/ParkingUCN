@@ -20,12 +20,12 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
- * The Functionary model class.
+ * The CivilFunctionary model class.
  *
- * @author Charlie Condorcet.
+ * @author Castillo - Condorcet - Pizarro.
  */
-@DatabaseTable(tableName = "publicinfo")
-public final class PublicInfo {
+@DatabaseTable(tableName = "civil_functionary")
+public final class CivilFunctionary {
 
     /**
      * The id: Primary Key.
@@ -36,37 +36,37 @@ public final class PublicInfo {
     /**
      * The Nombre.
      */
-    @DatabaseField(canBeNull = false)
+    @DatabaseField()
     private String nombre;
 
     /**
      * The RUT.
      */
-    @DatabaseField(canBeNull = true)
+    @DatabaseField()
     private String rut;
 
     /**
      * The Sexo.
      */
-    @DatabaseField(canBeNull = true)
+    @DatabaseField()
     private String sexo;
 
     /**
      * The Direccion.
      */
-    @DatabaseField(canBeNull = true)
+    @DatabaseField()
     private String direccion;
 
     /**
      * The Comuna.
      */
-    @DatabaseField(canBeNull = true)
+    @DatabaseField()
     private String comuna;
 
     /**
      * Empty contructor; Default visivility + empty body.
      */
-    public PublicInfo() {
+    public CivilFunctionary() {
         // nothing here.
     }
 
@@ -79,7 +79,7 @@ public final class PublicInfo {
      * @param direccion
      * @param comuna
      */
-    public PublicInfo(String nombre, String rut, String sexo, String direccion, String comuna) {
+    public CivilFunctionary(String nombre, String rut, String sexo, String direccion, String comuna) {
         this.nombre = nombre;
         this.rut = rut;
         this.sexo = sexo;
