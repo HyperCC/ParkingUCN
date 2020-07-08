@@ -46,6 +46,18 @@ public final class Functionary {
     private String nombre;
 
     /**
+     * The RUT.
+     */
+    @DatabaseField(canBeNull = true)
+    private String rut;
+
+    /**
+     * The sexo.
+     */
+    @DatabaseField(canBeNull = true)
+    private String sexo;
+
+    /**
      * The Cargo.
      */
     @DatabaseField(canBeNull = true)
@@ -76,10 +88,22 @@ public final class Functionary {
     private String oficina;
 
     /**
-     * The Direccion.
+     * The work address.
      */
     @DatabaseField(canBeNull = true)
-    private String direccion;
+    private String direccionTrabajo;
+
+    /**
+     * The home address.
+     */
+    @DatabaseField(canBeNull = true)
+    private String direccionCasa;
+
+    /**
+     * The City.
+     */
+    @DatabaseField(canBeNull = true)
+    private String comuna;
 
     /**
      * Empty contructor; Default visivility + empty body.
@@ -89,97 +113,144 @@ public final class Functionary {
     }
 
     /**
-     * Principal Constructor.
+     * The constructor of the model
      *
+     * @param id
+     * @param webId
      * @param nombre
+     * @param rut
+     * @param sexo
      * @param cargo
      * @param unidad
      * @param email
      * @param telefono
      * @param oficina
-     * @param direccion
+     * @param direccionTrabajo
+     * @param direccionCasa
+     * @param comuna
      */
-    public Functionary(int webId, String nombre, String cargo, String unidad, String email, String telefono, String oficina, String direccion) {
+    public Functionary(int id, int webId, String nombre, String rut, String sexo, String cargo, String unidad, String email, String telefono, String oficina, String direccionTrabajo, String direccionCasa, String comuna) {
+        this.id = id;
         this.webId = webId;
         this.nombre = nombre;
+        this.rut = rut;
+        this.sexo = sexo;
         this.cargo = cargo;
         this.unidad = unidad;
         this.email = email;
         this.telefono = telefono;
         this.oficina = oficina;
-        this.direccion = direccion;
+        this.direccionTrabajo = direccionTrabajo;
+        this.direccionCasa = direccionCasa;
+        this.comuna = comuna;
     }
 
     /**
-     * Getter to ID.
+     * Id getter
      *
-     * @return id
+     * @return
      */
     public int getId() {
         return id;
     }
 
     /**
-     * Getter to Nombre.
+     * webId getter
      *
-     * @return nombre
+     * @return
+     */
+    public int getWebId() {
+        return webId;
+    }
+
+    /**
+     * nombre getter
+     *
+     * @return
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * Getter to Cargo.
+     * RUT getter
      *
-     * @return cargo
+     * @return
+     */
+    public String getRut() {
+        return rut;
+    }
+
+    /**
+     * Sexo getter
+     *
+     * @return
+     */
+    public String getSexo() {
+        return sexo;
+    }
+
+    /**
+     * cargo getter
+     *
+     * @return
      */
     public String getCargo() {
         return cargo;
     }
-
     /**
-     * Getter to Unidad.
      *
-     * @return unidad
+     * @return
      */
     public String getUnidad() {
         return unidad;
     }
-
     /**
-     * Getter to E-mail.
+     * e-mail getter
      *
-     * @return email
+     * @return
      */
     public String getEmail() {
         return email;
     }
-
     /**
-     * Getter to Telefono.
+     * telefono getter
      *
-     * @return telefono
+     * @return
      */
     public String getTelefono() {
         return telefono;
     }
-
     /**
-     * Getter to Oficina.
+     * oficina getter
      *
-     * @return oficina
+     * @return
      */
     public String getOficina() {
         return oficina;
     }
-
     /**
-     * Getter to Direccion.
+     * DireccionTrabajo getter
      *
-     * @return direccion
+     * @return
      */
-    public String getDireccion() {
-        return direccion;
+    public String getDireccionTrabajo() {
+        return direccionTrabajo;
     }
-
+    /**
+     * DireccionCasa getter
+     *
+     * @return
+     */
+    public String getDireccionCasa() {
+        return direccionCasa;
+    }
+    /**
+     * Comuna getter
+     *
+     * @return
+     */
+    public String getComuna() {
+        return comuna;
+    }
 }
