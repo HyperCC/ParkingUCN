@@ -107,8 +107,20 @@ public final class Functionary {
 
     /**
      * Empty contructor; Default visivility + empty body.
+     * @param webId
+     * @param nombre
+     * @param rut
+     * @param sexo
+     * @param cargo
+     * @param unidad
+     * @param email
+     * @param telefono
+     * @param oficina
+     * @param direccionTrabajo
+     * @param direccionCasa
+     * @param comuna
      */
-    public Functionary() {
+    public Functionary(int webId, String nombre, String rut, String sexo, String cargo, String unidad, String email, String telefono, String oficina, String direccionTrabajo, String direccionCasa, String comuna) {
         // nothing here.
     }
 

@@ -58,11 +58,6 @@ public final class DbInteraction {
     private Dao<Functionary, String> functionaryDao;
 
     /**
-     * The Dao to CivilFunctionary model
-     */
-    private Dao<CivilFunctionary, String> publicInfoDao;
-
-    /**
      * Constructor to initialize the database.
      */
     public DbInteraction() throws SQLException {
@@ -76,51 +71,56 @@ public final class DbInteraction {
         // Instance the DAO to Functionary.
         functionaryDao = DaoManager.createDao(connectionSource, Functionary.class);
 
-        // Instance the DAO for PublicInfo
-        publicInfoDao = DaoManager.createDao(connectionSource, CivilFunctionary.class);
-
         // if you need to create the ’accounts’ table make this call.
         TableUtils.createTableIfNotExists(connectionSource, Functionary.class);
-
-        // Table creation for PublicInfo.
-        TableUtils.createTableIfNotExists(connectionSource, CivilFunctionary.class);
     }
 
     /**
      * Make format to save the Functionaries in database.
      *
+     * @param webId
      * @param nombre
+     * @param rut
+     * @param sexo
      * @param cargo
      * @param unidad
      * @param email
      * @param telefono
      * @param oficina
-     * @param direccion
-     * @return operation result
-     * @throws SQLException
-     * @throws IOException
+     * @param direccionTrabajo
+     * @param direccionCasa
+     * @param comuna
+     * @return
      */
-    public boolean formatToFunctionary(int webId, String nombre, String cargo, String unidad, String email, String telefono,
-                                       String oficina, String direccion) {
+    public boolean formatToFunctionary
+    (int webId, String nombre, String rut, String sexo, String cargo, String unidad, String email, String telefono,
+                                       String oficina, String direccionTrabajo, String direccionCasa, String comuna) {
 
         // Save variables like null if is empty.
+        sexo = EmptyToNull(sexo);
         cargo = EmptyToNull(cargo);
         unidad = EmptyToNull(unidad);
         email = EmptyToNull(email);
         telefono = EmptyToNull(telefono);
         oficina = EmptyToNull(oficina);
-        direccion = EmptyToNull(direccion);
+        direccionTrabajo = EmptyToNull(direccionTrabajo);
+        direccionCasa = EmptyToNull(direccionCasa);
+        comuna = EmptyToNull(comuna);
 
         // Add new valid functionary to database.
         Functionary functionary = new Functionary(
                 webId,
                 nombre,
+                rut,
+                sexo,
                 cargo,
                 unidad,
                 email,
                 telefono,
                 oficina,
-                direccion);
+                direccionTrabajo,
+                direccionCasa,
+                comuna);
 
         // Duplicaded Functionaries.
         try {
@@ -132,48 +132,6 @@ public final class DbInteraction {
         }
 
         log.debug("Added the new functionary to database.");
-        return true;
-    }
-
-    /**
-     * Make format to save the CivilFunctionary in database.
-     *
-     * @param nombre
-     * @param rut
-     * @param sexo
-     * @param direccion
-     * @param comuna
-     * @return operation result
-     * @throws SQLException
-     * @throws IOException
-     */
-    public boolean formatToCivilFunctionary(String nombre, String rut, String sexo, String direccion, String comuna) {
-
-        // Save variables like null if is empty. The name may not be found.
-        nombre = EmptyToNull(nombre);
-        rut = EmptyToNull(rut);
-        sexo = EmptyToNull(sexo);
-        direccion = EmptyToNull(direccion);
-        comuna = EmptyToNull(comuna);
-
-        // Add new valid functionary to database.
-        CivilFunctionary civilFunctionary = new CivilFunctionary(
-                nombre,
-                rut,
-                sexo,
-                direccion,
-                comuna);
-
-        // Duplicated Functionaries.
-        try {
-            this.publicInfoDao.createIfNotExists(civilFunctionary);
-
-        } catch (SQLException e) {
-            log.error("New public info {} no added. Details: {}", nombre, e.getMessage());
-            return false;
-        }
-
-        log.debug("Added the new public info to database.");
         return true;
     }
 
