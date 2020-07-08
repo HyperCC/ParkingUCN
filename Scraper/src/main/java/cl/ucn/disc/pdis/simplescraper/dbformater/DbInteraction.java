@@ -18,7 +18,6 @@ package cl.ucn.disc.pdis.simplescraper.dbformater;
 
 import cl.ucn.disc.pdis.simplescraper.App;
 import cl.ucn.disc.pdis.simplescraper.model.Functionary;
-import cl.ucn.disc.pdis.simplescraper.model.CivilFunctionary;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
