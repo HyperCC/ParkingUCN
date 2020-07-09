@@ -19,6 +19,7 @@ package cl.ucn.disc.pdis.simplescraper;
 import cl.ucn.disc.pdis.simplescraper.dbformater.DbInteraction;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +27,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.SocketTimeoutException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -56,18 +58,6 @@ public class App {
         // Variable to create registers in .txt.
         PrintWriter printWriter = new PrintWriter("records.txt", "UTF-8");
 
-        // Random variable to interleave time.
-        Random random = new Random();
-
-        // Data extracted from telephone directory.
-        String nombre = "";
-        String cargo = "";
-        String unidad = "";
-        String email = "";
-        String telefono = "";
-        String oficina = "";
-        String direccion = "";
-
         // The database instance.
         DbInteraction theDatabase = new DbInteraction();
 
@@ -76,7 +66,7 @@ public class App {
         // Auxiliaries.
         int id = 1;
         int canVoids = 0;
-        int maxCod = 200;
+        int maxCod = 29700;
 
         for (int i = 1; i < maxCod; i++) {
 
@@ -85,12 +75,14 @@ public class App {
 
             // try to connect, possible timeout in server.
             try {
-                docDirectoryUcn = Jsoup.connect("http://online.ucn.cl/directoriotelefonicoemail/fichaGenerica/?cod={}" + i).get();
+                docDirectoryUcn = Jsoup.connect("http://online.ucn.cl/directoriotelefonicoemail/fichaGenerica/?cod=" + i).get();
 
             } catch (SocketTimeoutException e) {
                 log.error("Timeout for http request. Details: {}", e.getMessage());
 
             }
+
+            String nombre = "";
 
             // Verify the index value. The COD may not contain data.
             try {
@@ -106,19 +98,62 @@ public class App {
             if (!nombre.isEmpty()) {
 
                 // Get variables from URL.
-                cargo = docDirectoryUcn.getElementById("lblCargo").text();
-                unidad = docDirectoryUcn.getElementById("lblUnidad").text();
-                email = docDirectoryUcn.getElementById("lblEmail").text();
-                telefono = docDirectoryUcn.getElementById("lblTelefono").text();
+                String cargo = docDirectoryUcn.getElementById("lblCargo").text();
+                String unidad = docDirectoryUcn.getElementById("lblUnidad").text();
+                String email = docDirectoryUcn.getElementById("lblEmail").text();
+                String telefono = docDirectoryUcn.getElementById("lblTelefono").text();
 
                 // Format to phone number.
                 if (!telefono.isEmpty()) {
-
                     telefono = telefono.substring(5, telefono.length());
+
                 }
 
-                oficina = docDirectoryUcn.getElementById("lblOficina").text();
-                direccion = docDirectoryUcn.getElementById("lblDireccion").text();
+                String oficina = docDirectoryUcn.getElementById("lblOficina").text();
+                String direccionTrabajo = docDirectoryUcn.getElementById("lblDireccion").text();
+
+
+                Document docNomRutFirm = null;
+
+                // Try to connect with nombrerutyfirma.com, possible timeout in server.
+                try {
+                    docNomRutFirm = Jsoup.connect("https://www.nombrerutyfirma.com/buscar?term=" + nombre).get();
+
+                } catch (SocketTimeoutException e) {
+                    log.error("Timeout for http request. Details: {}", e.getMessage());
+
+                }
+
+                ArrayList<String> allTrObtained = new ArrayList<>();
+
+                // Get all data with 'td' tag
+                // Must be only 5, if there are several results with the same name.
+                Elements trLabels = docNomRutFirm.getElementsByTag("td");
+
+                // Parting of 'td' tags
+                for (int j = 0; j < 5; j++) {
+
+                    try {
+                        // Get the content from the first 'td'.
+                        allTrObtained.add(trLabels.first().text().toString());
+
+                        // Delete the content from the 'td' stack.
+                        trLabels.remove(trLabels.first());
+
+                    } catch (NullPointerException e) {
+                        log.debug("No data found. Details: {}", e.getMessage());
+                        allTrObtained.add("");
+                    }
+                }
+
+                String nombreOrdenado = allTrObtained.get(0);
+                String rut = allTrObtained.get(1);
+                String sexo = allTrObtained.get(2);
+                String direccionCasa = allTrObtained.get(3);
+                String comuna = allTrObtained.get(4);
+
+                // Add the Nombre in format UTF-8 from nombrerutyfirma.
+                nombre = nombreOrdenado.equals("") ? nombre : nombreOrdenado;
 
                 // Concatenation of Functionary data.
                 StringBuilder sbFunctionary = new StringBuilder();
@@ -126,23 +161,41 @@ public class App {
                         // The id original from the web contacts.
                         .append(i).append(",")
                         .append(nombre).append(",")
+                        .append(rut).append(",")
+                        .append(sexo).append(",")
                         .append(cargo).append(",")
                         .append(unidad).append(",")
                         .append(email).append(",")
                         .append(telefono).append(",")
                         .append(oficina).append(",")
-                        .append(direccion);
+                        .append(direccionTrabajo).append(",")
+                        .append(direccionCasa).append(",")
+                        .append(comuna);
 
                 log.debug("New identified: {}", sbFunctionary.toString());
 
                 // Add new valid functionary to database.
-                boolean notExistInDb = theDatabase.formatToFunctionary(i, nombre, cargo, unidad, email, telefono, oficina, direccion);
+                boolean notExistInDb = theDatabase.formatToFunctionary(i
+                        , nombre
+                        , rut
+                        , sexo
+                        , cargo
+                        , unidad
+                        , email
+                        , telefono
+                        , oficina
+                        , direccionTrabajo
+                        , direccionCasa
+                        , comuna);
 
-                // Check if the new functionary is added. The db and csv must be same.
+                // Check if the new functionary is added. The DB and csv must be same.
                 if (notExistInDb) {
 
                     // Add new valid functionary to csv file.
                     printWriter.println(sbFunctionary.toString());
+
+                    // Random variable to interleave time.
+                    Random random = new Random();
 
                     // Time to wait not to do DDoS.
                     try {
@@ -161,24 +214,9 @@ public class App {
 
                 }
 
-            } else {
-
-                // If 10 connections to the server happen in a row with no data returned.
-                canVoids++;
-                if (canVoids >= 10) {
-
-                    // Time to wait not to do DDoS.
-                    try {
-                        Thread.sleep(1000 + random.nextInt(1000));
-
-                    } catch (InterruptedException e) {
-                        log.error("Thread is interrupted either before or during the activity. Details: {}", e.getMessage());
-
-                    }
-
-                    canVoids = 0;
-                }
             }
+
+            log.info("No result found for the searched Cod.");
 
         }
 
@@ -189,11 +227,6 @@ public class App {
         log.info("End of insertions.");
         theDatabase.CloseDBConnection();
 
-        /*
-        Thanks to
-        ORM Lite documentation https://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_2.html#Using
-        Save scv in txt http://decodigo.com/java-crear-archivos-de-texto
-         */
     }
 
 }
