@@ -107,25 +107,13 @@ public final class Functionary {
 
     /**
      * Empty contructor; Default visivility + empty body.
-     * @param webId
-     * @param nombre
-     * @param rut
-     * @param sexo
-     * @param cargo
-     * @param unidad
-     * @param email
-     * @param telefono
-     * @param oficina
-     * @param direccionTrabajo
-     * @param direccionCasa
-     * @param comuna
      */
-    public Functionary(int webId, String nombre, String rut, String sexo, String cargo, String unidad, String email, String telefono, String oficina, String direccionTrabajo, String direccionCasa, String comuna) {
+    public Functionary( ) {
         // nothing here.
     }
 
     /**
-     * The constructor of the model
+     * The constructor to the model
      *
      * @param id
      * @param webId
@@ -141,8 +129,7 @@ public final class Functionary {
      * @param direccionCasa
      * @param comuna
      */
-    public Functionary(int id, int webId, String nombre, String rut, String sexo, String cargo, String unidad, String email, String telefono, String oficina, String direccionTrabajo, String direccionCasa, String comuna) {
-        this.id = id;
+    public Functionary(int webId, String nombre, String rut, String sexo, String cargo, String unidad, String email, String telefono, String oficina, String direccionTrabajo, String direccionCasa, String comuna) {
         this.webId = webId;
         this.nombre = nombre;
         this.rut = rut;

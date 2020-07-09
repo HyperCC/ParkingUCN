@@ -53,11 +53,7 @@ public class App {
         Esto ultimo verificado buscando ultimos profesores agregados este semestre con id 29700 aprox.
         */
 
-        // Auxiliaries.
-        int id = 1;
-        int canVoids = 0;
-        int maxCod = 200;
-        String url = "http://online.ucn.cl/directoriotelefonicoemail/fichaGenerica/?cod=";
+        // Variable to create registers in .txt.
         PrintWriter printWriter = new PrintWriter("records.txt", "UTF-8");
 
         // Random variable to interleave time.
@@ -77,25 +73,28 @@ public class App {
 
         log.info("Initialization of scraping..");
 
+        // Auxiliaries.
+        int id = 1;
+        int canVoids = 0;
+        int maxCod = 200;
+
         for (int i = 1; i < maxCod; i++) {
 
-            // Build the URL to check the data.
-            StringBuilder actualUrl = new StringBuilder();
-            actualUrl.append(url).append(i);
-            Document document = null;
+            // Connection to directory ucn.
+            Document docDirectoryUcn = null;
 
-            // Timeout in server.
+            // try to connect, possible timeout in server.
             try {
-                document = Jsoup.connect(actualUrl.toString()).get();
+                docDirectoryUcn = Jsoup.connect("http://online.ucn.cl/directoriotelefonicoemail/fichaGenerica/?cod={}" + i).get();
 
             } catch (SocketTimeoutException e) {
                 log.error("Timeout for http request. Details: {}", e.getMessage());
 
             }
 
-            // Verify the index value.
+            // Verify the index value. The COD may not contain data.
             try {
-                nombre = document.getElementById("lblNombre").text();
+                nombre = docDirectoryUcn.getElementById("lblNombre").text();
 
             } catch (NullPointerException e) {
                 log.error("Value null for timout recent. Details: {}", e);
@@ -103,13 +102,14 @@ public class App {
 
             }
 
+            // if is data founded.
             if (!nombre.isEmpty()) {
 
                 // Get variables from URL.
-                cargo = document.getElementById("lblCargo").text();
-                unidad = document.getElementById("lblUnidad").text();
-                email = document.getElementById("lblEmail").text();
-                telefono = document.getElementById("lblTelefono").text();
+                cargo = docDirectoryUcn.getElementById("lblCargo").text();
+                unidad = docDirectoryUcn.getElementById("lblUnidad").text();
+                email = docDirectoryUcn.getElementById("lblEmail").text();
+                telefono = docDirectoryUcn.getElementById("lblTelefono").text();
 
                 // Format to phone number.
                 if (!telefono.isEmpty()) {
@@ -117,8 +117,8 @@ public class App {
                     telefono = telefono.substring(5, telefono.length());
                 }
 
-                oficina = document.getElementById("lblOficina").text();
-                direccion = document.getElementById("lblDireccion").text();
+                oficina = docDirectoryUcn.getElementById("lblOficina").text();
+                direccion = docDirectoryUcn.getElementById("lblDireccion").text();
 
                 // Concatenation of Functionary data.
                 StringBuilder sbFunctionary = new StringBuilder();

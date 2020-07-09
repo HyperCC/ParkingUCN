@@ -16,7 +16,6 @@
 
 package cl.ucn.disc.pdis.simplescraper.dbformater;
 
-import cl.ucn.disc.pdis.simplescraper.App;
 import cl.ucn.disc.pdis.simplescraper.model.Functionary;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -40,7 +39,7 @@ public final class DbInteraction {
     /**
      * The Logger.
      */
-    private static final Logger log = LoggerFactory.getLogger(App.class);
+    private static final Logger log = LoggerFactory.getLogger(DbInteraction.class);
 
     /**
      * The database URL.
@@ -92,11 +91,14 @@ public final class DbInteraction {
      * @param comuna
      * @return
      */
-    public boolean formatToFunctionary
-    (int webId, String nombre, String rut, String sexo, String cargo, String unidad, String email, String telefono,
-                                       String oficina, String direccionTrabajo, String direccionCasa, String comuna) {
+
+    public boolean formatToFunctionary(int webId, String nombre, String rut, String sexo, String cargo, String unidad,
+                                       String email, String telefono, String oficina, String direccionTrabajo,
+                                       String direccionCasa, String comuna) {
 
         // Save variables like null if is empty.
+        nombre = EmptyToNull(nombre);
+        rut = EmptyToNull(rut);
         sexo = EmptyToNull(sexo);
         cargo = EmptyToNull(cargo);
         unidad = EmptyToNull(unidad);
@@ -139,7 +141,7 @@ public final class DbInteraction {
      * Change the empty data for null.
      *
      * @param var
-     * @return
+     * @return a whole data or null.
      */
     public String EmptyToNull(String var) {
         return var.isEmpty() ? null : var;
