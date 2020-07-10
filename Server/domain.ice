@@ -15,29 +15,29 @@ limitations under the License.
 */
 
 // https://doc.zeroc.com/ice/3.7/language-mappings/java-mapping/client-side-slice-to-java-mapping/customizing-the-java-mapping
-["java:package:cl.ucn.disc.pdis.fivet.zeroice", "cs:namespace:Fivet.ZeroIce"]
+["java:package:cl.ucn.disc.pdis.simplescraper.zeroice", "cs:namespace:ServerZeroIce"]
 module model {
 
 
     /**
-    * Clase Functionary
-    */
+     * The Persona class.
+     */
     ["cs:property"]
-    class Functionary{
+    class Persona{
 		
-       /**
-     	* The id: Primary Key.
-     	*/    
-    	private int id;
+        /**
+     	 * The id: Primary Key.
+     	 */    
+    	private int uid;
 
     	/**
-     	* The web id from UCN directory.
-     	*/    
+     	 * The web id from UCN directory.
+     	 */    
     	private int webId;
 
     	/**
-     	* The Nombre.
-     	*/    
+     	 * The Nombre.
+     	 */    
     	private String nombre;
 
     	/**
@@ -46,18 +46,18 @@ module model {
     	private String rut;
 
     	/**
-     	* The sexo.
-     	*/    
-    	private String sexo;
+     	 * The enum Sexo.
+     	 */    
+    	private Sexo sexo;
 
     	/**
-     	* The Cargo.
-     	*/    
+     	 * The Cargo.
+     	 */    
     	private String cargo;
 
     	/**
-     	* The Unidad.
-    	*/    
+     	 * The Unidad.
+    	 */    
     	private String unidad;
 
     	/**
@@ -86,30 +86,43 @@ module model {
     	private String direccionCasa;
 
     	/**
-     	* The City.
-    	*/    
+     	 * The City.
+    	 */    
     	private String comuna;
     }
 
     /**
-    * Clase Vehiculo
-    */
+     * Sex of Person.
+     */
+    enum Sexo{
+        VAR,
+        MUJ
+    }
+
+    /**
+     * The Vehiculo class.
+     */
     ["cs:property"]
     class Vehiculo{
-		
-       /**
-     	* Vehicle Plate: Primary Key.
-     	*/    
+
+        /**
+      	 * The id: Primary Key.
+     	 */    
+    	private int uid;
+
+        /**
+     	 * Vehicle Plate.
+     	 */    
     	private String Patente;
 
     	/**
-     	* Vehicle Brand.
-     	*/    
+     	 * Vehicle Brand.
+     	 */    
     	private String marca;
 
     	/**
-     	* Vehicle Model.
-     	*/    
+     	 * Vehicle Model.
+     	 */    
     	private String Modelo;
 
     	/**
@@ -118,38 +131,39 @@ module model {
     	private int anio;
 
     	/**
-     	* Obvsevations of the vehicle.
-     	*/    
+     	 * Obvsevations of the vehicle.
+     	 */    
     	private String observacion;
 
     	/**
-     	* The owner of the vehicle.
-    	*/    
+     	 * The owner of the vehicle.
+    	 */    
     	private String responsable;    	
     }
 
     /**
-    *Contratos
-    */
-
+     * The Contratos.
+     */
     interface Contratos {
 
         /**
-         *
-         * @param functionary a crear
-         * @return Functionary creado
+         * Create a Persona with a persona instance.
+         * 
+         * @param functionary to create
+         * @return Functionary created
          */
-        Persona crearFunctionary(Functionary functionary);
+        Persona crearPersona(Persona persona);
 
 	/**
+         * Create a Vehiculo with a vehiculo instance.
          *
-         * @param vehiculo a crear
-         * @return Vehiculo creado
+         * @param vehiculo to create
+         * @return Vehiculo created
          */
-        Persona crearVehiculo(Vehiculo vehiculo);
+        Vehiculo crearVehiculo(Vehiculo vehiculo);
       
-
         /**
+         * Search a Persona with a rut.
          *
          * @param rut de la persona a buscar.
          * @return Functionary buscado.
@@ -157,23 +171,12 @@ module model {
         Persona obtenerFunctionary(string rut);
 
 	/**
-         *
+         * Search a Vehiculo with a patente.
+	 *
          * @param patente del vehiculo a buscar.
          * @return Vehiculo buscado.
          */
-        Persona obtenerVehiculo(string patente);
+        Vehiculo obtenerVehiculo(string patente);
     }
 
-
-    /**
-     * The base system.
-     */
-     interface TheSystem {
-
-        /**
-         * @return the diference in time between client and server.
-         */
-        long getDelay(long clientTime);
-
-     }
 }
