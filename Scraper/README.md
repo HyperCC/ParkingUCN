@@ -21,3 +21,32 @@
   
 ##  License
   This project is open-sourced software licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
+##Domain Model
+@startuml
+class App {
+    {static} - docDirectoryUcn: String
+    {static} - docNomRutFirm: String
+}
+class Persona{
+    -webId: String
+    -nombre: String
+    -rut: String
+    -sexo: Sexo
+    -cargo: String
+    -unidad: String
+    -email: String
+    -telefono: String
+    -oficina: String
+    -direccionTrabajo: String
+    -direccionCasa: String
+    -comuna: String
+}
+enum Sexo{
+    VAR,
+    MUJ
+}
+
+Persona --> Sexo
+Persona -- App
+@enduml
