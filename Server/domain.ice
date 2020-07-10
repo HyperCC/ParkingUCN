@@ -18,127 +18,126 @@ limitations under the License.
 ["java:package:cl.ucn.disc.pdis.simplescraper.zeroice", "cs:namespace:ServerZeroIce"]
 module model {
 
+    /**
+     * Sex of Person.
+     */
+    enum Sexo {
+        VAR,
+        MUJ
+    }
 
     /**
      * The Persona class.
      */
     ["cs:property"]
-    class Persona{
+    class Persona {
 		
         /**
      	 * The id: Primary Key.
      	 */    
-    	private int uid;
+    	int uid;
 
     	/**
      	 * The web id from UCN directory.
      	 */    
-    	private int webId;
+    	int webId;
 
     	/**
      	 * The Nombre.
      	 */    
-    	private String nombre;
+    	string nombre;
 
     	/**
     	 * The RUT.
     	 */    
-    	private String rut;
+    	string rut;
 
     	/**
      	 * The enum Sexo.
      	 */    
-    	private Sexo sexo;
+    	Sexo sexo;
 
     	/**
      	 * The Cargo.
      	 */    
-    	private String cargo;
+    	string cargo;
 
     	/**
      	 * The Unidad.
     	 */    
-    	private String unidad;
+    	string unidad;
 
     	/**
     	 * The E-Mail.
     	 */    
-    	private String email;
+    	string email;
 
     	/**
     	 * The Telefono.
     	 */    
-    	private String telefono;
+    	string telefono;
 
     	/**
     	 * The Oficina.
     	 */    
-    	private String oficina;
+    	string oficina;
 
     	/**
     	 * The work address.
     	 */    
-    	private String direccionTrabajo;
+    	string direccionTrabajo;
 
     	/**
     	 * The home address.
     	 */    
-    	private String direccionCasa;
+    	string direccionCasa;
 
     	/**
      	 * The City.
     	 */    
-    	private String comuna;
-    }
-
-    /**
-     * Sex of Person.
-     */
-    enum Sexo{
-        VAR,
-        MUJ
+    	string comuna;
     }
 
     /**
      * The Vehiculo class.
      */
     ["cs:property"]
-    class Vehiculo{
+    class Vehiculo {
 
         /**
       	 * The id: Primary Key.
      	 */    
-    	private int uid;
+    	int uid;
 
         /**
      	 * Vehicle Plate.
      	 */    
-    	private String Patente;
+    	string Patente;
 
     	/**
      	 * Vehicle Brand.
      	 */    
-    	private String marca;
+    	string marca;
 
     	/**
      	 * Vehicle Model.
      	 */    
-    	private String Modelo;
+    	string Modelo;
 
     	/**
     	 * Vehicle manufacture Year.
     	 */    
-    	private int anio;
+    	int anio;
 
     	/**
      	 * Obvsevations of the vehicle.
      	 */    
-    	private String observacion;
+    	string observacion;
 
     	/**
      	 * The owner of the vehicle.
     	 */    
-    	private String responsable;    	
+    	string responsable;    	
     }
 
     /**

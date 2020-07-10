@@ -115,7 +115,6 @@ public final class Functionary {
     /**
      * The constructor to the model
      *
-     * @param id
      * @param webId
      * @param nombre
      * @param rut
