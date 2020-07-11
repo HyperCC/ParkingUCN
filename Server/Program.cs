@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace ServerParkingUCN
 {
@@ -36,7 +38,7 @@ namespace ServerParkingUCN
             .ConfigureServices((hostContext, services) => 
             {
                 // The ServerParkingUcnService
-                services.AddHostedService<FivetService>();
+                services.AddHostedService<ServerParkingUcnService>();
                 // The Logger
                 services.AddLogging();
                 // The wait for finish

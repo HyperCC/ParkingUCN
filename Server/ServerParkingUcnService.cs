@@ -1,14 +1,14 @@
-using System;
 using Ice;
 using ServerZeroIce.model;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging; 
 
 namespace ServerParkingUCN
 {
     
-    internal class ServerParkingUcnService : IHostedService, IDisposable
+    internal class ServerParkingUcnService : IHostedService
     {
 
         /// <summary>
@@ -34,7 +34,6 @@ namespace ServerParkingUCN
         {
             _logger = logger; 
             _communicator = buildCommunicator();
-
         }
 
         /// <summary>
@@ -42,17 +41,17 @@ namespace ServerParkingUCN
         /// </summary>
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogDebug("Starting the FivetService ..");
+            _logger.LogDebug("Starting the ParkingService ..");
 
             // The adapter: https://doc.zeroc.com/ice/3.7/client-side-features/proxies/proxy-and-endpoint-syntax
             // tcp (protocol) -z (compression) -t 15000 (timeout in ms) -p 8080 (port to bind)
-            var adapter = _communicator.createObjectAdapterWithEndpoints("TheSystem", "tcp -z -t 15000 -p " + _port);
+            var adapter = _communicator.createObjectAdapterWithEndpoints("Contratos", "tcp -z -t 15000 -p " + _port);
 
-            // The interface
+            // The interface Contratos from ice.
             Contratos contratos = new ContratosImpl();
 
             // Register in the communicator
-            adapter.add(contratos, Util.stringToIdentity("TheSystem"));
+            adapter.add(contratos, Util.stringToIdentity("Contratos"));
 
             // Activation
             adapter.activate();
@@ -100,7 +99,46 @@ namespace ServerParkingUCN
     /// </summary>
     public class ContratosImpl : ContratosDisp_
     {
+        /// <summary>
+        /// Create a new Persona.
+        /// </summary>
+        /// <param name="persona"></param>
+        /// <param name="current"></param>
+        /// <returns>Dhe Persona validated</returns>
+        public override Persona crearPersona(Persona persona, Current current)
+        {
+            return default; 
+        }
 
+        /// <summary>
+        /// Create a new Vehiculo.
+        /// </summary>
+        /// <param name="vehiculo"></param>
+        /// <returns>The Vehiculo validated</returns>
+        public override Vehiculo crearVehiculo(Vehiculo vehiculo, Current current)
+        {
+            return default; 
+        }
+
+        /// <summary>
+        /// Get a Persona by Rut.
+        /// </summary>
+        /// <param name="rut"></param>
+        /// <returns>The Persona searched</returns>
+        public override Persona obtenerPersona(string rut, Current current)
+        {
+            return default; 
+        }
+        
+        /// <summary>
+        /// Get a Vehiculo by Patente.
+        /// </summary>
+        /// <param name="patente"></param>
+        /// <returns>The Vehiculo searched</returns>
+        public override Vehiculo obtenerVehiculo(string patente, Current current)
+        {
+            return default; 
+        }
     }
-
+    
 }

@@ -167,7 +167,7 @@ module model {
          * @param rut de la persona a buscar.
          * @return Functionary buscado.
          */
-        Persona obtenerFunctionary(string rut);
+        Persona obtenerPersona(string rut);
 
 	/**
          * Search a Vehiculo with a patente.
