@@ -33,9 +33,10 @@ namespace ServerParkingUCN
         /// The ServerParkingUcnService.
         /// </summary>
         /// <param name="logger">Used to print debug message.</param>
-        public ServerParkingUcnService(ILogger<ServerParkingUcnService> logger)
+        public ServerParkingUcnService(ILogger<ServerParkingUcnService> logger, ContratosDisp_ contratos)
         {
-            _logger = logger; 
+            _logger = logger;
+            _contratos = contratos; 
             _communicator = buildCommunicator();
         }
 
