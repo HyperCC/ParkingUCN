@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ServerZeroIce;
+using ServerZeroIce.model;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -37,8 +39,11 @@ namespace ServerParkingUCN
             // Service inside the DI
             .ConfigureServices((hostContext, services) => 
             {
+                //Singleton
+                services.AddSingleton<ContratosDisp_, ContratosImpl>();
                 // The ServerParkingUcnService
                 services.AddHostedService<ServerParkingUcnService>();
+                
                 // The Logger
                 services.AddLogging();
                 // The wait for finish
