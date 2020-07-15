@@ -155,37 +155,4 @@ public final class DbInteraction {
     public void closeDbConnection() throws IOException {
         this.connectionSource.close();
     }
-
-    /**
-     * Get name of Persona by id.
-     *
-     * @param id
-     * @return the name by id.
-     * @throws SQLException
-     */
-    public String GetFunctionaryById(int id) throws SQLException {
-
-        String val = Integer.toString(id);
-
-        // Build a query for get results from funcionarios.db
-        QueryBuilder<Persona, String> consulta = this.personaDao.queryBuilder();
-        Persona persona = consulta.where().eq("id", val).queryForFirst();
-
-        return persona.getNombre();
-    }
-
-    /**
-     * Get length of records from DB.
-     *
-     * @return length of records from DB.
-     * @throws SQLException
-     */
-    public long GetLengthFunctionary() throws SQLException {
-
-        // Build a query for get the length from funcionarios.db
-        QueryBuilder<Persona, String> consulta = this.personaDao.queryBuilder();
-        long lengthReg = consulta.countOf();
-
-        return lengthReg;
-    }
 }
