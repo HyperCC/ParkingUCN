@@ -35,12 +35,12 @@ import java.util.Random;
  *
  * @author Castillo - Condorcet - Pizarro.
  */
-public class App {
+public class Scraper {
 
     /**
      * The Logger
      */
-    private static final Logger log = LoggerFactory.getLogger(App.class);
+    private static final Logger log = LoggerFactory.getLogger(Scraper.class);
 
     /**
      * Principal Main class.
