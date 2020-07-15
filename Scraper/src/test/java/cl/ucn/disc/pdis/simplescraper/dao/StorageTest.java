@@ -59,31 +59,31 @@ public final class StorageTest {
             TableUtils.createTableIfNotExists(connectionSource, Persona.class);
 
             // The dao of Persona
-            Dao<Persona, Long> daoFunctionary = DaoManager.createDao(connectionSource, Persona.class);
+            Dao<Persona, Long> daoPersona = DaoManager.createDao(connectionSource, Persona.class);
 
             // New Persona
 
             Persona persona = new Persona(32234,"Andres Cervantes","12.345.678-9", "VAR", "Profesor", "Informatica", "andres@ucn.cl", "9 99998888", "depto. informatica", "angamos 675", "mi casa 123", "antofagasta");
 
             // Insert Persona into the database
-            int tuples = daoFunctionary.create(persona);
+            int tuples = daoPersona.create(persona);
             log.debug("Id: {}", persona.getId());
 
             Assertions.assertEquals(1, tuples, "Save tuples !=1");
 
             // Get from db
-            Persona functionarydb = daoFunctionary.queryForId((long) persona.getId());
+            Persona personaDb = daoPersona.queryForId((long) persona.getId());
 
-            Assertions.assertEquals(persona.getNombre(), functionarydb.getNombre(), "Names not equals!");
-            Assertions.assertEquals(persona.getCargo(), functionarydb.getCargo(), "Cargo not equals!");
-            Assertions.assertEquals(persona.getUnidad(), functionarydb.getUnidad(), "Unidad not equals!");
+            Assertions.assertEquals(persona.getNombre(), personaDb.getNombre(), "Names not equals!");
+            Assertions.assertEquals(persona.getCargo(), personaDb.getCargo(), "Cargo not equals!");
+            Assertions.assertEquals(persona.getUnidad(), personaDb.getUnidad(), "Unidad not equals!");
 
             // Search by rut: Select * FROM  'persona' WHERE 'nombre' = 'Andres Cervantes'
-            List<Persona> personaListList = daoFunctionary.queryForEq("nombre", "Andres Cervantes");
+            List<Persona> personaListList = daoPersona.queryForEq("nombre", "Andres Cervantes");
             Assertions.assertEquals(1, personaListList.size(), "More than one Persona!");
 
             // Not found by nombre
-            Assertions.assertEquals(0, daoFunctionary.queryForEq("nombre", "Hola Mundo").size(), "Found somethings!");
+            Assertions.assertEquals(0, daoPersona.queryForEq("nombre", "Hola Mundo").size(), "Found somethings!");
 
         } catch (IOException e) {
             log.error("Error", e);
