@@ -156,8 +156,8 @@ public class App {
                 nombre = nombreOrdenado.equals("") ? nombre : nombreOrdenado;
 
                 // Concatenation of Persona data.
-                StringBuilder sbFunctionary = new StringBuilder();
-                sbFunctionary.append(id).append(",")
+                StringBuilder sbPersona = new StringBuilder();
+                sbPersona.append(id).append(",")
                         // The id original from the web contacts.
                         .append(i).append(",")
                         .append(nombre).append(",")
@@ -172,7 +172,7 @@ public class App {
                         .append(direccionCasa).append(",")
                         .append(comuna);
 
-                log.debug("New identified: {}", sbFunctionary.toString());
+                log.debug("New identified: {}", sbPersona.toString());
 
                 // Add new valid functionary to database.
                 boolean notExistInDb = theDatabase.formatToPersona(i
@@ -192,7 +192,7 @@ public class App {
                 if (notExistInDb) {
 
                     // Add new valid functionary to csv file.
-                    printWriter.println(sbFunctionary.toString());
+                    printWriter.println(sbPersona.toString());
 
                     // Random variable to interleave time.
                     Random random = new Random();
