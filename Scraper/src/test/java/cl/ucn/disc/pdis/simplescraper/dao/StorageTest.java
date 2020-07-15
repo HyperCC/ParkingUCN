@@ -16,7 +16,7 @@
 
 package cl.ucn.disc.pdis.simplescraper.dao;
 
-import cl.ucn.disc.pdis.simplescraper.model.Functionary;
+import cl.ucn.disc.pdis.simplescraper.model.Persona;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -55,31 +55,31 @@ public final class StorageTest {
         // Connection source: autoclose with the try/catch
         try (ConnectionSource connectionSource = new JdbcConnectionSource(databaseUrl)) {
 
-            // Ctrate the table from the Functionary annotations
-            TableUtils.createTableIfNotExists(connectionSource, Functionary.class);
+            // Create the table from the Persona annotations
+            TableUtils.createTableIfNotExists(connectionSource, Persona.class);
 
-            // The dao of Functionary
-            Dao<Functionary, Long> daoFunctionary = DaoManager.createDao(connectionSource, Functionary.class);
+            // The dao of Persona
+            Dao<Persona, Long> daoFunctionary = DaoManager.createDao(connectionSource, Persona.class);
 
-            // New Functionary
-            Functionary functionary = new Functionary(32234,"Andres Cervantes", "Profesor", "Informatica", "andres@ucn.cl", "9 99998888", "depto. informatica", "angamos 675");
+            // New Persona
+            Persona persona = new Persona(32234,"Andres Cervantes", "Profesor", "Informatica", "andres@ucn.cl", "9 99998888", "depto. informatica", "angamos 675");
 
-            // Insert Functionary into the database
-            int tuples = daoFunctionary.create(functionary);
-            log.debug("Id: {}", functionary.getId());
+            // Insert Persona into the database
+            int tuples = daoFunctionary.create(persona);
+            log.debug("Id: {}", persona.getId());
 
             Assertions.assertEquals(1, tuples, "Save tuples !=1");
 
             // Get from db
-            Functionary functionarydb = daoFunctionary.queryForId((long) functionary.getId());
+            Persona functionarydb = daoFunctionary.queryForId((long) persona.getId());
 
-            Assertions.assertEquals(functionary.getNombre(), functionarydb.getNombre(), "Names not equals!");
-            Assertions.assertEquals(functionary.getCargo(), functionarydb.getCargo(), "Cargo not equals!");
-            Assertions.assertEquals(functionary.getUnidad(), functionarydb.getUnidad(), "Unidad not equals!");
+            Assertions.assertEquals(persona.getNombre(), functionarydb.getNombre(), "Names not equals!");
+            Assertions.assertEquals(persona.getCargo(), functionarydb.getCargo(), "Cargo not equals!");
+            Assertions.assertEquals(persona.getUnidad(), functionarydb.getUnidad(), "Unidad not equals!");
 
-            // Search by rut: Select * FROM  'functionary' WHERE 'nombre' = 'Andres Cervantes'
-            List<Functionary> functionaryListList = daoFunctionary.queryForEq("nombre", "Andres Cervantes");
-            Assertions.assertEquals(1, functionaryListList.size(), "More than one Functionary!");
+            // Search by rut: Select * FROM  'persona' WHERE 'nombre' = 'Andres Cervantes'
+            List<Persona> personaListList = daoFunctionary.queryForEq("nombre", "Andres Cervantes");
+            Assertions.assertEquals(1, personaListList.size(), "More than one Persona!");
 
             // Not found by nombre
             Assertions.assertEquals(0, daoFunctionary.queryForEq("nombre", "Hola Mundo").size(), "Found somethings!");

@@ -16,7 +16,7 @@
 
 package cl.ucn.disc.pdis.simplescraper.dbformater;
 
-import cl.ucn.disc.pdis.simplescraper.model.Functionary;
+import cl.ucn.disc.pdis.simplescraper.model.Persona;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -52,9 +52,9 @@ public final class DbInteraction {
     private ConnectionSource connectionSource;
 
     /**
-     * The Dao to Functionary model.
+     * The Dao to Persona model.
      */
-    private Dao<Functionary, String> functionaryDao;
+    private Dao<Persona, String> functionaryDao;
 
     /**
      * Constructor to initialize the database.
@@ -67,11 +67,11 @@ public final class DbInteraction {
         // Create a connection source to our database.
         this.connectionSource = new JdbcConnectionSource(databaseURL);
 
-        // Instance the DAO to Functionary.
-        functionaryDao = DaoManager.createDao(connectionSource, Functionary.class);
+        // Instance the DAO to Persona.
+        functionaryDao = DaoManager.createDao(connectionSource, Persona.class);
 
         // if you need to create the ’accounts’ table make this call.
-        TableUtils.createTableIfNotExists(connectionSource, Functionary.class);
+        TableUtils.createTableIfNotExists(connectionSource, Persona.class);
     }
 
     /**
@@ -109,8 +109,8 @@ public final class DbInteraction {
         direccionCasa = EmptyToNull(direccionCasa);
         comuna = EmptyToNull(comuna);
 
-        // Add new valid functionary to database.
-        Functionary functionary = new Functionary(
+        // Add new valid persona to database.
+        Persona persona = new Persona(
                 webId,
                 nombre,
                 rut,
@@ -126,14 +126,14 @@ public final class DbInteraction {
 
         // Duplicaded Functionaries.
         try {
-            this.functionaryDao.createIfNotExists(functionary);
+            this.functionaryDao.createIfNotExists(persona);
 
         } catch (SQLException e) {
-            log.error("New Functionary {} no added. Details: {}", nombre, e.getMessage());
+            log.error("New Persona {} no added. Details: {}", nombre, e.getMessage());
             return false;
         }
 
-        log.debug("Added the new functionary to database.");
+        log.debug("Added the new persona to database.");
         return true;
     }
 
@@ -157,7 +157,7 @@ public final class DbInteraction {
     }
 
     /**
-     * Get name of Functionary by id.
+     * Get name of Persona by id.
      *
      * @param id
      * @return the name by id.
@@ -168,10 +168,10 @@ public final class DbInteraction {
         String val = Integer.toString(id);
 
         // Build a query for get results from funcionarios.db
-        QueryBuilder<Functionary, String> consulta = this.functionaryDao.queryBuilder();
-        Functionary functionary = consulta.where().eq("id", val).queryForFirst();
+        QueryBuilder<Persona, String> consulta = this.functionaryDao.queryBuilder();
+        Persona persona = consulta.where().eq("id", val).queryForFirst();
 
-        return functionary.getNombre();
+        return persona.getNombre();
     }
 
     /**
@@ -183,7 +183,7 @@ public final class DbInteraction {
     public long GetLengthFunctionary() throws SQLException {
 
         // Build a query for get the length from funcionarios.db
-        QueryBuilder<Functionary, String> consulta = this.functionaryDao.queryBuilder();
+        QueryBuilder<Persona, String> consulta = this.functionaryDao.queryBuilder();
         long lengthReg = consulta.countOf();
 
         return lengthReg;

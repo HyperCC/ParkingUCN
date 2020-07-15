@@ -155,7 +155,7 @@ public class App {
                 // Add the Nombre in format UTF-8 from nombrerutyfirma.
                 nombre = nombreOrdenado.equals("") ? nombre : nombreOrdenado;
 
-                // Concatenation of Functionary data.
+                // Concatenation of Persona data.
                 StringBuilder sbFunctionary = new StringBuilder();
                 sbFunctionary.append(id).append(",")
                         // The id original from the web contacts.
