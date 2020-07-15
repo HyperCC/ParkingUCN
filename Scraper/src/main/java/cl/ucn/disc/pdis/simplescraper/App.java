@@ -175,7 +175,7 @@ public class App {
                 log.debug("New identified: {}", sbFunctionary.toString());
 
                 // Add new valid functionary to database.
-                boolean notExistInDb = theDatabase.formatToFunctionary(i
+                boolean notExistInDb = theDatabase.formatToPersona(i
                         , nombre
                         , rut
                         , sexo
@@ -225,7 +225,7 @@ public class App {
 
         //connectionSource.close();
         log.info("End of insertions.");
-        theDatabase.CloseDBConnection();
+        theDatabase.closeDbConnection();
 
     }
 

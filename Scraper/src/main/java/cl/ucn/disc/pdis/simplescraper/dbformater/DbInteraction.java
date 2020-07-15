@@ -54,7 +54,7 @@ public final class DbInteraction {
     /**
      * The Dao to Persona model.
      */
-    private Dao<Persona, String> functionaryDao;
+    private Dao<Persona, String> personaDao;
 
     /**
      * Constructor to initialize the database.
@@ -68,7 +68,7 @@ public final class DbInteraction {
         this.connectionSource = new JdbcConnectionSource(databaseURL);
 
         // Instance the DAO to Persona.
-        functionaryDao = DaoManager.createDao(connectionSource, Persona.class);
+        personaDao = DaoManager.createDao(connectionSource, Persona.class);
 
         // if you need to create the ’accounts’ table make this call.
         TableUtils.createTableIfNotExists(connectionSource, Persona.class);
@@ -92,22 +92,22 @@ public final class DbInteraction {
      * @return
      */
 
-    public boolean formatToFunctionary(int webId, String nombre, String rut, String sexo, String cargo, String unidad,
-                                       String email, String telefono, String oficina, String direccionTrabajo,
-                                       String direccionCasa, String comuna) {
+    public boolean formatToPersona(int webId, String nombre, String rut, String sexo, String cargo, String unidad,
+                                   String email, String telefono, String oficina, String direccionTrabajo,
+                                   String direccionCasa, String comuna) {
 
         // Save variables like null if is empty.
-        nombre = EmptyToNull(nombre);
-        rut = EmptyToNull(rut);
-        sexo = EmptyToNull(sexo);
-        cargo = EmptyToNull(cargo);
-        unidad = EmptyToNull(unidad);
-        email = EmptyToNull(email);
-        telefono = EmptyToNull(telefono);
-        oficina = EmptyToNull(oficina);
-        direccionTrabajo = EmptyToNull(direccionTrabajo);
-        direccionCasa = EmptyToNull(direccionCasa);
-        comuna = EmptyToNull(comuna);
+        nombre = emptyToNull(nombre);
+        rut = emptyToNull(rut);
+        sexo = emptyToNull(sexo);
+        cargo = emptyToNull(cargo);
+        unidad = emptyToNull(unidad);
+        email = emptyToNull(email);
+        telefono = emptyToNull(telefono);
+        oficina = emptyToNull(oficina);
+        direccionTrabajo = emptyToNull(direccionTrabajo);
+        direccionCasa = emptyToNull(direccionCasa);
+        comuna = emptyToNull(comuna);
 
         // Add new valid persona to database.
         Persona persona = new Persona(
@@ -126,7 +126,7 @@ public final class DbInteraction {
 
         // Duplicaded Functionaries.
         try {
-            this.functionaryDao.createIfNotExists(persona);
+            this.personaDao.createIfNotExists(persona);
 
         } catch (SQLException e) {
             log.error("New Persona {} no added. Details: {}", nombre, e.getMessage());
@@ -143,7 +143,7 @@ public final class DbInteraction {
      * @param var
      * @return a whole data or null.
      */
-    public String EmptyToNull(String var) {
+    public String emptyToNull(String var) {
         return var.isEmpty() ? null : var;
     }
 
@@ -152,7 +152,7 @@ public final class DbInteraction {
      *
      * @throws IOException
      */
-    public void CloseDBConnection() throws IOException {
+    public void closeDbConnection() throws IOException {
         this.connectionSource.close();
     }
 
@@ -168,7 +168,7 @@ public final class DbInteraction {
         String val = Integer.toString(id);
 
         // Build a query for get results from funcionarios.db
-        QueryBuilder<Persona, String> consulta = this.functionaryDao.queryBuilder();
+        QueryBuilder<Persona, String> consulta = this.personaDao.queryBuilder();
         Persona persona = consulta.where().eq("id", val).queryForFirst();
 
         return persona.getNombre();
@@ -183,10 +183,9 @@ public final class DbInteraction {
     public long GetLengthFunctionary() throws SQLException {
 
         // Build a query for get the length from funcionarios.db
-        QueryBuilder<Persona, String> consulta = this.functionaryDao.queryBuilder();
+        QueryBuilder<Persona, String> consulta = this.personaDao.queryBuilder();
         long lengthReg = consulta.countOf();
 
         return lengthReg;
     }
-
 }
