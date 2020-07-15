@@ -20,12 +20,12 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
- * The Functionary model class.
+ * The Persona model class.
  *
  * @author Castillo - Condorcet - Pizarro.
  */
 @DatabaseTable(tableName = "functionary")
-public final class Functionary {
+public final class Persona {
 
     /**
      * The id: Primary Key.
@@ -108,7 +108,7 @@ public final class Functionary {
     /**
      * Empty contructor; Default visivility + empty body.
      */
-    public Functionary( ) {
+    public Persona( ) {
         // nothing here.
     }
 
@@ -128,7 +128,7 @@ public final class Functionary {
      * @param direccionCasa
      * @param comuna
      */
-    public Functionary(int webId, String nombre, String rut, String sexo, String cargo, String unidad, String email, String telefono, String oficina, String direccionTrabajo, String direccionCasa, String comuna) {
+    public Persona(int webId, String nombre, String rut, String sexo, String cargo, String unidad, String email, String telefono, String oficina, String direccionTrabajo, String direccionCasa, String comuna) {
         this.webId = webId;
         this.nombre = nombre;
         this.rut = rut;

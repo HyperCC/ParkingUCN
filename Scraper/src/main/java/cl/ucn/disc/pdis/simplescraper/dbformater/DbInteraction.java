@@ -16,7 +16,7 @@
 
 package cl.ucn.disc.pdis.simplescraper.dbformater;
 
-import cl.ucn.disc.pdis.simplescraper.model.Functionary;
+import cl.ucn.disc.pdis.simplescraper.model.Persona;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -52,9 +52,9 @@ public final class DbInteraction {
     private ConnectionSource connectionSource;
 
     /**
-     * The Dao to Functionary model.
+     * The Dao to Persona model.
      */
-    private Dao<Functionary, String> functionaryDao;
+    private Dao<Persona, String> personaDao;
 
     /**
      * Constructor to initialize the database.
@@ -62,16 +62,16 @@ public final class DbInteraction {
     public DbInteraction() throws SQLException {
 
         // Use sqlite database to replace h2.
-        databaseURL = "jdbc:sqlite:Database/funcionarios.db";
+        databaseURL = "jdbc:sqlite:Database/persona.db";
 
         // Create a connection source to our database.
         this.connectionSource = new JdbcConnectionSource(databaseURL);
 
-        // Instance the DAO to Functionary.
-        functionaryDao = DaoManager.createDao(connectionSource, Functionary.class);
+        // Instance the DAO to Persona.
+        personaDao = DaoManager.createDao(connectionSource, Persona.class);
 
         // if you need to create the ’accounts’ table make this call.
-        TableUtils.createTableIfNotExists(connectionSource, Functionary.class);
+        TableUtils.createTableIfNotExists(connectionSource, Persona.class);
     }
 
     /**
@@ -92,25 +92,25 @@ public final class DbInteraction {
      * @return
      */
 
-    public boolean formatToFunctionary(int webId, String nombre, String rut, String sexo, String cargo, String unidad,
-                                       String email, String telefono, String oficina, String direccionTrabajo,
-                                       String direccionCasa, String comuna) {
+    public boolean formatToPersona(int webId, String nombre, String rut, String sexo, String cargo, String unidad,
+                                   String email, String telefono, String oficina, String direccionTrabajo,
+                                   String direccionCasa, String comuna) {
 
         // Save variables like null if is empty.
-        nombre = EmptyToNull(nombre);
-        rut = EmptyToNull(rut);
-        sexo = EmptyToNull(sexo);
-        cargo = EmptyToNull(cargo);
-        unidad = EmptyToNull(unidad);
-        email = EmptyToNull(email);
-        telefono = EmptyToNull(telefono);
-        oficina = EmptyToNull(oficina);
-        direccionTrabajo = EmptyToNull(direccionTrabajo);
-        direccionCasa = EmptyToNull(direccionCasa);
-        comuna = EmptyToNull(comuna);
+        nombre = emptyToNull(nombre);
+        rut = emptyToNull(rut);
+        sexo = emptyToNull(sexo);
+        cargo = emptyToNull(cargo);
+        unidad = emptyToNull(unidad);
+        email = emptyToNull(email);
+        telefono = emptyToNull(telefono);
+        oficina = emptyToNull(oficina);
+        direccionTrabajo = emptyToNull(direccionTrabajo);
+        direccionCasa = emptyToNull(direccionCasa);
+        comuna = emptyToNull(comuna);
 
-        // Add new valid functionary to database.
-        Functionary functionary = new Functionary(
+        // Add new valid persona to database.
+        Persona persona = new Persona(
                 webId,
                 nombre,
                 rut,
@@ -126,14 +126,14 @@ public final class DbInteraction {
 
         // Duplicaded Functionaries.
         try {
-            this.functionaryDao.createIfNotExists(functionary);
+            this.personaDao.createIfNotExists(persona);
 
         } catch (SQLException e) {
-            log.error("New Functionary {} no added. Details: {}", nombre, e.getMessage());
+            log.error("New Persona {} no added. Details: {}", nombre, e.getMessage());
             return false;
         }
 
-        log.debug("Added the new functionary to database.");
+        log.debug("Added the new persona to database.");
         return true;
     }
 
@@ -143,7 +143,7 @@ public final class DbInteraction {
      * @param var
      * @return a whole data or null.
      */
-    public String EmptyToNull(String var) {
+    public String emptyToNull(String var) {
         return var.isEmpty() ? null : var;
     }
 
@@ -152,41 +152,7 @@ public final class DbInteraction {
      *
      * @throws IOException
      */
-    public void CloseDBConnection() throws IOException {
+    public void closeDbConnection() throws IOException {
         this.connectionSource.close();
     }
-
-    /**
-     * Get name of Functionary by id.
-     *
-     * @param id
-     * @return the name by id.
-     * @throws SQLException
-     */
-    public String GetFunctionaryById(int id) throws SQLException {
-
-        String val = Integer.toString(id);
-
-        // Build a query for get results from funcionarios.db
-        QueryBuilder<Functionary, String> consulta = this.functionaryDao.queryBuilder();
-        Functionary functionary = consulta.where().eq("id", val).queryForFirst();
-
-        return functionary.getNombre();
-    }
-
-    /**
-     * Get length of records from DB.
-     *
-     * @return length of records from DB.
-     * @throws SQLException
-     */
-    public long GetLengthFunctionary() throws SQLException {
-
-        // Build a query for get the length from funcionarios.db
-        QueryBuilder<Functionary, String> consulta = this.functionaryDao.queryBuilder();
-        long lengthReg = consulta.countOf();
-
-        return lengthReg;
-    }
-
 }
