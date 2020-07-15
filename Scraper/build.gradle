@@ -38,7 +38,7 @@ slice {
 
     java {
         files = [file("../domain.ice")]
-        // args = "--debug --impl"
+        //args = "--debug --impl"
         logger.lifecycle("Slicing file: <${files}>")
     }
 }
@@ -72,5 +72,4 @@ dependencies {
     // JUnit
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0-M1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0-M1'
-
 }

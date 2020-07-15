@@ -148,12 +148,12 @@ module model {
         /**
          * Create a Persona with a persona instance.
          * 
-         * @param functionary to create
-         * @return Functionary created
+         * @param persona to create
+         * @return Persona created
          */
         Persona crearPersona(Persona persona);
 
-	/**
+		/**
          * Create a Vehiculo with a vehiculo instance.
          *
          * @param vehiculo to create
@@ -165,13 +165,13 @@ module model {
          * Search a Persona with a rut.
          *
          * @param rut de la persona a buscar.
-         * @return Functionary buscado.
+         * @return Persona buscado.
          */
         Persona obtenerPersona(string rut);
 
-	/**
+		/**
          * Search a Vehiculo with a patente.
-	 *
+		 *
          * @param patente del vehiculo a buscar.
          * @return Vehiculo buscado.
          */
