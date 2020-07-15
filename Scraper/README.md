@@ -24,25 +24,23 @@
 
 ##Domain Model
 @startuml
-class App {
+class Scraper {
     -log: Logger
     {static} - docDirectoryUcn: String
     {static} - docNomRutFirm: String
     +Main()
 }
 
-class DBInteraction{
+class DbInteraction{
     -log: Logger
     -connectionSource: ConnectionSource
     -personaDao: Dao <Persona,String>
     
-    +DBInteraction()
-    +formatToFunctionary(int webId, String nombre, String rut,String sexo, String cargo, String unidad,String email,String telefono, String oficina, String direccionTrabajo,
+    +DbInteraction()
+    +formatToPersona(int webId, String nombre, String rut,String sexo, String cargo, String unidad,String email,String telefono, String oficina, String direccionTrabajo,
     String direccionCasa, String comuna): boolean
-    +EmptyToNull(String var): String
-    +CloseDBConnection(): void
-    +GetFunctionaryById(int id): String
-    +GetLengthFunctionary(): long
+    +emptyToNull(String var): String
+    +closeDbConnection(): void
 }
 class Persona{
     -webId: String
@@ -79,7 +77,7 @@ enum Sexo{
 }
 
 Persona --> Sexo
-Persona <-- App
-DBInteraction <-- App
-DBInteraction --> Persona
+Persona <-- Scraper
+DbInteraction <-- Scraper
+DbInteraction --> Persona
 @enduml
