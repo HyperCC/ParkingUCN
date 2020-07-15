@@ -24,7 +24,7 @@ import com.j256.ormlite.table.DatabaseTable;
  *
  * @author Castillo - Condorcet - Pizarro.
  */
-@DatabaseTable(tableName = "functionary")
+@DatabaseTable(tableName = "persona")
 public final class Persona {
 
     /**
