@@ -66,7 +66,7 @@ public class App {
         // Auxiliaries.
         int id = 1;
         int canVoids = 0;
-        int maxCod = 29700;
+        int maxCod = 200;
 
         for (int i = 1; i < maxCod; i++) {
 

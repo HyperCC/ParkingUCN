@@ -62,7 +62,8 @@ public final class StorageTest {
             Dao<Persona, Long> daoFunctionary = DaoManager.createDao(connectionSource, Persona.class);
 
             // New Persona
-            Persona persona = new Persona(32234,"Andres Cervantes", "Profesor", "Informatica", "andres@ucn.cl", "9 99998888", "depto. informatica", "angamos 675");
+
+            Persona persona = new Persona(32234,"Andres Cervantes","12.345.678-9", "VAR", "Profesor", "Informatica", "andres@ucn.cl", "9 99998888", "depto. informatica", "angamos 675", "mi casa 123", "antofagasta");
 
             // Insert Persona into the database
             int tuples = daoFunctionary.create(persona);

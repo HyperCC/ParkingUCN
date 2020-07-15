@@ -62,7 +62,7 @@ public final class DbInteraction {
     public DbInteraction() throws SQLException {
 
         // Use sqlite database to replace h2.
-        databaseURL = "jdbc:sqlite:Database/funcionarios.db";
+        databaseURL = "jdbc:sqlite:Database/persona.db";
 
         // Create a connection source to our database.
         this.connectionSource = new JdbcConnectionSource(databaseURL);
