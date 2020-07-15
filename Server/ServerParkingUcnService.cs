@@ -1,14 +1,15 @@
+using System;
 using Ice;
 using ServerZeroIce.model;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging; 
+using Microsoft.Extensions.Logging;
 
 namespace ServerParkingUCN
 {
-    
-    internal class ServerParkingUcnService : IHostedService
+
+    internal class ServerParkingUcnService : IHostedService, IDisposable
     {
 
         /// <summary>
@@ -36,7 +37,8 @@ namespace ServerParkingUCN
         public ServerParkingUcnService(ILogger<ServerParkingUcnService> logger, ContratosDisp_ contratos)
         {
             _logger = logger;
-            _contratos = contratos; 
+            _logger.LogDebug("Building the Parking Service ..");
+            _contratos = contratos;
             _communicator = buildCommunicator();
         }
 
@@ -49,7 +51,7 @@ namespace ServerParkingUCN
 
             // The adapter: https://doc.zeroc.com/ice/3.7/client-side-features/proxies/proxy-and-endpoint-syntax
             // tcp (protocol) -z (compression) -t 15000 (timeout in ms) -p 8080 (port to bind)
-            var adapter = _communicator.createObjectAdapterWithEndpoints("Contratos", "tcp -z -t 15000 -p " + _port);
+            var adapter = _communicator.createObjectAdapterWithEndpoints("ContratosAdapter", "tcp -z -t 15000 -p " + _port);
 
             // Register in the communicator
             adapter.add(_contratos, Util.stringToIdentity("Contratos"));
@@ -93,6 +95,14 @@ namespace ServerParkingUCN
             return Ice.Util.initialize(initializationData);
         }
 
+        /// <summary>
+        /// Clear the memory.
+        /// </summary>
+        public void Dispose()
+        {
+            _communicator.destroy();
+        }
+
     }
-    
+
 }

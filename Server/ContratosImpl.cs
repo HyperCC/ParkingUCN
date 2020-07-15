@@ -2,8 +2,7 @@ using Ice;
 using ServerZeroIce.model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
-
+using ParkingDao; 
 
 namespace ServerParkingUCN
 {
@@ -15,14 +14,17 @@ namespace ServerParkingUCN
         // The Provider of DbContext
         private readonly IServiceScopeFactory _serviceScopeFactory;
 
-        // The constructor
+        /// <summary>
+        /// The Constructor.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="serviceScopeFactory"></param>
         public ContratosImpl(ILogger<ContratosImpl> logger, IServiceScopeFactory serviceScopeFactory)
         {
             _logger = logger;
             _logger.LogDebug("Building the ContratosImpl ..");
             _serviceScopeFactory = serviceScopeFactory;
 
-            /*TODO:
             // Create the database
             _logger.LogInformation("Creating the Database ..");
             using (var scope = _serviceScopeFactory.CreateScope())
@@ -31,7 +33,7 @@ namespace ServerParkingUCN
                 pc.Database.EnsureCreated();
                 pc.SaveChanges();
             }
-            */
+            
             _logger.LogDebug("Done.");            
         }
 

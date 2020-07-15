@@ -3,6 +3,7 @@ using ServerZeroIce.model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ParkingDao; 
 
 namespace ServerParkingUCN
 {
@@ -39,6 +40,8 @@ namespace ServerParkingUCN
             // Service inside the DI
             .ConfigureServices((hostContext, services) => 
             {
+                // The ParkingContext
+                services.AddDbContext<ParkingContext>(); 
                 //Singleton
                 services.AddSingleton<ContratosDisp_, ContratosImpl>();
                 // The ServerParkingUcnService

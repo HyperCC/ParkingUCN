@@ -2,7 +2,7 @@ using System.Reflection;
 using ServerZeroIce.model;
 using Microsoft.EntityFrameworkCore;
 
-namespace parking_Dao
+namespace ParkingDao
 {
     /// <summary>
     /// The Connection to the ParkingDatabase.
