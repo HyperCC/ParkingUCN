@@ -42,7 +42,7 @@ class DbInteraction{
     +emptyToNull(String var): String
     +closeDbConnection(): void
 }
-class Persona{
+class Persona <<Entity>>{
     -webId: String
     -nombre: String
     -rut: String
@@ -55,7 +55,7 @@ class Persona{
     -direccionTrabajo: String
     -direccionCasa: String
     -comuna: String
-    +Persona(int webId, String nombre, String rut, String sexo, String cargo, String unidad, String email, String telefono, 
+    +Persona(int webId, String nombre, String rut, Sexo sexo, String cargo, String unidad, String email, String telefono, 
     String oficina, String direccionTrabajo, String direccionCasa, String comuna):void
     +getId(): int
     +getWebId(): int
