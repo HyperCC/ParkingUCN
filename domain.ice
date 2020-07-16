@@ -139,6 +139,19 @@ module model {
     	 */    
     	string responsable;    	
     }
+	
+	/**
+     * The Personas importation.
+     */
+	interface UploadPersonas {
+	    /**
+         * Import Personas from Scraper.
+         * 
+         * @param Persona exportated
+         * @return Persona importaded
+         */
+        Persona exportPersonaToDb(Persona persona);
+	}
 
     /**
      * The Contratos.
