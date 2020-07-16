@@ -40,7 +40,7 @@ namespace ServerParkingUCN
         // Adds a Persona to Database
         public override Persona crearPersona(Persona persona, Current current = null)
         {
-            /*TODO:
+            
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
@@ -48,14 +48,12 @@ namespace ServerParkingUCN
                 pc.SaveChanges();
                 return persona;
             }
-            */
-            throw new System.NotImplementedException();
         }
 
         // Adds a Vehiculo to Database
         public override Vehiculo crearVehiculo(Vehiculo vehiculo, Current current = null)
         {
-            /*TODO:
+            
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
@@ -63,38 +61,32 @@ namespace ServerParkingUCN
                 pc.SaveChanges();
                 return vehiculo;
             }
-            */
-            throw new System.NotImplementedException();
         }
 
         // Given a patente, returns a vehiculo from Database
         public override Vehiculo obtenerVehiculo(string patente, Current current)
         {
-            /*TODO:
+            
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
                 Vehiculo vehiculo = pc.Vehiculos.Find(patente);
                 pc.SaveChanges();
                 return vehiculo;
-            }
-            */
-            throw new System.NotImplementedException();
+            }            
         }
 
         // Given a rut, returns a persona from Database
         public override Persona obtenerPersona(string rut, Current current)
         {
-            /*TODO:
+            
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
                 Persona persona = pc.Personas.Find(rut);
                 pc.SaveChanges();
                 return persona;
-            }
-            */
-            throw new System.NotImplementedException();
+            }            
         }
     }
 }
