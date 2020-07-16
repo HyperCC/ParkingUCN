@@ -6,12 +6,19 @@ using ParkingDao;
 
 namespace ServerParkingUCN
 {
+    /// <summary>
+    /// The Implementation of the Contratos
+    /// </summary>
     public class ContratosImpl : ContratosDisp_
     {
-        // The Logger
+        /// <summary>
+        /// The Logger
+        /// </summary>
         private readonly ILogger<ContratosImpl> _logger;
 
-        // The Provider of DbContext
+        /// <summary>
+        /// The Provider of DbContext
+        /// </summary>
         private readonly IServiceScopeFactory _serviceScopeFactory;
 
         /// <summary>
@@ -37,7 +44,12 @@ namespace ServerParkingUCN
             _logger.LogDebug("Done.");            
         }
 
-        // Adds a Persona to Database
+        /// <summary>
+        /// Create the Persona
+        /// </summary>
+        /// <param name="persona">to save</param>
+        /// <param name="current">the context of zeroIce</param>
+        /// <returns></returns>
         public override Persona crearPersona(Persona persona, Current current = null)
         {
             
@@ -50,7 +62,12 @@ namespace ServerParkingUCN
             }
         }
 
-        // Adds a Vehiculo to Database
+        /// <summary>
+        /// Create the Vehiculo
+        /// </summary>
+        /// <param name="vehiculo">to save</param>
+        /// <param name="current">the context of zeroIce</param>
+        /// <returns></returns>
         public override Vehiculo crearVehiculo(Vehiculo vehiculo, Current current = null)
         {
             
