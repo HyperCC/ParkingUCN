@@ -16,8 +16,13 @@ namespace ServerParkingUCN
         static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run(); 
-        }
+        }     
 
+        /// <summary>
+        /// Build and configure a Host
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns>The IhostBuilder</returns>   
          public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host
             .CreateDefaultBuilder(args)
