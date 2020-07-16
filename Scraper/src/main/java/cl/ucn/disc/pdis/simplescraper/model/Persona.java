@@ -28,7 +28,7 @@ import com.j256.ormlite.table.DatabaseTable;
 public final class Persona {
 
     /**
-     * The id: Primary Key.     *
+     * The id: Primary Key.
      */
     @DatabaseField(generatedId = true)
     private int id;
@@ -259,5 +259,4 @@ public final class Persona {
     public String getComuna() {
         return comuna;
     }
-
 }
