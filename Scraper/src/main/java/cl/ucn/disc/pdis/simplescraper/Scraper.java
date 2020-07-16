@@ -210,7 +210,7 @@ public class Scraper {
                     id++;
 
                 } else {
-                    log.info("The new functionary is not added.");
+                    log.info("The new persona is not added.");
 
                 }
 
