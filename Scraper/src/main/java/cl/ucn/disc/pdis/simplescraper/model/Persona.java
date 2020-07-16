@@ -108,7 +108,7 @@ public final class Persona {
     /**
      * Empty contructor; Default visivility + empty body.
      */
-    public Persona( ) {
+    public Persona() {
         // nothing here.
     }
 
@@ -153,7 +153,7 @@ public final class Persona {
     }
 
     /**
-     * webId getter
+     * WebId getter
      *
      * @return
      */
@@ -162,7 +162,7 @@ public final class Persona {
     }
 
     /**
-     * nombre getter
+     * Nombre getter
      *
      * @return
      */
@@ -189,44 +189,50 @@ public final class Persona {
     }
 
     /**
-     * cargo getter
+     * Cargo getter
      *
      * @return
      */
     public String getCargo() {
         return cargo;
     }
+
     /**
+     * Unidad getter
      *
      * @return
      */
     public String getUnidad() {
         return unidad;
     }
+
     /**
-     * e-mail getter
+     * R-mail getter
      *
      * @return
      */
     public String getEmail() {
         return email;
     }
+
     /**
-     * telefono getter
+     * Telefono getter
      *
      * @return
      */
     public String getTelefono() {
         return telefono;
     }
+
     /**
-     * oficina getter
+     * Oficina getter
      *
      * @return
      */
     public String getOficina() {
         return oficina;
     }
+
     /**
      * DireccionTrabajo getter
      *
@@ -235,6 +241,7 @@ public final class Persona {
     public String getDireccionTrabajo() {
         return direccionTrabajo;
     }
+
     /**
      * DireccionCasa getter
      *
@@ -243,6 +250,7 @@ public final class Persona {
     public String getDireccionCasa() {
         return direccionCasa;
     }
+
     /**
      * Comuna getter
      *
@@ -251,4 +259,5 @@ public final class Persona {
     public String getComuna() {
         return comuna;
     }
+
 }
