@@ -144,6 +144,14 @@ public final class Persona {
     }
 
     /**
+     * The Enum to Sexo.
+     */
+    public enum Sexo {
+        VAR,
+        MUJ
+    }
+
+    /**
      * Id getter
      *
      * @return

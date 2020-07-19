@@ -16,7 +16,7 @@
 
 package cl.ucn.disc.pdis.simplescraper.dbformater;
 
-import cl.ucn.disc.pdis.simplescraper.model.Persona;
+import cl.ucn.disc.pdis.simplescraper.model.*;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -145,6 +145,24 @@ public final class DbInteraction {
      */
     public String emptyToNull(String var) {
         return var.isEmpty() ? null : var;
+    }
+
+    /**
+     * Get Persona from Scraper model by id.
+     *
+     * @param id
+     * @return the Persona by id.
+     * @throws SQLException
+     */
+    public Persona findPersona(int id) throws SQLException {
+
+        String val = Integer.toString(id);
+
+        // Build a query for get results from personas.db
+        QueryBuilder<Persona, String> consulta = this.personaDao.queryBuilder();
+        Persona persona = consulta.where().eq("id", val).queryForFirst();
+
+        return persona;
     }
 
     /**
