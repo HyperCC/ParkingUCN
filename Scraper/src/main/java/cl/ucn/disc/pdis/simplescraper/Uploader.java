@@ -1,9 +1,13 @@
 package cl.ucn.disc.pdis.simplescraper;
 
-import cl.ucn.disc.pdis.simplescraper.dbformater.DbInteraction;
+import cl.ucn.disc.pdis.simplescraper.model.Persona;
+import cl.ucn.disc.pdis.simplescraper.zeroice.model.Contratos;
+import cl.ucn.disc.pdis.simplescraper.zeroice.model.ContratosPrx;
+import cl.ucn.disc.pdis.simplescraper.zeroice.model.Sexo;
 import com.zeroc.Ice.*;
-import org.slf4j.Logger;
+import cl.ucn.disc.pdis.simplescraper.dbformater.*;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.sql.SQLException;
 
@@ -26,7 +30,7 @@ public class Uploader {
      * @throws SQLException
      */
     public static void main(String[] args) throws SQLException {
-        
+
         // Initialize the Communicator.
         try (Communicator communicator = Util.initialize(getInitializationData(args))) {
 
@@ -104,6 +108,35 @@ public class Uploader {
         initializationData.properties = properties;
 
         return initializationData;
+    }
+
+    /**
+     * Parse from Scraper enum to Zero ice model enum.
+     *
+     * @param sexo
+     * @return Zero ice enum.
+     */
+    public static Sexo parseEnum(cl.ucn.disc.pdis.simplescraper.model.Persona.Sexo sexo) {
+
+        // enum from Zero ice model.
+        Sexo sexoZeroIce;
+
+        // parsing ..
+        if (sexo.toString().equals("VAR")) {
+            // VAR from domain.ice model.
+            sexoZeroIce = Sexo.VAR;
+            return sexoZeroIce.values()[0];
+
+        } else if (sexo.toString().equals("MUJ")) {
+            // MUJ from domain.ice model.
+            sexoZeroIce = Sexo.MUJ;
+            return sexoZeroIce.values()[1];
+
+        } else {
+            // if you have not obtained records from nombrerutyfirma.com
+            return null;
+
+        }
     }
 
 }
