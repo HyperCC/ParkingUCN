@@ -16,7 +16,7 @@
 
 package cl.ucn.disc.pdis.simplescraper.dbformater;
 
-import cl.ucn.disc.pdis.simplescraper.model.Persona;
+import cl.ucn.disc.pdis.simplescraper.model.*;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -92,14 +92,13 @@ public final class DbInteraction {
      * @return
      */
 
-    public boolean formatToPersona(int webId, String nombre, String rut, String sexo, String cargo, String unidad,
+    public boolean formatToPersona(int webId, String nombre, String rut, Persona.Sexo sexo, String cargo, String unidad,
                                    String email, String telefono, String oficina, String direccionTrabajo,
                                    String direccionCasa, String comuna) {
 
         // Save variables like null if is empty.
         nombre = emptyToNull(nombre);
         rut = emptyToNull(rut);
-        sexo = emptyToNull(sexo);
         cargo = emptyToNull(cargo);
         unidad = emptyToNull(unidad);
         email = emptyToNull(email);
@@ -148,6 +147,39 @@ public final class DbInteraction {
     }
 
     /**
+     * Get Persona from Scraper model by id.
+     *
+     * @param id
+     * @return the Persona by id.
+     * @throws SQLException
+     */
+    public Persona findPersona(int id) throws SQLException {
+
+        String val = Integer.toString(id);
+
+        // Build a query for get results from personas.db
+        QueryBuilder<Persona, String> consulta = this.personaDao.queryBuilder();
+        Persona persona = consulta.where().eq("id", val).queryForFirst();
+
+        return persona;
+    }
+
+    /**
+     * Get cant of records from DB.
+     *
+     * @return length of records from DB.
+     * @throws SQLException
+     */
+    public long cantRegisters() throws SQLException {
+
+        // Build a query for get the cant of registry from personas.db
+        QueryBuilder<Persona, String> consulta = this.personaDao.queryBuilder();
+        long lengthReg = consulta.countOf();
+
+        return lengthReg;
+    }
+
+    /**
      * End the database connection.
      *
      * @throws IOException
@@ -155,4 +187,5 @@ public final class DbInteraction {
     public void closeDbConnection() throws IOException {
         this.connectionSource.close();
     }
+
 }

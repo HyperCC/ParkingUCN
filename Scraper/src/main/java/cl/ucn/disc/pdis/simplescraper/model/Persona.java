@@ -55,7 +55,7 @@ public final class Persona {
      * The sexo.
      */
     @DatabaseField(canBeNull = true)
-    private String sexo;
+    private Sexo sexo;
 
     /**
      * The Cargo.
@@ -128,7 +128,7 @@ public final class Persona {
      * @param direccionCasa
      * @param comuna
      */
-    public Persona(int webId, String nombre, String rut, String sexo, String cargo, String unidad, String email, String telefono, String oficina, String direccionTrabajo, String direccionCasa, String comuna) {
+    public Persona(int webId, String nombre, String rut, Sexo sexo, String cargo, String unidad, String email, String telefono, String oficina, String direccionTrabajo, String direccionCasa, String comuna) {
         this.webId = webId;
         this.nombre = nombre;
         this.rut = rut;
@@ -141,6 +141,14 @@ public final class Persona {
         this.direccionTrabajo = direccionTrabajo;
         this.direccionCasa = direccionCasa;
         this.comuna = comuna;
+    }
+
+    /**
+     * The Enum to Sexo.
+     */
+    public enum Sexo {
+        VAR,
+        MUJ
     }
 
     /**
@@ -184,7 +192,7 @@ public final class Persona {
      *
      * @return
      */
-    public String getSexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
