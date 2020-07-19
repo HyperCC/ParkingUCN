@@ -46,7 +46,7 @@ public class Uploader {
             DbInteraction dbInteraction = new DbInteraction();
 
             // Transfer the Personas to Server through the Contratos.
-            for (int i = 1; i < 10; i++) {
+            for (int i = 1; i <= dbInteraction.cantRegisters(); i++) {
 
                 // Scraper Persona.
                 cl.ucn.disc.pdis.simplescraper.model.Persona personaScraper = dbInteraction.findPersona(i);
@@ -75,7 +75,6 @@ public class Uploader {
                 // Contrato from Server to her DB.
                 contratos.crearPersona(persona);
 
-                log.debug("Persona sended: {}", persona.sexo.toString());
             }
 
             log.debug("Personas upload finished.");
@@ -119,24 +118,26 @@ public class Uploader {
     public static Sexo parseEnum(cl.ucn.disc.pdis.simplescraper.model.Persona.Sexo sexo) {
 
         // enum from Zero ice model.
-        Sexo sexoZeroIce;
+        Sexo enumZeroIce = null;
 
-        // parsing ..
-        if (sexo.toString().equals("VAR")) {
-            // VAR from domain.ice model.
-            sexoZeroIce = Sexo.VAR;
-            return sexoZeroIce.values()[0];
+        try {
+            // parsing ..
+            if (sexo.toString().equals("VAR")) {
+                // VAR from domain.ice model.
+                enumZeroIce = Sexo.VAR;
 
-        } else if (sexo.toString().equals("MUJ")) {
-            // MUJ from domain.ice model.
-            sexoZeroIce = Sexo.MUJ;
-            return sexoZeroIce.values()[1];
+            } else if (sexo.toString().equals("MUJ")) {
+                // MUJ from domain.ice model.
+                enumZeroIce = Sexo.MUJ;
 
-        } else {
+            }
             // if you have not obtained records from nombrerutyfirma.com
-            return null;
+        } catch (NullPointerException e) {
+            log.debug("Enum with value null.");
 
         }
+
+        return enumZeroIce;
     }
 
 }

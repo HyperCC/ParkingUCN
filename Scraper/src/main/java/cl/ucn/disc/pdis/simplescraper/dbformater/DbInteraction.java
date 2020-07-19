@@ -165,6 +165,21 @@ public final class DbInteraction {
     }
 
     /**
+     * Get cant of records from DB.
+     *
+     * @return length of records from DB.
+     * @throws SQLException
+     */
+    public long cantRegisters() throws SQLException {
+
+        // Build a query for get the cant of registry from personas.db
+        QueryBuilder<Persona, String> consulta = this.personaDao.queryBuilder();
+        long lengthReg = consulta.countOf();
+
+        return lengthReg;
+    }
+
+    /**
      * End the database connection.
      *
      * @throws IOException

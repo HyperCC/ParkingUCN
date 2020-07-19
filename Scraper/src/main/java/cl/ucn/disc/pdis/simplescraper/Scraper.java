@@ -66,7 +66,7 @@ public class Scraper {
 
         // Auxiliaries.
         int id = 1;
-        int maxCod = 300;
+        int maxCod = 500;
 
         for (int i = 1; i < maxCod; i++) {
 
