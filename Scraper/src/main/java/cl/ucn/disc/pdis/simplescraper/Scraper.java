@@ -17,6 +17,7 @@
 package cl.ucn.disc.pdis.simplescraper;
 
 import cl.ucn.disc.pdis.simplescraper.dbformater.DbInteraction;
+import cl.ucn.disc.pdis.simplescraper.model.Persona;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -65,8 +66,7 @@ public class Scraper {
 
         // Auxiliaries.
         int id = 1;
-        int canVoids = 0;
-        int maxCod = 200;
+        int maxCod = 300;
 
         for (int i = 1; i < maxCod; i++) {
 
@@ -148,7 +148,20 @@ public class Scraper {
 
                 String nombreOrdenado = allTrObtained.get(0);
                 String rut = allTrObtained.get(1);
+
+
+                // Parse the sexo from String to Sexo.
                 String sexo = allTrObtained.get(2);
+                Persona.Sexo sexoEnum;
+
+                if (sexo.equals("VAR")) {
+                    sexoEnum = Persona.Sexo.VAR;
+                } else if (sexo.equals("MUJ")) {
+                    sexoEnum = Persona.Sexo.MUJ;
+                } else {
+                    sexoEnum = null;
+                }
+
                 String direccionCasa = allTrObtained.get(3);
                 String comuna = allTrObtained.get(4);
 
@@ -162,6 +175,7 @@ public class Scraper {
                         .append(i).append(",")
                         .append(nombre).append(",")
                         .append(rut).append(",")
+                        // Para el txt se recibe el sexo como String.
                         .append(sexo).append(",")
                         .append(cargo).append(",")
                         .append(unidad).append(",")
@@ -175,18 +189,19 @@ public class Scraper {
                 log.debug("New identified: {}", sbPersona.toString());
 
                 // Add new valid functionary to database.
-                boolean notExistInDb = theDatabase.formatToPersona(i
-                        , nombre
-                        , rut
-                        , sexo
-                        , cargo
-                        , unidad
-                        , email
-                        , telefono
-                        , oficina
-                        , direccionTrabajo
-                        , direccionCasa
-                        , comuna);
+                boolean notExistInDb = theDatabase.formatToPersona(
+                        i,
+                        nombre,
+                        rut,
+                        sexoEnum,
+                        cargo,
+                        unidad,
+                        email,
+                        telefono,
+                        oficina,
+                        direccionTrabajo,
+                        direccionCasa,
+                        comuna);
 
                 // Check if the new functionary is added. The DB and csv must be same.
                 if (notExistInDb) {

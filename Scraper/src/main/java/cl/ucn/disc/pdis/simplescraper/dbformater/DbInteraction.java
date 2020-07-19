@@ -92,14 +92,13 @@ public final class DbInteraction {
      * @return
      */
 
-    public boolean formatToPersona(int webId, String nombre, String rut, String sexo, String cargo, String unidad,
+    public boolean formatToPersona(int webId, String nombre, String rut, Persona.Sexo sexo, String cargo, String unidad,
                                    String email, String telefono, String oficina, String direccionTrabajo,
                                    String direccionCasa, String comuna) {
 
         // Save variables like null if is empty.
         nombre = emptyToNull(nombre);
         rut = emptyToNull(rut);
-        sexo = emptyToNull(sexo);
         cargo = emptyToNull(cargo);
         unidad = emptyToNull(unidad);
         email = emptyToNull(email);
@@ -173,4 +172,5 @@ public final class DbInteraction {
     public void closeDbConnection() throws IOException {
         this.connectionSource.close();
     }
+
 }
