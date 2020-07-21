@@ -63,7 +63,7 @@ public final class StorageTest {
 
             // New Persona
 
-            Persona persona = new Persona(32234,"Andres Cervantes","12.345.678-9", "VAR", "Profesor", "Informatica", "andres@ucn.cl", "9 99998888", "depto. informatica", "angamos 675", "mi casa 123", "antofagasta");
+            Persona persona = new Persona(32234,"Andres Cervantes","12.345.678-9", Persona.Sexo.VAR, "Profesor", "Informatica", "andres@ucn.cl", "9 99998888", "depto. informatica", "angamos 675", "mi casa 123", "antofagasta");
 
             // Insert Persona into the database
             int tuples = daoPersona.create(persona);
