@@ -4,13 +4,9 @@ buildscript {
         google()
         jcenter()
     }
-    plugins {
-        id "com.zeroc.gradle.ice-builder.slice" version "1.4.7"
-    }
-    apply plugin: 'com.android.application'
+
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.0-alpha04'
-        implementation 'com.zeroc:ice:3.7.4'
 
 
         // NOTE: Do not place your application dependencies here; they belong
