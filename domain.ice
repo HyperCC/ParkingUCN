@@ -140,19 +140,6 @@ module model {
     	string responsable;    	
     }
 	
-	/**
-     * The Personas importation.
-     */
-	interface UploadPersonas {
-	    /**
-         * Import Personas from Scraper.
-         * 
-         * @param Persona exportated
-         * @return Persona importaded
-         */
-        Persona exportPersonaToDb(Persona persona);
-	}
-
     /**
      * The Contratos.
      */
@@ -166,7 +153,7 @@ module model {
          */
         Persona crearPersona(Persona persona);
 
-		/**
+	/**
          * Create a Vehiculo with a vehiculo instance.
          *
          * @param vehiculo to create
@@ -182,13 +169,22 @@ module model {
          */
         Persona obtenerPersona(string rut);
 
-		/**
+	/**
          * Search a Vehiculo with a patente.
-		 *
+	 *
          * @param patente del vehiculo a buscar.
          * @return Vehiculo buscado.
          */
         Vehiculo obtenerVehiculo(string patente);
+
+
+	/**
+         * Vehiculo entry to university.
+         *
+         * @param admision de ingreso vehicular a la universidad.
+         * @return Vehiculo ingresado
+         */
+        Vehiculo ingresarVehiculo(string patente);
     }
 
 }
