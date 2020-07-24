@@ -33,52 +33,50 @@
 @startuml
 
 class Scraper {
-    -log: Logger
-    {static} - docDirectoryUcn: String
-    {static} - docNomRutFirm: String
-    +Main()
+    {static} - log: Logger
+    {static} + main(args: String[]): void
 }
 
 class DbInteraction{
 
-    -log: Logger
-    -connectionSource: ConnectionSource
-    -personaDao: Dao <Persona,String>
-    
-    +DbInteraction()
-    +formatToPersona(webId: int, nombre: String, rut: String, sexo: String, cargo: String, unidad: String, email: String, telefono: String, oficina: String, direccionTrabajo: String,
+    - log: Logger
+    - connectionSource: ConnectionSource
+    - personaDao: Dao <Persona,String>
+    + DbInteraction()
+    + formatToPersona(webId: int, nombre: String, rut: String, sexo: String, cargo: String, unidad: String, email: String, telefono: String, oficina: String, direccionTrabajo: String,
     direccionCasa: String, comuna: String): boolean
-    +emptyToNull(var: String): String
-    +closeDbConnection(): void
+    + emptyToNull(var: String): String
+    + closeDbConnection(): void
 }
 class Persona <<Entity>>{
-    -webId: String
-    -nombre: String
-    -rut: String
-    -sexo: Sexo
-    -cargo: String
-    -unidad: String
-    -email: String
-    -telefono: String
-    -oficina: String
-    -direccionTrabajo: String
-    -direccionCasa: String
-    -comuna: String
-    +Persona(webId: int, nombre: String,rut: String, sexo: Sexo, cargo: String, unidad: String, email: String, telefono: String, 
+    - id: int
+    - webId: int
+    - nombre: String
+    - rut: String
+    - sexo: Sexo
+    - cargo: String
+    - unidad: String
+    - email: String
+    - telefono: String
+    - oficina: String
+    - direccionTrabajo: String
+    - direccionCasa: String
+    - comuna: String
+    + Persona(webId: int, nombre: String,rut: String, sexo: Sexo, cargo: String, unidad: String, email: String, telefono: String, 
     oficina: String, direccionTrabajo: String, direccionCasa: String, comuna: String): void
-    +getId(): int
-    +getWebId(): int
-    +getNombre(): String
-    +getRut(): String
-    +getSexo(): Sexo
-    +getCargo(): String
-    +getUnidad(): String
-    +getEmail(): String
-    +getTelefono(): String
-    +getOficina(): String
-    +getDireccionTrabajo(): String
-    +getDireccionCasa(): String
-    +getComuna(): String
+    + getId(): int
+    + getWebId(): int
+    + getNombre(): String
+    + getRut(): String
+    + getSexo(): Sexo
+    + getCargo(): String
+    + getUnidad(): String
+    + getEmail(): String
+    + getTelefono(): String
+    + getOficina(): String
+    + getDireccionTrabajo(): String
+    + getDireccionCasa(): String
+    + getComuna(): String
 }
 
 enum Sexo{
@@ -86,10 +84,21 @@ enum Sexo{
     MUJ
 }
 
+class Uploader {
+    {static} - log: Logger
+    {static} + main(args: String[]): void
+    {static} + getInitializationData(args: String[]): InitializationData
+    {static} + parseEnum(sexo: model.Persona.Sexo): zerocice.model.Sexo
+}
+
 Persona --> Sexo
 Persona <-- Scraper
 DbInteraction <-- Scraper
 DbInteraction --> Persona
+
+Uploader --> DbInteraction
+Uploader --> Persona
+Uploader --> Sexo
 
 @enduml
 ```
