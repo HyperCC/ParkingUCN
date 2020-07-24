@@ -22,66 +22,66 @@
 ##  License
   This project is open-sourced software licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
-##  Domain Model
+##Class Diagram
+
+![](class.svg)
+
+<details><summary>PlantUML</summary>
+<p>
+
 ```
 @startuml
 
 class Scraper {
-    {static} - log: Logger
-    {static} + main(args: String[]): void
+    -log: Logger
+    {static} - docDirectoryUcn: String
+    {static} - docNomRutFirm: String
+    +Main()
 }
 
-class Persona <<Entity>> {
-    - id: int
-    - webId: int
-    - nombre: String
-    - rut: String
-    - sexo: Sexo
-    - cargo: String
-    - unidad: String
-    - email: String
-    - telefono: String
-    - oficina: String
-    - direccionTrabajo: String
-    - direccionCasa: String
-    - comuna: String
-    + Persona(int webId, String nombre, String rut, Sexo sexo, String cargo, String unidad, String email, String telefono, 
-      String oficina, String direccionTrabajo, String direccionCasa, String comuna):void
-    + getId(): int
-    + getWebId(): int
-    + getNombre(): String
-    + getRut(): String
-    + getSexo(): Sexo
-    + getCargo(): String
-    + getUnidad(): String
-    + getEmail(): String
-    + getTelefono(): String
-    + getOficina(): String
-    + getDireccionTrabajo(): String
-    + getDireccionCasa(): String
-    + getComuna(): String
+class DbInteraction{
+
+    -log: Logger
+    -connectionSource: ConnectionSource
+    -personaDao: Dao <Persona,String>
+    
+    +DbInteraction()
+    +formatToPersona(webId: int, nombre: String, rut: String, sexo: String, cargo: String, unidad: String, email: String, telefono: String, oficina: String, direccionTrabajo: String,
+    direccionCasa: String, comuna: String): boolean
+    +emptyToNull(var: String): String
+    +closeDbConnection(): void
+}
+class Persona <<Entity>>{
+    -webId: String
+    -nombre: String
+    -rut: String
+    -sexo: Sexo
+    -cargo: String
+    -unidad: String
+    -email: String
+    -telefono: String
+    -oficina: String
+    -direccionTrabajo: String
+    -direccionCasa: String
+    -comuna: String
+    +Persona(webId: int, nombre: String,rut: String, sexo: Sexo, cargo: String, unidad: String, email: String, telefono: String, 
+    oficina: String, direccionTrabajo: String, direccionCasa: String, comuna: String): void
+    +getId(): int
+    +getWebId(): int
+    +getNombre(): String
+    +getRut(): String
+    +getSexo(): Sexo
+    +getCargo(): String
+    +getUnidad(): String
+    +getEmail(): String
+    +getTelefono(): String
+    +getOficina(): String
+    +getDireccionTrabajo(): String
+    +getDireccionCasa(): String
+    +getComuna(): String
 }
 
-
-class DbInteraction {
-    - log: Logger
-    - connectionSource: ConnectionSource
-    - personaDao: Dao <Persona,String>
-    + DbInteraction()
-    + formatToPersona(int webId, String nombre, String rut,String sexo, String cargo, String unidad,String email,String telefono, 
-      String oficina, String direccionTrabajo, String direccionCasa, String comuna): boolean
-    + emptyToNull(String var): String
-    + closeDbConnection(): void
-}
-
-class Uploader {
-    {static} - log: Logger
-    {static} + main(args: String[]): void
-    {static} + getInitializationData(args: String[]): InitializationData
-    {static} + parseEnum(sexo: model.Persona.Sexo): zerocice.model.Sexo
-{
-
-enum Sexo {
+enum Sexo{
     VAR,
     MUJ
 }
@@ -93,3 +93,6 @@ DbInteraction --> Persona
 
 @enduml
 ```
+
+</p>
+</details>
