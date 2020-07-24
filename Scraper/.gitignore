@@ -10,26 +10,14 @@
 # Idea
 /.idea/caches
 /.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-/.idea/misc.xml
 # /.idea/codeStyles/
-/.idea/runConfigurations.xml
-/.idea/vcs.xml
-/.idea/gradle.xml
 /.idea/.name
 /.idea/inspectionProfiles/
 /.idea/copyright/
-/.idea/kotlinCodeInsightSettings.xml
 /.idea/.gitignore
-/.idea/render.experimental.xml
 /.idea/$CACHE_FILE$
-/.idea/checkstyle-idea.xml
 /.idea/dictionaries
-/.idea/jarRepositories.xml
-/.idea/compiler.xml
+/.idea/*.xml
 
 # Trashy-trashy
 .DS_Store
