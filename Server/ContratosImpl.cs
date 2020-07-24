@@ -45,11 +45,11 @@ namespace ServerParkingUCN
         }
 
         /// <summary>
-        /// Create the Persona
+        /// Create a Persona
         /// </summary>
         /// <param name="persona">to save</param>
         /// <param name="current">the context of zeroIce</param>
-        /// <returns></returns>
+        /// <returns>A Persona created</returns>
         public override Persona crearPersona(Persona persona, Current current = null)
         {
             
@@ -63,11 +63,11 @@ namespace ServerParkingUCN
         }
 
         /// <summary>
-        /// Create the Vehiculo
+        /// Create a Vehiculo
         /// </summary>
         /// <param name="vehiculo">to save</param>
         /// <param name="current">the context of zeroIce</param>
-        /// <returns></returns>
+        /// <returns>A Vehiculo created</returns>
         public override Vehiculo crearVehiculo(Vehiculo vehiculo, Current current = null)
         {
             
@@ -80,7 +80,12 @@ namespace ServerParkingUCN
             }
         }
 
-        // Given a patente, returns a vehiculo from Database
+        /// <summary>
+        /// Given a patente, returns a vehiculo from Database
+        /// </summary>
+        /// <param name="patente">to search</param>
+        /// <param name="current">the context of zeroIce</param>
+        /// <returns></returns>
         public override Vehiculo obtenerVehiculo(string patente, Current current)
         {
             
@@ -93,7 +98,13 @@ namespace ServerParkingUCN
             }            
         }
 
-        // Given a rut, returns a persona from Database
+        // 
+        /// <summary>
+        /// Given a rut, returns a persona from Database
+        /// </summary>
+        /// <param name="rut">to search</param>
+        /// <param name="current">the context of zeroIce</param>
+        /// <returns>A Persona founded</returns>
         public override Persona obtenerPersona(string rut, Current current)
         {
             
@@ -104,6 +115,24 @@ namespace ServerParkingUCN
                 pc.SaveChanges();
                 return persona;
             }            
+        }
+
+        /// <summary>
+        /// Given a patente, records that a vehicle has entered the university
+        /// </summary>
+        /// <param name="patente"></param>
+        /// <param name="current"></param>
+        /// <returns> The Vehiculo joined</returns>
+        public override Vehiculo ingresarVehiculo(string patente, Current current)
+        {
+            using (var scope = _serviceScopeFactory.CreateScope())
+            {
+                ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
+                Vehiculo vehiculo = pc.Vehiculos.Find(patente);
+                //TODO: entry of a vehicle in a register of entry to the university
+                pc.SaveChanges();
+                return vehiculo;
+            }   
         }
     }
 }
