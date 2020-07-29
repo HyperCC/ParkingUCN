@@ -1,16 +1,16 @@
 plugins {
     id 'com.android.application'
+    id 'kotlin-android'
     id "com.zeroc.gradle.ice-builder.slice" version "1.4.7"
 }
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "cl.ucn.dics.pdis.appparkingucn"
-        minSdkVersion 26
+        applicationId "cl.ucn.disc.pdis.app"
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -28,15 +28,30 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "${compose_version}"
+        kotlinCompilerVersion '1.3.70-dev-withExperimentalGoogleExtensions-20200424'
+    }
 }
 
 dependencies {
 
+    implementation 'com.zeroc:ice:3.7.4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
+    implementation "androidx.ui:ui-layout:$compose_version"
+    implementation "androidx.ui:ui-material:$compose_version"
+    implementation "androidx.ui:ui-tooling:$compose_version"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.zeroc:ice:3.7.4'
 }

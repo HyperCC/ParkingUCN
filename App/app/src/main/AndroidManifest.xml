@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cl.ucn.dics.pdis.appparkingucn">
+    package="cl.ucn.disc.pdis.app">
 
     <application
         android:allowBackup="true"
@@ -8,8 +8,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppParkingUCN">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.App">
+        <activity android:name=".Buscar"></activity>
+        <activity android:name=".RegistroVehiculo" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.App.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
