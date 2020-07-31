@@ -34,9 +34,6 @@ class MainActivity : AppCompatActivity() {
             Button(onClick = {startActivity(Intent(this@MainActivity, RegistroVehiculo::class.java))}) {
                 Text(text = "Registro")
             }
-
-
-
         }
     }
 }
