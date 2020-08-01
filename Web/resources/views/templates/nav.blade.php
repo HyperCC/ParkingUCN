@@ -2,6 +2,10 @@
 
     <div class="container">
 
+        <a class="navbar-brand font-weight-bold text-light" href="{{ route('home') }}">
+            {{ config('app.name') }}
+        </a>
+
     </div>
 
 </nav>
