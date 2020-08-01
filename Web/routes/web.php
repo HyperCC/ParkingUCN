@@ -21,3 +21,6 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
+Route::get('/app', function () {
+    return view('appdownload');
+})->name('app');

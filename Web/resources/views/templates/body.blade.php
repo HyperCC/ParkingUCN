@@ -21,7 +21,7 @@
         @include('templates.nav')
     </header>
 
-    <main class="py-3">
+    <main>
         @yield('content_body')
     </main>
 

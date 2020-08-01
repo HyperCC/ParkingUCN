@@ -6,7 +6,7 @@
 
     <div class="container">
 
-        <div class="row">
+        <div class="row my-3">
 
             <div class="col-12 col-lg-6">
                 <img class="img-fluid m-lg-3 m-sm-3" src="img/parkinghome.png" alt="parking ucn">
@@ -28,10 +28,9 @@
                             </h4>
                         </div>
                     </div>
+
                 </div>
             </div>
-
-
         </div>
 
         <div class="row">
