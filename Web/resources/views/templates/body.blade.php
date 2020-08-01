@@ -7,6 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset(mix('css/app.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/paletas.css') }}">
     <script src="{{ asset(mix('js/app.js')) }}" defer></script>
 
     <link rel="shortcut icon" href="{{{ asset('img/favicon.png') }}}">
@@ -20,11 +21,11 @@
         @include('templates.nav')
     </header>
 
-    <main>
+    <main class="py-3">
         @yield('content_body')
     </main>
 
-    <footer class="bg-dark text-center text-light py-3 shadow" >
+    <footer class="bg-dark text-center text-light py-3 shadow">
         {{ config('app.name') }} | Copyright @ {{ date('Y') }}
     </footer>
 

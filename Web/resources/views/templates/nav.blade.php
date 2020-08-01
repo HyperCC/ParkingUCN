@@ -2,7 +2,7 @@
 
     <div class="container">
 
-        <a class="navbar-brand font-weight-bold text-light" href="{{ route('home') }}">
+        <a class="navbar-brand font-weight-bold text-light my-1" href="{{ route('home') }}">
             {{ config('app.name') }}
         </a>
 
