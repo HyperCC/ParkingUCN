@@ -24,6 +24,5 @@ class Buscar : AppCompatActivity() {
                     //TODO: buscar patente
                     Toast.makeText(this, "El valor seleccionado es: "+seleccion.checkedRadioButtonId, Toast.LENGTH_SHORT).show()
         }
-
     }
 }
