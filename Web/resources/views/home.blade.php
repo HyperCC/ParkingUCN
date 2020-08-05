@@ -74,7 +74,7 @@
                             <p class="text-muted"> Crear un usuario y registrarlo junto a los demas usuarios
                                 autorizados</p>
                         </div>
-                        <a href="{{ route('create.persona') }}" class="btn mx-3 mb-3 btn-outline-success rounded-pill">
+                        <a href="{{ route('persona.create') }}" class="btn mx-3 mb-3 btn-outline-success rounded-pill">
                             ¡A Inscribir!
                         </a>
                     </div>
@@ -89,7 +89,7 @@
                             <p class="text-muted"> Crear un vehiculo validado el usuario como autorizado o
                                 registrado</p>
                         </div>
-                        <a href="#" class="btn mx-3 mb-3 btn-outline-success rounded-pill">
+                        <a href="{{ route('vehiculo.create') }}" class="btn mx-3 mb-3 btn-outline-success rounded-pill">
                             ¡A Inscribir!
                         </a>
                     </div>

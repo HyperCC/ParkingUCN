@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', function () {
     return view('home');
 })->name('home');
 
@@ -25,6 +21,6 @@ Route::get('/app', function () {
     return view('appdownload');
 })->name('app');
 
-Route::get('/crear Persona', function () {
-    return view('PersonaOperations.create');
-})->name('create.persona');
+Route::get('/crear-Persona', 'PersonaController@create')->name('persona.create');
+
+Route::get('/creat-Vehiculo', 'VehiculoController@create')->name('vehiculo.create');

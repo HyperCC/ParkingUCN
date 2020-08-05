@@ -28,14 +28,14 @@
 
             <div class="row">
 
-                <form class="form-inline my-lg-0 mb-2">
+                <form class="form-inline my-lg-0 my-2">
                     <div class="col-8">
                         <input class="form-control rounded-pill" type="search" placeholder="Search"
                                aria-label="Search">
                     </div>
 
                     <div class="col-4">
-                        <button class="btn btn-outline-dark" type="submit">Buscar</button>
+                        <button class="btn btn-outline-light" type="submit">Buscar</button>
                     </div>
 
                 </form>
