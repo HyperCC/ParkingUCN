@@ -40,7 +40,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="card mb-3 box-shadow">
                         <div class="card-header bg-warning">
-                            <h4 class="my-0 font-weight-normal text-light"> Registrar un Ingreso </h4>
+                            <h4 class="my-0 font-weight-normal text-dark"> Registrar un Ingreso </h4>
                         </div>
                         <div class="card-body">
                             <p class="text-muted"> Crear nuevo registro de ingreso vehicular a la universidad</p>
@@ -54,7 +54,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="card mb-3 box-shadow">
                         <div class="card-header bg-warning">
-                            <h4 class="my-0 font-weight-normal text-light"> Registrar una Salida </h4>
+                            <h4 class="my-0 font-weight-normal text-dark"> Registrar una Salida </h4>
                         </div>
                         <div class="card-body">
                             <p class="text-muted"> Crear nuevo registro sobre la salida de un vehiculo del recinto </p>
@@ -74,7 +74,7 @@
                             <p class="text-muted"> Crear un usuario y registrarlo junto a los demas usuarios
                                 autorizados</p>
                         </div>
-                        <a href="#" class="btn mx-3 mb-3 btn-outline-success rounded-pill">
+                        <a href="{{ route('create.persona') }}" class="btn mx-3 mb-3 btn-outline-success rounded-pill">
                             ¡A Inscribir!
                         </a>
                     </div>

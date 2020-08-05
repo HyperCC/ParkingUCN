@@ -24,3 +24,7 @@ Route::get('/home', function () {
 Route::get('/app', function () {
     return view('appdownload');
 })->name('app');
+
+Route::get('/crear Persona', function () {
+    return view('PersonaOperations.create');
+})->name('create.persona');

@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="col-4">
-                        <button class="btn btn-outline-dark rounded-pill" type="submit">Buscar</button>
+                        <button class="btn btn-outline-dark" type="submit">Buscar</button>
                     </div>
 
                 </form>
