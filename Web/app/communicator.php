@@ -3,28 +3,35 @@ require_once 'Ice.php';
 require_once 'domain.php';
 
 try {
-    echo 'Hola Mundo';
 
+    syslog(0, 'Inicializacion del Communicator');
+
+    // inicializacion de propiedades
     $data = new Ice\InitializationData;
     $data->properties = Ice\getProperties();
     $communicator = Ice\initialize($data);
+
+    // declaracion del proxy
     $proxy = $communicator->stringToProxy("Contratos:tcp -z -t 15000 -p 8080");
     $contratosCall = \model\ContratosPrxHelper::checkedCast($proxy);
 
-    // llamado a un contrato
+    // llamado a un contrato de prueba
     $per = $contratosCall->obtenerPersona("3.915.487-0");
+
     //$contratosCall->obtenerPersona((string)("5.357.633-8"));
-    echo $per->nombre;
+    // TODO: perfeccionar los contratos, metodo Find no funcion con rut.
+    syslog(0, 'El nombre recibido por el servidor: ' . $per->nombre);
 
 
 } catch (Ice\LocalException $ex) {
-    echo 'erro: '.$ex;
+    syslog(0, 'Error capturado: ' . $ex);
 
 }
 
 
 if ($communicator) {
     try {
+        // finalizacion del Communicator.
         $communicator->destroy();
     } catch (Ice\LocalException $ex) {
         // Ignore.
