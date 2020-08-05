@@ -26,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent buscar = new Intent(MainActivity.this, Buscar.class);
-                startActivity(buscar);
+                startActivity(new Intent(MainActivity.this, Buscar.class));
             }
         });
 
@@ -35,8 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent registrar = new Intent(MainActivity.this,RegistroVehiculo.class);
-                startActivity(registrar);
+                startActivity(new Intent(MainActivity.this, RegistroVehiculo.class));
             }
         });
     }
