@@ -1,4 +1,4 @@
-package cl.ucn.dics.pdis.appparkingucn;
+package cl.ucn.disc.pdis.appparkingucn;
 
 import org.junit.Test;
 
