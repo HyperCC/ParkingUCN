@@ -1,4 +1,8 @@
-<nav class="navbar navbar-light navbar-expand-lg bg-primary">
+@if(route('app'))
+    <nav class="navbar navbar-light navbar-expand-lg bg-dark">
+        @else
+            <nav class="navbar navbar-light navbar-expand-lg bg-primary">
+                @endif
 
     <div class="container">
 

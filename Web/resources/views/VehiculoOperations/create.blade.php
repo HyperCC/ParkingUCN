@@ -1,6 +1,6 @@
 @extends('templates.body')
 
-@section('title_head', 'Crear Persona')
+@section('title_head', 'Crear Vehiculo')
 
 @section('content_body')
 
