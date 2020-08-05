@@ -4,6 +4,18 @@ plugins {
 }
 apply plugin: 'com.android.application'
 
+slice {
+
+    // The home of ice
+    iceHome = 'C:\\Program Files\\ZeroC\\Ice-3.7.3'
+
+    java {
+        files = [file("../../domain.ice")]
+        //args = "--debug --impl"
+        //logger.lifecycle("Slicing file: <${files}>")
+    }
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
