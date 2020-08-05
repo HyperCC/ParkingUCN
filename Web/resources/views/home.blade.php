@@ -45,7 +45,7 @@
                         <div class="card-body">
                             <p class="text-muted"> Crear nuevo registro de ingreso vehicular a la universidad</p>
                         </div>
-                        <a href="#" class="btn mx-3 mb-3 btn-outline-warning rounded-pill text-dark">
+                        <a href="{{ route('registro.create') }}" class="btn mx-3 mb-3 btn-outline-warning rounded-pill text-dark">
                             ¡A Registrar!
                         </a>
                     </div>

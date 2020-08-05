@@ -24,3 +24,5 @@ Route::get('/app', function () {
 Route::get('/crear-Persona', 'PersonaController@create')->name('persona.create');
 
 Route::get('/creat-Vehiculo', 'VehiculoController@create')->name('vehiculo.create');
+
+Route::get('/creat-Registro', 'RegistroController@create')->name('registro.create');
