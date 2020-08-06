@@ -18,12 +18,12 @@ public class RegistroVehiculo extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                if (entradaSalida.getCheckedRadioButtonId() == R.id.botonRut) {
+                if (entradaSalida.getCheckedRadioButtonId() == R.id.entrada) {
                     //TODO: metodo ingreso
                     Toast.makeText(RegistroVehiculo.this, "El valor seleccionado es: "+ entradaSalida.getCheckedRadioButtonId(), Toast.LENGTH_SHORT).show();
                 }
-                if (entradaSalida.getCheckedRadioButtonId() == R.id.botonPatente) {
-                    //TODO: buscar patente
+                if (entradaSalida.getCheckedRadioButtonId() == R.id.salida) {
+                    //TODO: metodo salida
                     Toast.makeText(RegistroVehiculo.this, "El valor seleccionado es: "+ entradaSalida.getCheckedRadioButtonId(), Toast.LENGTH_SHORT).show();
                 }
                 //TODO: limpiar datos ingresados
