@@ -14,6 +14,9 @@ public final class ZeroIce {
     // The logger
     private static final Logger log = LoggerFactory.getLogger(ZeroIce.class);
 
+    // Server IP (MUST BE SETTED BY ADMINISTRATOR)
+    private String serverIP = "192.168.0.13";
+
     // Singleton
     private static final ZeroIce ZERO_ICE = new ZeroIce();
 
@@ -67,7 +70,7 @@ public final class ZeroIce {
         String nameContratos = Contratos.class.getSimpleName();
 
         // The proxy
-        ObjectPrx theProxy = this.communicator.stringToProxy(nameContratos + ":tcp -z -t 15000 -p 8080");
+        ObjectPrx theProxy = this.communicator.stringToProxy(nameContratos + ":tcp -h "+serverIP+" -t 15000 -p 8080");
         this.contratosPrx = ContratosPrx.checkedCast(theProxy);
     }
 

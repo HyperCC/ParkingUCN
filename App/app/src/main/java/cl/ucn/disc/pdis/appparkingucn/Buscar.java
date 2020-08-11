@@ -30,11 +30,9 @@ public class Buscar extends AppCompatActivity {
                    Toast.makeText(Buscar.this, "El valor seleccionado es: "+ seleccion.getCheckedRadioButtonId(), Toast.LENGTH_SHORT).show();
                }
                if (seleccion.getCheckedRadioButtonId() == R.id.botonPatente) {
-                   
+
                    //TODO: buscar patente
                    Toast.makeText(Buscar.this, "El valor seleccionado es: "+ seleccion.getCheckedRadioButtonId(), Toast.LENGTH_SHORT).show();
-
-
                }
            }
        });
