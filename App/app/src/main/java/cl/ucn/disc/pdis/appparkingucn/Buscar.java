@@ -12,18 +12,25 @@ public class Buscar extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar);
+
         Button botonBuscar = findViewById(R.id.botonBuscar);
         RadioGroup seleccion = findViewById(R.id.seleccion);
+        EditText dato = findViewById(R.id.editText);
+
+        Communicator communicator = new Communicator();
 
        botonBuscar.setOnClickListener(new View.OnClickListener() {
 
            @Override
            public void onClick(View v) {
                if (seleccion.getCheckedRadioButtonId() == R.id.botonRut) {
+
                    //TODO: buscar rut
+                   communicator.obtenerPersona(dato.getText().toString());
                    Toast.makeText(Buscar.this, "El valor seleccionado es: "+ seleccion.getCheckedRadioButtonId(), Toast.LENGTH_SHORT).show();
                }
                if (seleccion.getCheckedRadioButtonId() == R.id.botonPatente) {
+                   
                    //TODO: buscar patente
                    Toast.makeText(Buscar.this, "El valor seleccionado es: "+ seleccion.getCheckedRadioButtonId(), Toast.LENGTH_SHORT).show();
 
