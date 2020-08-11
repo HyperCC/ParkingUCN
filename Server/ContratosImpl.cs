@@ -1,8 +1,9 @@
+using System.Linq;
 using Ice;
 using ServerZeroIce.model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ParkingDao; 
+using ParkingDao;
 
 namespace ServerParkingUCN
 {
@@ -40,8 +41,8 @@ namespace ServerParkingUCN
                 pc.Database.EnsureCreated();
                 pc.SaveChanges();
             }
-            
-            _logger.LogDebug("Done.");            
+
+            _logger.LogDebug("Done.");
         }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace ServerParkingUCN
         /// <returns>A Persona created</returns>
         public override Persona crearPersona(Persona persona, Current current = null)
         {
-            
+
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
@@ -70,7 +71,7 @@ namespace ServerParkingUCN
         /// <returns>A Vehiculo created</returns>
         public override Vehiculo crearVehiculo(Vehiculo vehiculo, Current current = null)
         {
-            
+
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
@@ -88,14 +89,14 @@ namespace ServerParkingUCN
         /// <returns></returns>
         public override Vehiculo obtenerVehiculo(string patente, Current current)
         {
-            
+
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
                 Vehiculo vehiculo = pc.Vehiculos.Find(patente);
                 pc.SaveChanges();
                 return vehiculo;
-            }            
+            }
         }
 
         // 
@@ -107,14 +108,35 @@ namespace ServerParkingUCN
         /// <returns>A Persona founded</returns>
         public override Persona obtenerPersona(string rut, Current current)
         {
-            
+            _logger.LogDebug("obtenerPersona initialization..");
+
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
-                Persona persona = pc.Personas.Find(rut);
-                pc.SaveChanges();
+
+                Persona persona = new Persona();
+                try
+                {
+                    _logger.LogDebug($"Searching the Persona by rut: {rut}");
+                    persona = pc.Personas.Where(persona => persona.rut == rut).First();
+
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug($"Error in query to search a Persona by rut: {e.GetBaseException()}");
+                    persona = new Persona();
+
+                }
+                if (persona != new Persona())
+                {
+                    _logger.LogDebug($"Persona founded: {persona.nombre}");
+
+                }
+
+                _logger.LogDebug("Persona not found in database");
+                // pc.SaveChanges();
                 return persona;
-            }            
+            }
         }
 
         /// <summary>
@@ -132,7 +154,7 @@ namespace ServerParkingUCN
                 //TODO: entry of a vehicle in a register of entry to the university
                 pc.SaveChanges();
                 return vehiculo;
-            }   
+            }
         }
     }
 }
