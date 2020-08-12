@@ -89,12 +89,44 @@ namespace ServerParkingUCN
         /// <returns></returns>
         public override Vehiculo obtenerVehiculo(string patente, Current current)
         {
+            _logger.LogDebug("obtenerVehiculo initialization..");
 
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
-                Vehiculo vehiculo = pc.Vehiculos.Find(patente);
-                pc.SaveChanges();
+
+                // the default Vehiculo
+                Vehiculo vehiculo = null;
+
+                try
+                {
+                    // try find the Vehiculo by patente
+                    _logger.LogDebug($"Searching the Vehiculo by patente: {patente}");
+                    vehiculo = pc.Vehiculos.Where(vehiculo => vehiculo.Patente == patente).First();
+
+                }
+                catch (Exception e)
+                {
+                    // error in the query. return null Persona
+                    _logger.LogDebug($"Error in query to search a Vehiculo by patente: {e.GetBaseException()}");
+
+                }
+
+                if (vehiculo != null)
+                {
+                    // Vehiculo finded correctly
+                    _logger.LogDebug($"Vehiculo foundedwith owner: {vehiculo.responsable}");
+
+                }
+                else
+                {
+                    // the system must return a null Vehiculo
+                    _logger.LogDebug($"Vehiculo with patente: {patente} not found");
+
+                }
+
+                _logger.LogDebug("Vehiculo not found in database");
+                // pc.SaveChanges();
                 return vehiculo;
             }
         }
