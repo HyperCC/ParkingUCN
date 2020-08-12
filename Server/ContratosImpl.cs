@@ -1,3 +1,4 @@
+using System.Linq;
 using Ice;
 using System.Linq;
 using ServerZeroIce.model;
@@ -89,7 +90,10 @@ namespace ServerParkingUCN
         /// <returns></returns>
         public override Vehiculo obtenerVehiculo(string patente, Current current)
         {
+<<<<<<< HEAD
             _logger.LogDebug("obtenerVehiculo initialization..");
+=======
+>>>>>>> 55f10a74f2a18a74935071d4357f55b1998d8e22
 
             using (var scope = _serviceScopeFactory.CreateScope())
             {
@@ -146,18 +150,25 @@ namespace ServerParkingUCN
             {
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
 
+<<<<<<< HEAD
                 // the default Persona
                 Persona persona = null;
 
                 try
                 {
                     // try find the Persona by rut
+=======
+                Persona persona = new Persona();
+                try
+                {
+>>>>>>> 55f10a74f2a18a74935071d4357f55b1998d8e22
                     _logger.LogDebug($"Searching the Persona by rut: {rut}");
                     persona = pc.Personas.Where(persona => persona.rut == rut).First();
 
                 }
                 catch (Exception e)
                 {
+<<<<<<< HEAD
                     // error in the query. return null Persona
                     _logger.LogDebug($"Error in query to search a Persona by rut: {e.GetBaseException()}");
 
@@ -175,6 +186,17 @@ namespace ServerParkingUCN
                     _logger.LogDebug($"Persona with rut: {rut} not found");
 
                 }
+=======
+                    _logger.LogDebug($"Error in query to search a Persona by rut: {e.GetBaseException()}");
+                    persona = new Persona();
+
+                }
+                if (persona != new Persona())
+                {
+                    _logger.LogDebug($"Persona founded: {persona.nombre}");
+
+                }
+>>>>>>> 55f10a74f2a18a74935071d4357f55b1998d8e22
 
                 _logger.LogDebug("Persona not found in database");
                 // pc.SaveChanges();
