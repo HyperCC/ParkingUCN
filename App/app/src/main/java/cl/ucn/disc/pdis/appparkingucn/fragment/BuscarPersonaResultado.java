@@ -1,4 +1,4 @@
-package cl.ucn.disc.pdis.appparkingucn;
+package cl.ucn.disc.pdis.appparkingucn.fragment;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import cl.ucn.disc.pdis.appparkingucn.R;
 
 /**
  * A simple {@link Fragment} subclass.
