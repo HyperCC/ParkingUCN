@@ -28,7 +28,7 @@ public class BuscarPersonaResultado extends Fragment {
         //TODO: Hacer elementos del fragmento funcionales
 
         //TODO: Hacer funcionales las transacciones de fragmentos
-        
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_buscar_persona_resultado, container, false);
     }
