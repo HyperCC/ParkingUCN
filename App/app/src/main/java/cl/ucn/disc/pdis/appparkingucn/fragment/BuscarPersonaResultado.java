@@ -15,6 +15,9 @@ import cl.ucn.disc.pdis.appparkingucn.R;
  */
 public class BuscarPersonaResultado extends Fragment {
 
+    /**
+     *  Fragment constructor
+     */
     public BuscarPersonaResultado() {
         // Required empty public constructor
     }
@@ -22,6 +25,10 @@ public class BuscarPersonaResultado extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //TODO: Hacer elementos del fragmento funcionales
+
+        //TODO: Hacer funcionales las transacciones de fragmentos
+        
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_buscar_persona_resultado, container, false);
     }
