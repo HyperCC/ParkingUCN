@@ -78,11 +78,11 @@ namespace ParkingDao
                 // Primary Key
                 v.HasKey(v => v.uid);
                 // The Patente
-                v.Property(v => v.Patente);
+                v.Property(v => v.patente);
                 // The Marca
                 v.Property(v => v.marca);
                 // The Modelo
-                v.Property(v => v.Modelo);
+                v.Property(v => v.modelo);
                 // The anio
                 v.Property(v => v.anio);
                 // The Observation
