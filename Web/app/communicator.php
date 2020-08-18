@@ -4,7 +4,7 @@ require_once 'domain.php';
 
 try {
 
-    syslog(0, 'Inicializacion del Communicator');
+    syslog(LOG_INFO, 'Inicializacion del Communicator');
 
     // inicializacion de propiedades
     $data = new Ice\InitializationData;
@@ -22,9 +22,8 @@ try {
     // TODO: perfeccionar los contratos, metodo Find no funcion con rut.
     syslog(0, 'El nombre recibido por el servidor: ' . $per->nombre);
 
-
 } catch (Ice\LocalException $ex) {
-    syslog(0, 'Error capturado: ' . $ex);
+    syslog(LOG_WARNING, 'Error capturado: ' . $ex);
 
 }
 

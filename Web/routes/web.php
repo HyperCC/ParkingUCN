@@ -22,8 +22,10 @@ Route::get('/app', function () {
 })->name('app');
 
 Route::get('/crear-Persona', 'PersonaController@create')->name('persona.create');
+Route::post('/guardar-Persona', 'PersonaController@store')->name('persona.store');
 
 Route::get('/crear-Vehiculo', 'VehiculoController@create')->name('vehiculo.create');
 
 Route::get('/crear-Registro', 'RegistroController@create')->name('registro.create');
 
+Route::get('/probar', 'PersonaController@getContratos');

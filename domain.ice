@@ -22,8 +22,7 @@ module model {
      * Sex of Person.
      */
     enum Sexo {
-        VAR,
-        MUJ
+        VAR, MUJ
     }
 
     /**

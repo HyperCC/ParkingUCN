@@ -10,7 +10,7 @@
 
             <div class="col-12 col-sm-10 col-lg-6 mx-auto my-3">
 
-                <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="#">
+                <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{ route('persona.store') }}">
 
                     @csrf
 
@@ -33,9 +33,8 @@
                     <div class="form-group">
                         <label for="sexo"> Sexo </label>
                         <select class="form-control shadow-sm custom-select" name="sexo">
-                            <option>Secretaria</option>
-                            <option value="MUJ">Femenino</option>
                             <option value="VAR">Masculino</option>
+                            <option value="MUJ">Femenino</option>
                         </select>
                     </div>
 
