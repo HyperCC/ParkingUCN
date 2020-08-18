@@ -27,5 +27,6 @@ Route::post('/guardar-Persona', 'PersonaController@store')->name('persona.store'
 Route::get('/crear-Vehiculo', 'VehiculoController@create')->name('vehiculo.create');
 Route::post('/guardar_Vehiculo', 'VehiculoController@store')->name('vehiculo.store');
 
-Route::get('/crear-Registro', 'RegistroController@create')->name('registro.create');
+Route::get('/crear-Registro-Entrada', 'RegistroController@createEntrada')->name('registro.create.entrada');
+Route::get('/crear-Registro-Salida', 'RegistroController@createSalida')->name('registro.create.salida');
 Route::post('/guardar-Registro', 'RegistroController@store')->name('registro.store');

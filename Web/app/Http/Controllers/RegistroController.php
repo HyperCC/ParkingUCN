@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+require 'Ice.php';
+require_once base_path() . './domain.php';
+
 class RegistroController extends Controller
 {
     /**
@@ -21,9 +24,19 @@ class RegistroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createEntrada()
     {
-        return view('RegistroOperations.create');
+        return view('RegistroOperations.createentrada');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createSalida()
+    {
+        return view('RegistroOperations.createsalida');
     }
 
     /**
