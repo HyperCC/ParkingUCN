@@ -53,10 +53,16 @@ namespace ServerParkingUCN
         /// <returns>A Persona created</returns>
         public override Persona crearPersona(Persona persona, Current current = null)
         {
-
             using (var scope = _serviceScopeFactory.CreateScope())
             {
+                // instane the context
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
+
+                // updating the UID recibed for a viable UID
+                int nextid = pc.Personas.Last().uid;
+                persona.uid = nextid;
+
+                // add the new Persona validated
                 pc.Personas.Add(persona);
                 pc.SaveChanges();
                 return persona;
@@ -71,10 +77,16 @@ namespace ServerParkingUCN
         /// <returns>A Vehiculo created</returns>
         public override Vehiculo crearVehiculo(Vehiculo vehiculo, Current current = null)
         {
-
             using (var scope = _serviceScopeFactory.CreateScope())
             {
+                // instane the context
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
+
+                // updating the UID recibed for a viable UID
+                int nextid = pc.Vehiculos.Last().uid;
+                vehiculo.uid = nextid;
+
+                // add the new Vehiculo validated
                 pc.Vehiculos.Add(vehiculo);
                 pc.SaveChanges();
                 return vehiculo;
@@ -91,7 +103,14 @@ namespace ServerParkingUCN
         {
             using (var scope = _serviceScopeFactory.CreateScope())
             {
+                // instane the context
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
+
+                // updating the UID recibed for a viable UID
+                int nextid = pc.Registros.Last().uid;
+                registro.uid = nextid;
+
+                // add the new Regitro validated
                 pc.Registros.Add(registro);
                 pc.SaveChanges();
                 return registro;
