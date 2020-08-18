@@ -1,0 +1,44 @@
+warning: LF will be replaced by CRLF in Web/app/Http/Controllers/VehiculoController.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in Web/resources/views/VehiculoOperations/create.blade.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in Web/routes/web.php.
+The file will have its original line endings in your working directory
+[1mdiff --git a/Web/app/Http/Controllers/VehiculoController.php b/Web/app/Http/Controllers/VehiculoController.php[m
+[1mindex 8f1a530..7709561 100644[m
+[1m--- a/Web/app/Http/Controllers/VehiculoController.php[m
+[1m+++ b/Web/app/Http/Controllers/VehiculoController.php[m
+[36m@@ -34,7 +34,7 @@[m [mclass VehiculoController extends Controller[m
+      */[m
+     public function store(Request $request)[m
+     {[m
+[31m-        //[m
+[32m+[m
+     }[m
+ [m
+     /**[m
+[1mdiff --git a/Web/resources/views/VehiculoOperations/create.blade.php b/Web/resources/views/VehiculoOperations/create.blade.php[m
+[1mindex b92ffad..0310401 100644[m
+[1m--- a/Web/resources/views/VehiculoOperations/create.blade.php[m
+[1m+++ b/Web/resources/views/VehiculoOperations/create.blade.php[m
+[36m@@ -10,7 +10,7 @@[m
+ [m
+             <div class="col-12 col-sm-10 col-lg-6 mx-auto my-3">[m
+ [m
+[31m-                <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="#">[m
+[32m+[m[32m                <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{ route('vehiculo.store') }}">[m
+ [m
+                     @csrf[m
+ [m
+[1mdiff --git a/Web/routes/web.php b/Web/routes/web.php[m
+[1mindex 5e041a3..37a42d5 100644[m
+[1m--- a/Web/routes/web.php[m
+[1m+++ b/Web/routes/web.php[m
+[36m@@ -25,6 +25,7 @@[m [mRoute::get('/crear-Persona', 'PersonaController@create')->name('persona.create')[m
+ Route::post('/guardar-Persona', 'PersonaController@store')->name('persona.store');[m
+ [m
+ Route::get('/crear-Vehiculo', 'VehiculoController@create')->name('vehiculo.create');[m
+[32m+[m[32mRoute::post('/guardar_Vehiculo', 'VehiculoController@store')->name('vehiculo.store');[m
+ [m
+ Route::get('/crear-Registro', 'RegistroController@create')->name('registro.create');[m
+ [m
