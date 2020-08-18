@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\InitializeConnection;
 use Illuminate\Http\Request;
+use model\Vehiculo;
+
+require 'Ice.php';
+require_once base_path() . './domain.php';
 
 class VehiculoController extends Controller
 {
@@ -29,18 +34,36 @@ class VehiculoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $vehiculo = new Vehiculo(
+        // UID se cambiara en el Servidor
+            10000,
+            request('patente'),
+            request('marca'),
+            request('modelo'),
+            request('anio'),
+            request('observacion'),
+            request('responsable')
+        );
 
+        // instancia de ICE.
+        $connection = new InitializeConnection();
+        $contratos = $connection->getContratos();
+
+        // envio de la persona al servidor.
+        $per = $contratos->crearVehiculo($vehiculo);
+
+        return redirect(route('home'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -51,7 +74,7 @@ class VehiculoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -62,8 +85,8 @@ class VehiculoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -74,7 +97,7 @@ class VehiculoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -31,6 +31,12 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="marca"> Modelo </label>
+                        <input class="form-control shadow-sm bg-light" name="modelo" type="text">
+                    </div>
+
+
+                    <div class="form-group">
                         <label for="anio"> Año Manufactura </label>
                         <input class="form-control shadow-sm bg-light" name="anio" type="text">
                     </div>
@@ -42,7 +48,7 @@
 
                     <div class="form-group">
                         <label for="propietario"> Nombre del Propietario </label>
-                        <input class="form-control shadow-sm bg-light" name="propietario" type="text">
+                        <input class="form-control shadow-sm bg-light" name="responsable" type="text">
                     </div>
 
                     <hr>
