@@ -82,6 +82,23 @@ namespace ServerParkingUCN
         }
 
         /// <summary>
+        /// Create a Registro
+        /// </summary>
+        /// <param name="registro">to save</param>
+        /// <param name="current">the context of zeroIce</param>
+        /// <returns>The Registro created</returns>
+        public override Registro crearRegistro(Registro registro, Current current = null)
+        {
+            using (var scope = _serviceScopeFactory.CreateScope())
+            {
+                ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
+                pc.Registro.Add(registro);
+                pc.SaveChanges();
+                return registro;
+            }
+        }
+
+        /// <summary>
         /// Given a patente, returns a vehiculo from Database
         /// </summary>
         /// <param name="patente">to search</param>

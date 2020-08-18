@@ -26,6 +26,13 @@ module model {
     }
 
     /**
+     * Estado of Registro.
+     */
+    enum Estado {
+        ENTRADA, SALIDA
+    }
+
+    /**
      * The Persona class.
      */
     ["cs:property"]
@@ -67,7 +74,7 @@ module model {
     	string unidad;
 
     	/**
-    	 * The E-Mail.
+    	 * The eMail.
     	 */    
     	string email;
 
@@ -111,7 +118,7 @@ module model {
         /**
      	 * Vehicle Plate.
      	 */    
-    	string Patente;
+    	string patente;
 
     	/**
      	 * Vehicle Brand.
@@ -121,12 +128,12 @@ module model {
     	/**
      	 * Vehicle Model.
      	 */    
-    	string Modelo;
+    	string modelo;
 
     	/**
     	 * Vehicle manufacture Year.
     	 */    
-    	int anio;
+    	string anio;
 
     	/**
      	 * Obvsevations of the vehicle.
@@ -137,6 +144,43 @@ module model {
      	 * The owner of the vehicle.
     	 */    
     	string responsable;    	
+    }
+
+    /**
+     * The Registro class.
+     */
+    ["cs:property"]
+    class Registro{
+
+        /**
+      	 * The id: Primary Key.
+     	 */    
+    	int uid;
+
+    	/**
+     	 * The patente of vehicle.
+    	 */    
+    	string patente; 
+
+    	/**
+     	 * The actual driver (rut) of the vehicle.
+    	 */    
+    	string responsable;   
+
+    	/**
+     	 * The date of entry.
+    	 */    
+    	string fecha;
+
+    	/**
+     	 * The time of entry.
+    	 */    
+    	string hora;
+
+    	/**
+     	 * The Estado (ENTRADA/ SALIDA).
+    	 */    
+    	Estado estado;
     }
 	
     /**
@@ -159,6 +203,14 @@ module model {
          * @return Vehiculo created
          */
         Vehiculo crearVehiculo(Vehiculo vehiculo);
+
+	/**
+         * Vehiculo entry to university.
+         *
+         * @param registro de vehiculo a la universidad.
+         * @return Registro ingresado
+         */
+        Registro crearRegistro(Registro registro);
       
         /**
          * Search a Persona with a rut.
@@ -175,15 +227,6 @@ module model {
          * @return Vehiculo buscado.
          */
         Vehiculo obtenerVehiculo(string patente);
-
-
-	/**
-         * Vehiculo entry to university.
-         *
-         * @param admision de ingreso vehicular a la universidad.
-         * @return Vehiculo ingresado
-         */
-        Vehiculo ingresarVehiculo(string patente);
     }
 
 }
