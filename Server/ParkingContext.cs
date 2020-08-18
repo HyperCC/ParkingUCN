@@ -53,7 +53,7 @@ namespace ParkingDao
                 // Primary Key
                 p.HasKey(p => p.uid);
                 // Directorio UCN Cod
-                p.Property(p => p.webId).HasDefaultValue(0);
+                p.Property(p => p.webId);
                 // The Name
                 p.Property(p => p.nombre);
                 // Required rut

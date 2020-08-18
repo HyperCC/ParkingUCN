@@ -45,7 +45,7 @@ class PersonaController extends Controller
         $persona = new Persona(
         // UID y WEBID se modificaran en el servidor para concordar con los registros.
             10001,
-            null,
+            0,
             request('name'),
             request('rut'),
             request('sexo') == 'VAR' ? Sexo::_VAR : Sexo::MUJ,

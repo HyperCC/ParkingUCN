@@ -68,7 +68,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="card mb-3 box-shadow">
                         <div class="card-header bg-success">
-                            <h4 class="my-0 font-weight-normal text-light"> Guardar nuevo Usuario </h4>
+                            <h4 class="my-0 font-weight-normal text-light"> Guardar nueva Persona </h4>
                         </div>
                         <div class="card-body">
                             <p class="text-muted"> Crear un usuario y registrarlo junto a los demas usuarios

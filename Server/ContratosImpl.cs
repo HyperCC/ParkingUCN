@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Ice;
 using ServerZeroIce.model;
@@ -53,18 +54,31 @@ namespace ServerParkingUCN
         /// <returns>A Persona created</returns>
         public override Persona crearPersona(Persona persona, Current current = null)
         {
+            _logger.LogDebug("Initialization of createPersona");
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 // instane the context
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
 
                 // updating the UID recibed for a viable UID
-                int nextid = pc.Personas.Last().uid;
-                persona.uid = nextid;
+                try
+                {
+                    int nextid = pc.Personas.OrderByDescending(p => p.uid).First().uid;
+                    persona.uid = nextid + 1;
+
+                }
+                catch (InvalidOperationException ex)
+                {
+                    _logger.LogDebug($"The Database is empty, adding the first Persona. Error details: {ex.GetBaseException()}");
+                    // the  first Persona
+                    persona.uid = 1;
+
+                }
 
                 // add the new Persona validated
                 pc.Personas.Add(persona);
                 pc.SaveChanges();
+                _logger.LogDebug("Added the new Persona");
                 return persona;
             }
         }
@@ -77,18 +91,31 @@ namespace ServerParkingUCN
         /// <returns>A Vehiculo created</returns>
         public override Vehiculo crearVehiculo(Vehiculo vehiculo, Current current = null)
         {
+            _logger.LogDebug("Initialization of createVehiculo");
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 // instane the context
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
 
                 // updating the UID recibed for a viable UID
-                int nextid = pc.Vehiculos.Last().uid;
-                vehiculo.uid = nextid;
+                try
+                {
+                    int nextid = pc.Vehiculos.OrderByDescending(v => v.uid).First().uid;
+                    vehiculo.uid = nextid + 1;
+
+                }
+                catch (InvalidOperationException ex)
+                {
+                    _logger.LogDebug($"The Database is empty, adding the first Vehiculo. Error details: {ex.GetBaseException()}");
+                    // the  first Vehiculo
+                    vehiculo.uid = 1;
+
+                }
 
                 // add the new Vehiculo validated
                 pc.Vehiculos.Add(vehiculo);
                 pc.SaveChanges();
+                _logger.LogDebug("Added the new Vehiculo");
                 return vehiculo;
             }
         }
@@ -101,18 +128,33 @@ namespace ServerParkingUCN
         /// <returns>The Registro created</returns>
         public override Registro crearRegistro(Registro registro, Current current = null)
         {
+            _logger.LogDebug("Initialization of createRegistro");
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 // instane the context
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
 
                 // updating the UID recibed for a viable UID
-                int nextid = pc.Registros.Last().uid;
-                registro.uid = nextid;
+                try
+                {
+                    int nextid = pc.Registros.OrderByDescending(r => r.uid).First().uid;
+                    registro.uid = nextid + 1;
+
+                }
+                catch (InvalidOperationException ex)
+                {
+                    _logger.LogDebug($"The Database is empty, adding the first Registro. Error details: {ex.GetBaseException()}");
+                    // the  first Registro
+                    registro.uid = 1;
+
+                }
+
+                _logger.LogDebug("Added the new Registro");
 
                 // add the new Regitro validated
                 pc.Registros.Add(registro);
                 pc.SaveChanges();
+                _logger.LogDebug("Added the new Registro");
                 return registro;
             }
         }
@@ -141,7 +183,7 @@ namespace ServerParkingUCN
                     vehiculo = pc.Vehiculos.Where(vehiculo => vehiculo.patente == patente).First();
 
                 }
-                catch (Exception e)
+                catch (System.Exception e)
                 {
                     // error in the query. return null Persona
                     _logger.LogDebug($"Error in query to search a Vehiculo by patente: {e.GetBaseException()}");
@@ -189,7 +231,7 @@ namespace ServerParkingUCN
                     persona = pc.Personas.Where(persona => persona.rut == rut).First();
 
                 }
-                catch (Exception e)
+                catch (System.Exception e)
                 {
                     // error in the query. return null Persona
                     _logger.LogDebug($"Error in query to search a Persona by rut: {e.GetBaseException()}");
