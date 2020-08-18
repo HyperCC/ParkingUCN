@@ -35,12 +35,12 @@ class PersonaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly Persona created in storage.
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         $persona = new Persona(
         // UID y WEBID se modificaran en el servidor para concordar con los registros.
@@ -64,7 +64,7 @@ class PersonaController extends Controller
         $contratos = $connection->getContratos();
 
         // envio de la persona al servidor.
-        $per = $contratos->crearPersona($persona);
+        $contratos->crearPersona($persona);
 
         return redirect(route('home'));
     }

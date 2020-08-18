@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\InitializeConnection;
 use Illuminate\Http\Request;
+use model\Estado;
+use model\Registro;
 
 require 'Ice.php';
 require_once base_path() . './domain.php';
@@ -30,7 +33,7 @@ class RegistroController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for create a new Registro.
      *
      * @return \Illuminate\Http\Response
      */
@@ -40,20 +43,38 @@ class RegistroController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly Registro created in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $registro = new Registro(
+            // the UID will change in the Server
+            10000,
+            request('patente'),
+            request('rut'),
+            request('fecha'),
+            request('hora'),
+            // enum of Estado.
+            (request('estado') == 'Entrada') ? Estado::ENTRADA : Estado::SALIDA
+        );
+
+        // instancia de ICE.
+        $connection = new InitializeConnection();
+        $contratos = $connection->getContratos();
+
+        // envio de la registro al servidor.
+        $contratos->crearRegistro($registro);
+
+        return redirect(route('home'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -64,7 +85,7 @@ class RegistroController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -75,8 +96,8 @@ class RegistroController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -87,7 +108,7 @@ class RegistroController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

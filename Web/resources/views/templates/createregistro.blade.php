@@ -16,6 +16,8 @@
     <input class="form-control shadow-sm bg-light" name="rut" type="text">
 </div>
 
+<input type="hidden" name="estado" value="{{ $tipoRegistro }}">
+
 <hr>
 
 <div class="py-3">

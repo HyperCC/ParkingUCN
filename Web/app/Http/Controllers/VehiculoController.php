@@ -32,12 +32,12 @@ class VehiculoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly Vehiculo created in storage.
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         $vehiculo = new Vehiculo(
         // UID se cambiara en el Servidor
@@ -54,8 +54,8 @@ class VehiculoController extends Controller
         $connection = new InitializeConnection();
         $contratos = $connection->getContratos();
 
-        // envio de la persona al servidor.
-        $per = $contratos->crearVehiculo($vehiculo);
+        // envio de la vehiculo al servidor.
+        $contratos->crearVehiculo($vehiculo);
 
         return redirect(route('home'));
     }

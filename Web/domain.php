@@ -29,6 +29,18 @@ namespace model
 
 namespace model
 {
+    global $model__t_Estado;
+    class Estado
+    {
+        const ENTRADA = 0;
+        const SALIDA = 1;
+    }
+
+    $model__t_Estado = IcePHP_defineEnum('::model::Estado', array('ENTRADA', 0, 'SALIDA', 1));
+}
+
+namespace model
+{
     global $model__t_Persona;
     class Persona extends \Ice\Value
     {
@@ -105,12 +117,12 @@ namespace model
     global $model__t_Vehiculo;
     class Vehiculo extends \Ice\Value
     {
-        public function __construct($uid=0, $Patente='', $marca='', $Modelo='', $anio=0, $observacion='', $responsable='')
+        public function __construct($uid=0, $patente='', $marca='', $modelo='', $anio='', $observacion='', $responsable='')
         {
             $this->uid = $uid;
-            $this->Patente = $Patente;
+            $this->patente = $patente;
             $this->marca = $marca;
-            $this->Modelo = $Modelo;
+            $this->modelo = $modelo;
             $this->anio = $anio;
             $this->observacion = $observacion;
             $this->responsable = $responsable;
@@ -133,9 +145,9 @@ namespace model
         }
 
         public $uid;
-        public $Patente;
+        public $patente;
         public $marca;
-        public $Modelo;
+        public $modelo;
         public $anio;
         public $observacion;
         public $responsable;
@@ -146,12 +158,64 @@ namespace model
     global $IcePHP__t_string;
     $model__t_Vehiculo = IcePHP_defineClass('::model::Vehiculo', '\\model\\Vehiculo', -1, false, false, $Ice__t_Value, array(
         array('uid', $IcePHP__t_int, false, 0),
-        array('Patente', $IcePHP__t_string, false, 0),
+        array('patente', $IcePHP__t_string, false, 0),
         array('marca', $IcePHP__t_string, false, 0),
-        array('Modelo', $IcePHP__t_string, false, 0),
-        array('anio', $IcePHP__t_int, false, 0),
+        array('modelo', $IcePHP__t_string, false, 0),
+        array('anio', $IcePHP__t_string, false, 0),
         array('observacion', $IcePHP__t_string, false, 0),
         array('responsable', $IcePHP__t_string, false, 0)));
+}
+
+namespace model
+{
+    global $model__t_Registro;
+    class Registro extends \Ice\Value
+    {
+        public function __construct($uid=0, $patente='', $responsable='', $fecha='', $hora='', $estado=\model\Estado::ENTRADA)
+        {
+            $this->uid = $uid;
+            $this->patente = $patente;
+            $this->responsable = $responsable;
+            $this->fecha = $fecha;
+            $this->hora = $hora;
+            $this->estado = $estado;
+        }
+
+        public function ice_id()
+        {
+            return '::model::Registro';
+        }
+
+        public static function ice_staticId()
+        {
+            return '::model::Registro';
+        }
+
+        public function __toString()
+        {
+            global $model__t_Registro;
+            return IcePHP_stringify($this, $model__t_Registro);
+        }
+
+        public $uid;
+        public $patente;
+        public $responsable;
+        public $fecha;
+        public $hora;
+        public $estado;
+    }
+
+    global $Ice__t_Value;
+    global $IcePHP__t_int;
+    global $IcePHP__t_string;
+    global $model__t_Estado;
+    $model__t_Registro = IcePHP_defineClass('::model::Registro', '\\model\\Registro', -1, false, false, $Ice__t_Value, array(
+        array('uid', $IcePHP__t_int, false, 0),
+        array('patente', $IcePHP__t_string, false, 0),
+        array('responsable', $IcePHP__t_string, false, 0),
+        array('fecha', $IcePHP__t_string, false, 0),
+        array('hora', $IcePHP__t_string, false, 0),
+        array('estado', $model__t_Estado, false, 0)));
 }
 
 namespace model
@@ -183,11 +247,12 @@ namespace model
 
     global $model__t_Persona;
     global $model__t_Vehiculo;
+    global $model__t_Registro;
     global $IcePHP__t_string;
     IcePHP_defineOperation($model__t_ContratosPrx, 'crearPersona', 0, 0, 0, array(array($model__t_Persona)), null, array($model__t_Persona), null);
     IcePHP_defineOperation($model__t_ContratosPrx, 'crearVehiculo', 0, 0, 0, array(array($model__t_Vehiculo)), null, array($model__t_Vehiculo), null);
+    IcePHP_defineOperation($model__t_ContratosPrx, 'crearRegistro', 0, 0, 0, array(array($model__t_Registro)), null, array($model__t_Registro), null);
     IcePHP_defineOperation($model__t_ContratosPrx, 'obtenerPersona', 0, 0, 0, array(array($IcePHP__t_string)), null, array($model__t_Persona), null);
     IcePHP_defineOperation($model__t_ContratosPrx, 'obtenerVehiculo', 0, 0, 0, array(array($IcePHP__t_string)), null, array($model__t_Vehiculo), null);
-    IcePHP_defineOperation($model__t_ContratosPrx, 'ingresarVehiculo', 0, 0, 0, array(array($IcePHP__t_string)), null, array($model__t_Vehiculo), null);
 }
 ?>
