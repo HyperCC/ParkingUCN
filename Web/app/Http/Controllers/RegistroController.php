@@ -50,13 +50,22 @@ class RegistroController extends Controller
      */
     public function store()
     {
+        // date_default_timezone_set('America/Santiago');
+        $fecha = getdate();
+
+        // fecha actual en formato dd-mm-yyyy
+        $fecha_formated = strval($fecha['mday'] . '-' . $fecha['mon'] . '-' . $fecha['year']);
+
+        // hora actual en formato hh:mm:ss
+        $hora_formated = strval(($fecha['hours']) . ':' . $fecha['minutes'] . ':' . $fecha['seconds']);
+
         $registro = new Registro(
-            // the UID will change in the Server
+        // the UID will change in the Server
             10000,
             request('patente'),
             request('rut'),
-            request('fecha'),
-            request('hora'),
+            $fecha_formated,
+            $hora_formated,
             // enum of Estado.
             (request('estado') == 'Entrada') ? Estado::ENTRADA : Estado::SALIDA
         );
