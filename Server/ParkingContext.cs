@@ -22,6 +22,12 @@ namespace ParkingDao
         public DbSet<Vehiculo> Vehiculos { get; set; }
 
         /// <summary>
+        /// The Connection to the database to Registro.
+        /// </summary>
+        /// <value> </value>
+        public DbSet<Registro> Registros { get; set; }
+
+        /// <summary>
         /// Configuration.
         /// </summary>
         /// <param name="optionsBuilder"> </param>
@@ -52,7 +58,7 @@ namespace ParkingDao
                 p.Property(p => p.nombre);
                 // Required rut
                 p.Property(p => p.rut);
-                // The Sexo
+                // The Sexo (VAR/MUJ)
                 p.Property(p => p.sexo);
                 // The Cargo
                 p.Property(p => p.cargo);
@@ -91,9 +97,25 @@ namespace ParkingDao
                 v.Property(v => v.responsable);
             });
 
+            // Make the model to Registro in Db. 
+            modelBuilder.Entity<Registro>(r =>
+            {
+                // Primary Key
+                r.HasKey(r => r.uid);
+                // The Patente
+                r.Property(r => r.patente);
+                // The rut of Responsable
+                r.Property(r => r.responsable);
+                // The fecha of entry
+                r.Property(r => r.fecha);
+                // The hour of entry
+                r.Property(r => r.hora);
+                // The Estado enum (ENTRADA/SALIDA)
+                r.Property(r => r.estado);
+            });
+
         }
 
     }
-
 
 }

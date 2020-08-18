@@ -92,7 +92,7 @@ namespace ServerParkingUCN
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
-                pc.Registro.Add(registro);
+                pc.Registros.Add(registro);
                 pc.SaveChanges();
                 return registro;
             }
@@ -119,7 +119,7 @@ namespace ServerParkingUCN
                 {
                     // try find the Vehiculo by patente
                     _logger.LogDebug($"Searching the Vehiculo by patente: {patente}");
-                    vehiculo = pc.Vehiculos.Where(vehiculo => vehiculo.Patente == patente).First();
+                    vehiculo = pc.Vehiculos.Where(vehiculo => vehiculo.patente == patente).First();
 
                 }
                 catch (Exception e)
@@ -196,22 +196,5 @@ namespace ServerParkingUCN
             }
         }
 
-        /// <summary>
-        /// Given a patente, records that a vehicle has entered the university
-        /// </summary>
-        /// <param name="patente"></param>
-        /// <param name="current"></param>
-        /// <returns> The Vehiculo joined</returns>
-        public override Vehiculo ingresarVehiculo(string patente, Current current)
-        {
-            using (var scope = _serviceScopeFactory.CreateScope())
-            {
-                ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
-                Vehiculo vehiculo = pc.Vehiculos.Find(patente);
-                //TODO: entry of a vehicle in a register of entry to the university
-                pc.SaveChanges();
-                return vehiculo;
-            }
-        }
     }
 }
