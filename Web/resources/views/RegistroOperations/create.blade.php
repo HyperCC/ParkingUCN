@@ -15,7 +15,7 @@
                     @csrf
 
                     <div class="text-center">
-                        <span class="display-3">Crear nueva Registro de Ingreso</span>
+                        <span class="display-3">Crear Registro de Entrada</span>
                     </div>
 
                     <hr>
@@ -33,7 +33,7 @@
                     <hr>
 
                     <div class="py-3">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block rounded-pill"> Crear Registro
+                        <button type="submit" class="btn btn-primary btn-lg btn-block rounded-pill"> Crear Registro Entrada
                         </button>
                         <a class="btn btn-lg btn-block btn-outline-dark rounded-pill" href="{{route('home')}}">
                             Cancelar
