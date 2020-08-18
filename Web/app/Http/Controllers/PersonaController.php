@@ -6,41 +6,13 @@ use Illuminate\Http\Request;
 use model\ContratosPrxHelper;
 use model\Persona;
 use model\Sexo;
-use function Composer\Autoload\includeFile;
+use App\InitializeConnection;
 
 require 'Ice.php';
 require_once base_path() . './domain.php';
 
-
 class PersonaController extends Controller
 {
-    /**
-     * Initialize the communicator to get the Contratos
-     *
-     * @return ContratosPrxHelper
-     */
-    public function getContratos()
-    {
-        try {
-            syslog(LOG_INFO, 'Initializing the connection with the Server ..');
-
-            $communicator = \Ice\Initialize();
-
-            // declare the Proxy
-            $proxy = $communicator->stringToProxy("Contratos:tcp -z -t 15000 -p 8080");
-
-            syslog(LOG_INFO, 'Returning the Contratos connected with the server ..');
-
-            // return the operations from the Contratos
-            return \model\ContratosPrxHelper::checkedCast($proxy);
-
-        } catch (Ice\LocalException $ex) {
-            syslog(LOG_WARNING, 'Error connecting to the Server: ' . $ex);
-            return null;
-
-        }
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -72,11 +44,11 @@ class PersonaController extends Controller
     {
         $persona = new Persona(
         // UID y WEBID se modificaran en el servidor para concordar con los registros.
-            0,
-            0,
+            10001,
+            10001,
             request('name'),
             request('rut'),
-            \request('sexo') == 'VAR' ? Sexo::_VAR : Sexo::MUJ,
+            request('sexo') == 'VAR' ? Sexo::_VAR : Sexo::MUJ,
             request('cargo'),
             request('unidad'),
             request('email'),
@@ -88,7 +60,8 @@ class PersonaController extends Controller
         );
 
         // instancia de ICE.
-        $contratos = $this->getContratos();
+        $connection = new InitializeConnection();
+        $contratos = $connection->getContratos();
 
         // envio de la persona al servidor.
         $per = $contratos->crearPersona($persona);
