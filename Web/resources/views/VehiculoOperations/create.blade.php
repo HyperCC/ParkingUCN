@@ -47,14 +47,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="propietario"> Nombre del Propietario </label>
+                        <label for="propietario"> Rut del Propietario </label>
                         <input class="form-control shadow-sm bg-light" name="responsable" type="text">
                     </div>
 
                     <hr>
 
                     <div class="py-3">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block rounded-pill"> Crear Persona
+                        <button type="submit" class="btn btn-primary btn-lg btn-block rounded-pill"> Crear Vehiculo
                         </button>
                         <a class="btn btn-lg btn-block btn-outline-dark rounded-pill" href="{{route('home')}}">
                             Cancelar
