@@ -15,6 +15,14 @@ require_once base_path() . './domain.php';
 class InitializeConnection
 {
     /**
+     * The default Constructor
+     */
+    function InitializeConnection()
+    {
+        // default void
+    }
+
+    /**
      * Initialize the communicator to get the Contratos
      *
      * @return ContratosPrxHelper
