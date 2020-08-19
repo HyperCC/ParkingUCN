@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".fragment.RegistrarInicio">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,41 +17,33 @@
             android:layout_width="252dp"
             android:layout_height="50dp"
             android:layout_marginTop="116dp"
-            android:hint="Patente"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.49"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="250dp"
-            android:layout_height="46dp"
-            android:layout_marginTop="32dp"
-            android:text="Nombre"
+            android:hint="Patente Vehiculo"
+            app:layout_constraintBottom_toTopOf="@+id/botonRegistrar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputEditText" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.327" />
 
         <Button
             android:id="@+id/botonRegistrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="280dp"
-            android:text="Registrar"
+            android:text="Ingresar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.591" />
 
         <RadioGroup
             android:id="@+id/tipoRegistro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="94dp"
+            android:layout_height="98dp"
             app:layout_constraintBottom_toTopOf="@+id/botonRegistrar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView">
+            app:layout_constraintTop_toBottomOf="@+id/textInputEditText">
 
             <RadioButton
                 android:id="@+id/entrada"
@@ -65,5 +57,19 @@
                 android:layout_height="wrap_content"
                 android:text="Salida" />
         </RadioGroup>
+
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="319dp"
+            android:layout_height="68dp"
+            android:text="Control Vehicular"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toTopOf="@+id/textInputEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.406" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
