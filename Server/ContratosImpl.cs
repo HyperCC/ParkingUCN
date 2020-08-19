@@ -235,19 +235,7 @@ namespace ServerParkingUCN
                 {
                     // error in the query. return null Persona
                     _logger.LogDebug($"Error in query to search a Persona by rut: {e.GetBaseException()}");
-
-                }
-
-                if (persona != null)
-                {
-                    // Persona finded correctly
-                    _logger.LogDebug($"Persona founded: {persona.nombre}");
-
-                }
-                else
-                {
-                    // the system must return a null Persona
-                    _logger.LogDebug($"Persona with rut: {rut} not found");
+                    return null;
 
                 }
 
