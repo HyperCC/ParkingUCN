@@ -7,13 +7,23 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import cl.ucn.disc.pdis.appparkingucn.Buscar;
 import cl.ucn.disc.pdis.appparkingucn.R;
+import cl.ucn.disc.pdis.simplescraper.zeroice.model.Persona;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class BuscarPersonaResultado extends Fragment {
+
+    Persona persona;
+    TextView rutPersona;
+    TextView nombrePersona;
+
+    View vista;
+
 
     /**
      *  Fragment constructor
@@ -29,7 +39,17 @@ public class BuscarPersonaResultado extends Fragment {
 
         //TODO: Hacer funcionales las transacciones de fragmentos
 
+        vista = inflater.inflate(R.layout.fragment_buscar_persona_resultado, container, false);
+
+        rutPersona = (TextView) vista.findViewById(R.id.rutPersonaBuscada);
+        nombrePersona = (TextView) vista.findViewById(R.id.nombrePersonaBuscada);
+
+        persona = ((Buscar)getActivity()).getRegistro();
+
+        rutPersona.setText(persona.rut);
+        nombrePersona.setText(persona.nombre);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_buscar_persona_resultado, container, false);
+        return vista;
     }
 }
