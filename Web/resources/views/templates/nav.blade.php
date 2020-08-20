@@ -4,7 +4,7 @@
 
 
         <a class="navbar-brand font-weight-bold text-light my-1" href="{{ route('home') }}">
-            {{ config('app.name') }}
+            ParkingUCN
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

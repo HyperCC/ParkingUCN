@@ -8,10 +8,10 @@
 
         <div class="row my-4">
 
-            <div class="col-12 col-lg-6 text-center">
+            <div class="col-12 col-lg-6 text-center my-3">
 
-                <p class="display-4 font-weight-bold">Vehiculo:
-                <h1> {{ $vehiculo->patente }} </h1></p>
+                <span class="display-3">Vehiculo:
+                    <h1> {{ $vehiculo->patente }} </h1></span>
 
                 <img class="img-fluid my-3" src="{{ URL::to('/')}}/img/carshow.svg" alt="vehiculo encontrado">
             </div>

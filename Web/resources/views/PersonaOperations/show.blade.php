@@ -8,10 +8,10 @@
 
         <div class="row my-4">
 
-            <div class="col-12 col-lg-6 text-center">
+            <div class="col-12 col-lg-6 text-center my-3">
 
-                <p class="display-4 font-weight-bold">Persona:
-                <h1> {{ $persona->rut }} </h1></p>
+                <span class="display-3">Persona:
+                    <h1> {{ $persona->rut }} </h1></span>
 
                 <img class="img-fluid my-3" src="{{ URL::to('/')}}/img/thepersonas.svg" alt="persona encontrada">
             </div>
