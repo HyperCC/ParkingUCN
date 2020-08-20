@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditText"
+            android:id="@+id/datoRegistroVehicular"
             android:layout_width="252dp"
             android:layout_height="50dp"
             android:layout_marginTop="116dp"
@@ -43,7 +43,7 @@
             app:layout_constraintBottom_toTopOf="@+id/botonRegistrar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputEditText">
+            app:layout_constraintTop_toBottomOf="@+id/datoRegistroVehicular">
 
             <RadioButton
                 android:id="@+id/entrada"
@@ -65,7 +65,7 @@
             android:text="Control Vehicular"
             android:textAlignment="center"
             android:textSize="36sp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputEditText"
+            app:layout_constraintBottom_toTopOf="@+id/datoRegistroVehicular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
