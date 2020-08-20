@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import cl.ucn.disc.pdis.appparkingucn.R;
 import cl.ucn.disc.pdis.appparkingucn.RegistroVehiculo;
@@ -23,7 +22,7 @@ public class RegistrarInicio extends Fragment {
 
     Button botonRegistrar;
     RadioGroup tipoRegistro;
-    EditText editText;
+    EditText datoPatente;
     View vista;
 
     @Override
@@ -34,7 +33,7 @@ public class RegistrarInicio extends Fragment {
 
         botonRegistrar = (Button) vista.findViewById(R.id.botonRegistrar);
         tipoRegistro = (RadioGroup) vista.findViewById(R.id.tipoRegistro);
-        editText = (EditText) vista.findViewById(R.id.textInputEditText);
+        datoPatente = (EditText) vista.findViewById(R.id.datoRegistroVehicular);
 
 
         botonRegistrar.setOnClickListener(new View.OnClickListener() {
@@ -42,13 +41,14 @@ public class RegistrarInicio extends Fragment {
             public void onClick(View v) {
                 if (tipoRegistro.getCheckedRadioButtonId() == R.id.entrada) {
 
-                    ((RegistroVehiculo)getActivity()).limpiarPatente(editText.getText().toString());
+                    ((RegistroVehiculo)getActivity()).setTipoRegistro("Entrada");
+                    ((RegistroVehiculo)getActivity()).limpiarPatente(datoPatente.getText().toString());
                 }
                 if (tipoRegistro.getCheckedRadioButtonId() == R.id.salida) {
-                    //TODO: metodo salida
-                    Toast.makeText(getContext(), "El valor seleccionado es: "+ tipoRegistro.getCheckedRadioButtonId(), Toast.LENGTH_SHORT).show();
+
+                    ((RegistroVehiculo)getActivity()).setTipoRegistro("Salida");
+                    ((RegistroVehiculo)getActivity()).limpiarPatente(datoPatente.getText().toString());
                 }
-                //TODO: limpiar datos ingresados
             }
         });
         return vista;
