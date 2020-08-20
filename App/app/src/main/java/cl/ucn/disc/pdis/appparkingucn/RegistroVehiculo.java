@@ -7,10 +7,15 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import cl.ucn.disc.pdis.appparkingucn.fragment.*;
+import cl.ucn.disc.pdis.simplescraper.zeroice.model.Persona;
+import cl.ucn.disc.pdis.simplescraper.zeroice.model.Vehiculo;
 
 public class RegistroVehiculo extends AppCompatActivity {
 
     Fragment fragmentInicioRegistro;
+
+    Persona persona;
+    Vehiculo vehiculo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +91,40 @@ public class RegistroVehiculo extends AppCompatActivity {
             }
         }
 
-        Toast.makeText(this, datoTemp, Toast.LENGTH_SHORT).show();
+        consultarPatente(datoTemp);
+    }
+
+    public void consultarPatente(String datoTemp){
+
+
+        Communicator communicator = new Communicator();
+        vehiculo = communicator.obtenerVehiculo(datoTemp);
+
+        if(vehiculo != null){
+
+            consultarRut(vehiculo.responsable);
+        }else{
+
+            Toast.makeText(this, "PATENTE: "+datoTemp+" NO ENCONTRADA", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void consultarRut(String rut){
+
+
+        Communicator communicator = new Communicator();
+        persona = communicator.obtenerPersona(rut);
+
+        if(persona != null){
+
+            // TODO: Fragment transaction and deploy DATA
+            /*
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.contenedorFragments, fragmentInicioRegistro).addToBackStack(null).commit();*/
+        }else{
+
+            Toast.makeText(this, "PERSONA CON RUT: "+rut+" NO ENCONTRADA", Toast.LENGTH_SHORT).show();
+        }
     }
 }
