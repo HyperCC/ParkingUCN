@@ -15,21 +15,20 @@
 </head>
 <body>
 
-<div class="d-flex flex-column h-screen justify-content-between" id="app">
+    <div class="d-flex flex-column h-screen justify-content-between" id="app">
+        <header>
+            @include('templates.nav')
+        </header>
 
-    <header>
-        @include('templates.nav')
-    </header>
+        <main>
+            @yield('content_body')
+        </main>
 
-    <main>
-        @yield('content_body')
-    </main>
+        <footer class="bg-dark text-center text-light py-3 shadow">
+            {{ config('app.name') }} | Copyright @ {{ date('Y') }}
+        </footer>
 
-    <footer class="bg-dark text-center text-light py-3 shadow">
-        {{ config('app.name') }} | Copyright @ {{ date('Y') }}
-    </footer>
-
-</div>
+    </div>
 
 </body>
 </html>
