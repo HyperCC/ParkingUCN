@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\IdentifierValidator;
 use App\InitializeConnection;
 use Illuminate\Http\Request;
 use model\Estado;
@@ -50,6 +51,16 @@ class RegistroController extends Controller
      */
     public function store()
     {
+        // validaciones de formato
+        $validador = new IdentifierValidator();
+        // validar formato de rut
+        $rutValidado = $validador->validarRut(\request('rut'));
+        $rutValidado = $rutValidado ? $rutValidado : \request('rut');
+
+        // validar formato de patente
+        $patenteValida = $validador->validarPatente(\request('patente'));
+        $patenteValida = $patenteValida ? $patenteValida : \request('patente');
+
         // date_default_timezone_set('America/Santiago');
         $fecha = getdate();
 
@@ -61,9 +72,9 @@ class RegistroController extends Controller
 
         $registro = new Registro(
         // the UID will change in the Server
-            10000,
-            request('patente'),
-            request('rut'),
+            1,
+            $patenteValida,
+            $rutValidado,
             $fecha_formated,
             $hora_formated,
             // enum of Estado.

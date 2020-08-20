@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\IdentifierValidator;
 use Illuminate\Http\Request;
 use model\ContratosPrxHelper;
 use model\Persona;
@@ -42,12 +43,17 @@ class PersonaController extends Controller
      */
     public function store()
     {
+        $validador = new IdentifierValidator();
+        $rutValidado = $validador->validarRut(\request('rut'));
+        $rutValidado = $rutValidado ? $rutValidado : \request('rut');
+        // TODO: agregar lanzamiento de error para formato
+
         $persona = new Persona(
         // UID y WEBID se modificaran en el servidor para concordar con los registros.
             10001,
             0,
             request('name'),
-            request('rut'),
+            $rutValidado,
             request('sexo') == 'VAR' ? Sexo::_VAR : Sexo::MUJ,
             request('cargo'),
             request('unidad'),

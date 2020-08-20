@@ -27,19 +27,30 @@ class BusquedaController extends Controller
      */
     public function search()
     {
+        // generar un identificador generico
         $validarBuscado = new IdentifierValidator();
         $validado = $validarBuscado->identificarRutOPatente(request('buscado'));
 
+        // si el resultado generado existe
         if ($validado) {
+
+            // reconocimiento del identificador como Vehiculo
             if (get_class($validado) == Vehiculo::class)
+
                 return view('VehiculoOperations.show', [
                     'vehiculo' => $validado
                 ]);
+
+            // reconocimiento del identificador como Persona
             return view('PersonaOperations.show', [
                 'persona' => $validado
             ]);
+
         }
-        return view('templates.void');
+        // el resultado del formateo no pudo corregirse, dato no identificado
+        return view('templates.void', [
+            'buscado' => request('buscado')
+        ]);
 
     }
 

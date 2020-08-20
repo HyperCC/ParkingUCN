@@ -25,7 +25,7 @@
         </main>
 
         <footer class="bg-dark text-center text-light py-3 shadow">
-            {{ config('app.name') }} | Copyright @ {{ date('Y') }}
+            ParkingUCN | Copyright @ {{ date('Y') }}
         </footer>
 
     </div>

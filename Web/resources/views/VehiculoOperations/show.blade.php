@@ -8,18 +8,22 @@
 
         <div class="row my-4">
 
-            <div class="col-12 col-lg-6">
-                <img class="img-fluid my-3" src="{{ URL::to('/')}}/img/parkinghome.png" alt="actividades bitacora ucn">
+            <div class="col-12 col-lg-6 text-center my-3">
+
+                <span class="display-3">Vehiculo:
+                    <h1> {{ $vehiculo->patente }} </h1></span>
+
+                <img class="img-fluid my-3" src="{{ URL::to('/')}}/img/carshow.svg" alt="vehiculo encontrado">
             </div>
 
             <div class="col-12 col-lg-6">
                 <div class="card shadow-sm">
 
-                    <h3 class="card-header text-center">{{ $vehiculo->modelo }}</h3>
+                    <h3 class="card-header text-center font-weight-bold">{{ $vehiculo->modelo }}</h3>
 
                     <div class="card-body">
 
-                        <div class="card px-3">
+                        <div class="card p-3">
 
                             <div class="input-group my-3">
                                 <div class="input-group-prepend">
