@@ -3,6 +3,7 @@ package cl.ucn.disc.pdis.appparkingucn;
 import cl.ucn.disc.pdis.appparkingucn.zeroice.ZeroIce;
 import cl.ucn.disc.pdis.simplescraper.zeroice.model.ContratosPrx;
 import cl.ucn.disc.pdis.simplescraper.zeroice.model.Persona;
+import cl.ucn.disc.pdis.simplescraper.zeroice.model.Vehiculo;
 
 
 public class Communicator {
@@ -23,6 +24,15 @@ public class Communicator {
 
         try{
             return operator.obtenerPersona(rut);
+        }catch(Exception e){
+            return null;
+        }
+    }
+
+    public Vehiculo obtenerVehiculo (String patente){
+
+        try{
+            return operator.obtenerVehiculo(patente);
         }catch(Exception e){
             return null;
         }
