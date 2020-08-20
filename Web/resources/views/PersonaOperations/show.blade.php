@@ -1,6 +1,6 @@
 @extends('templates.body')
 
-@section('title_head', 'Persona ' . $persona->name )
+@section('title_head', 'Persona ' . $persona->rut )
 
 @section('content_body')
 
@@ -8,18 +8,22 @@
 
         <div class="row my-4">
 
-            <div class="col-12 col-lg-6">
-                <img class="img-fluid my-3" src="{{ URL::to('/')}}/img/parkinghome.png" alt="actividades bitacora ucn">
+            <div class="col-12 col-lg-6 text-center">
+
+                <p class="display-4 font-weight-bold">Persona:
+                <h1> {{ $persona->rut }} </h1></p>
+
+                <img class="img-fluid my-3" src="{{ URL::to('/')}}/img/thepersonas.svg" alt="persona encontrada">
             </div>
 
             <div class="col-12 col-lg-6">
                 <div class="card shadow-sm">
 
-                    <h3 class="card-header text-center">{{ $persona->nombre  }}</h3>
+                    <h3 class="card-header text-center font-weight-bold">{{ $persona->nombre  }}</h3>
 
                     <div class="card-body">
 
-                        <div class="card px-3">
+                        <div class="card p-3">
 
                             <div class="input-group my-3">
                                 <div class="input-group-prepend">

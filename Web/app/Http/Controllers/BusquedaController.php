@@ -39,7 +39,9 @@ class BusquedaController extends Controller
                 'persona' => $validado
             ]);
         }
-        return view('templates.void');
+        return view('templates.void', [
+            'buscado' => request('buscado')
+        ]);
 
     }
 

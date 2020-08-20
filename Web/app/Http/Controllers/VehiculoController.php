@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\IdentifierValidator;
 use App\InitializeConnection;
 use Illuminate\Http\Request;
 use model\Vehiculo;
@@ -39,10 +40,15 @@ class VehiculoController extends Controller
      */
     public function store()
     {
+        $validador = new IdentifierValidator();
+        $patenteValida = $validador->validarPatente(\request('patente'));
+        $patenteValida = $patenteValida ? $patenteValida : \request('patente');
+        // TODO: agregar lanzamiento de error para formato
+
         $vehiculo = new Vehiculo(
         // UID se cambiara en el Servidor
             10000,
-            request('patente'),
+            $patenteValida,
             request('marca'),
             request('modelo'),
             request('anio'),
