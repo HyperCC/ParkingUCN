@@ -2,16 +2,17 @@ package cl.ucn.disc.pdis.appparkingucn.fragment;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import cl.ucn.disc.pdis.appparkingucn.R;
+import cl.ucn.disc.pdis.appparkingucn.RegistroVehiculo;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +23,7 @@ public class RegistrarInicio extends Fragment {
 
     Button botonRegistrar;
     RadioGroup tipoRegistro;
+    EditText editText;
     View vista;
 
     @Override
@@ -32,14 +34,15 @@ public class RegistrarInicio extends Fragment {
 
         botonRegistrar = (Button) vista.findViewById(R.id.botonRegistrar);
         tipoRegistro = (RadioGroup) vista.findViewById(R.id.tipoRegistro);
+        editText = (EditText) vista.findViewById(R.id.textInputEditText);
 
 
         botonRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (tipoRegistro.getCheckedRadioButtonId() == R.id.entrada) {
-                    //TODO: metodo ingreso
-                    Toast.makeText(getContext(), "El valor seleccionado es: "+ tipoRegistro.getCheckedRadioButtonId(), Toast.LENGTH_SHORT).show();
+
+                    ((RegistroVehiculo)getActivity()).limpiarPatente(editText.getText().toString());
                 }
                 if (tipoRegistro.getCheckedRadioButtonId() == R.id.salida) {
                     //TODO: metodo salida
