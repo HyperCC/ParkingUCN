@@ -27,11 +27,13 @@
             </ul>
 
             <div class="row">
+                <form class="form-inline my-lg-0 my-2" action="{{ route('busqueda.search') }}" method="get">
 
-                <form class="form-inline my-lg-0 my-2">
                     <div class="col-8">
-                        <input class="form-control rounded-pill px-3" type="search" placeholder="Buscar Persona o Vehiculo"
-                               aria-label="Search">
+                        <input class="form-control rounded-pill px-3" type="text"
+                               placeholder="Buscar Rut o Patente.."
+                               aria-label="Search"
+                               name="buscado">
                     </div>
 
                     <div class="col-4">
