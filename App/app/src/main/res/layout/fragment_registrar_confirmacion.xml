@@ -139,7 +139,7 @@
         </TableLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/botonConfirmar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Confirmar"
@@ -151,5 +151,4 @@
             app:layout_constraintVertical_bias="0.104" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>
