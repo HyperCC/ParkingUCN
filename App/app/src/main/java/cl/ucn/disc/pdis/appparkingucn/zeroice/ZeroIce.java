@@ -31,7 +31,7 @@ public final class ZeroIce {
     private static final Logger log = LoggerFactory.getLogger(ZeroIce.class);
 
     // Server IP (MUST BE SETTED BY ADMINISTRATOR)
-    private String serverIP = "192.168.0.13";
+    private String serverIP = "192.168.0.7";
 
     // Singleton
     private static final ZeroIce ZERO_ICE = new ZeroIce();

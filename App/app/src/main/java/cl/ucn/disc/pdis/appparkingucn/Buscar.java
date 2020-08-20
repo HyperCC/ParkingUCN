@@ -58,7 +58,8 @@ public class Buscar extends AppCompatActivity {
 
             datoTemp = datoTemp+split;
         }
-        //TODO: Reestructurar
+
+        datoTemp = datoTemp.toUpperCase();
 
         int len = datoTemp.length();
 
@@ -140,7 +141,6 @@ public class Buscar extends AppCompatActivity {
 
         return this.persona;
     }
-
 
     public void resultadoPersona() {
 
