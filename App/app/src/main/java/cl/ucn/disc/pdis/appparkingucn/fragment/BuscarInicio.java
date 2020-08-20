@@ -2,12 +2,12 @@ package cl.ucn.disc.pdis.appparkingucn.fragment;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -21,6 +21,8 @@ public class BuscarInicio extends Fragment {
 
     Button botonBuscar;
     RadioGroup seleccion;
+    EditText editText;
+
     View vista;
     /**
      *  Fragment constructor
@@ -38,17 +40,18 @@ public class BuscarInicio extends Fragment {
 
         botonBuscar = (Button) vista.findViewById(R.id.botonBuscar);
         seleccion = (RadioGroup) vista.findViewById(R.id.seleccion);
+        editText = (EditText) vista.findViewById(R.id.editText);
 
 
         botonBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (seleccion.getCheckedRadioButtonId() == R.id.botonRut) {
-                    //TODO: metodo ingreso
-                    ((Buscar)getActivity()).resultadoPersona();
-                    Toast.makeText(getContext(), "El valor seleccionado es: "+ seleccion.getCheckedRadioButtonId(), Toast.LENGTH_SHORT).show();
+
+                    ((Buscar)getActivity()).reestructurarRut(editText.getText().toString());
                 }
                 if (seleccion.getCheckedRadioButtonId() == R.id.botonPatente) {
+
                     //TODO: metodo salida
                     ((Buscar)getActivity()).resultadoVehiculo();
                     Toast.makeText(getContext(), "El valor seleccionado es: "+ seleccion.getCheckedRadioButtonId(), Toast.LENGTH_SHORT).show();
