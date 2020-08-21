@@ -98,8 +98,6 @@ class RegistroController extends Controller
             (request('estado') == 'Entrada') ? Estado::ENTRADA : Estado::SALIDA
         );
 
-        return $registro;
-
         // instancia de ICE.
         $connection = new InitializeConnection();
         $contratos = $connection->getContratos();

@@ -3,6 +3,8 @@
 
 namespace App;
 
+use Illuminate\Validation\ValidationException;
+
 require 'Ice.php';
 require_once base_path() . './domain.php';
 
@@ -107,12 +109,19 @@ class IdentifierValidator
      *
      * @param string $rut
      * @return null
+     * @throws ValidationException
      */
     public function validarRut(string $rut)
     {
         // siempre debe ir el upper de llamarse este metodo independientemente.
         $rut = strtoupper($rut);
         $formatedRut = null;
+
+        // verificar el ultimo digito, debe ser numerico o K
+        if (ctype_digit(substr($rut, -1)) == false & substr($rut, -1) != 'K')
+            throw ValidationException::withMessages([
+                'El formato del Rut proporcionado no es valido, debe terminar en un número o K',
+            ]);
 
         // rut con formato 11.222.333-4
         if (strlen($rut) == 12) {
@@ -121,7 +130,7 @@ class IdentifierValidator
             if (($rut[2] & $rut[6]) == '.'
                 & $rut[10] == '-'
                 // verificar que los characteres que no son '.' o '-' son numericos, excepto el primero.
-                & ctype_digit(str_replace('.', '', substr($rut, 0, (strlen($rut) - 3))))
+                & ctype_digit(str_replace('.', '', substr($rut, 0, (strlen($rut) - 2))))
             ) {
 
                 // dado el formato inicial correcto, solo podria ser rechazado por el servidor de no existir.
@@ -134,6 +143,7 @@ class IdentifierValidator
             // verificar el formato, dado el largo 11, no hay caso favorable para modificar.
             if (($rut[1] & $rut[5]) == '.'
                 & $rut[9] == '-'
+                & ctype_digit(str_replace('.', '', substr($rut, 0, (strlen($rut) - 2))))
             ) {
 
                 return $rut;
@@ -143,7 +153,7 @@ class IdentifierValidator
         } elseif (strlen($rut) == 10) {
 
             // verificar formato con guion unico antes de DV
-            if ($rut[8] == '-' & ctype_digit(substr($rut, 0, (strlen($rut) - 3)))) {
+            if ($rut[8] == '-' & ctype_digit(substr($rut, 0, (strlen($rut) - 2)))) {
 
                 // dar formato correcto con puntos antes de enviar al servidor
                 for ($i = 0; $i < 10; $i++) {
@@ -157,7 +167,7 @@ class IdentifierValidator
         } elseif (strlen($rut) == 9) {
 
             // verificar rut con formato 1222333-4
-            if ($rut[7] == '-' & ctype_digit(substr($rut, 0, (strlen($rut) - 3)))) {
+            if ($rut[7] == '-' & ctype_digit(substr($rut, 0, (strlen($rut) - 2)))) {
 
                 // dar formato correcto con puntos antes de enviar al servidor
                 for ($i = 0; $i < 9; $i++) {
@@ -167,7 +177,7 @@ class IdentifierValidator
                 return $formatedRut;
 
                 // verificar rut con formato 112223334
-            } elseif (ctype_digit(substr($rut, 0, (strlen($rut) - 3)))) {
+            } elseif (ctype_digit(substr($rut, 0, (strlen($rut) - 1)))) {
 
                 // dar formato correcto con puntos antes de enviar al servidor
                 for ($i = 0; $i < 9; $i++) {
@@ -176,6 +186,7 @@ class IdentifierValidator
                     if ($i == 7) $formatedRut .= '-';
 
                 }
+
                 return $formatedRut;
 
                 // rut de formato no valido
@@ -188,7 +199,7 @@ class IdentifierValidator
         } elseif (strlen($rut) == 8) {
 
             // verificar validez del formato
-            if (ctype_digit(substr($rut, 0, (strlen($rut) - 3)))) {
+            if (ctype_digit(substr($rut, 0, (strlen($rut) - 1)))) {
 
                 // dar formato correcto con puntos antes de enviar al servidor
                 for ($i = 0; $i < 8; $i++) {
