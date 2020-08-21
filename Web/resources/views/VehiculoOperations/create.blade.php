@@ -28,6 +28,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="propietario"> Rut del Propietario </label>
+                        <input class="form-control shadow-sm bg-light" name="responsable" type="text">
+                    </div>
+
+                    <div class="form-group">
                         <label for="marca"> Marca </label>
                         <input class="form-control shadow-sm bg-light" name="marca" type="text">
                     </div>
@@ -46,11 +51,6 @@
                     <div class="form-group">
                         <label for="observacion"> Observación </label>
                         <input class="form-control shadow-sm bg-light" name="observacion" type="text">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="propietario"> Rut del Propietario </label>
-                        <input class="form-control shadow-sm bg-light" name="responsable" type="text">
                     </div>
 
                     <hr>

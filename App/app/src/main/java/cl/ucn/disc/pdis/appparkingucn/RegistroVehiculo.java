@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020. Castillo - Condorcet - Pizarro Engineering Students.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package cl.ucn.disc.pdis.appparkingucn;
 
 import androidx.fragment.app.Fragment;
@@ -6,25 +22,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import cl.ucn.disc.pdis.appparkingucn.fragment.*;
-import cl.ucn.disc.pdis.simplescraper.zeroice.model.Persona;
-import cl.ucn.disc.pdis.simplescraper.zeroice.model.Vehiculo;
+import cl.ucn.disc.pdis.simplescraper.zeroice.model.*;
+
+
 
 public class RegistroVehiculo extends AppCompatActivity {
 
-    Fragment fragmentInicioRegistro;
+    Fragment fragmentRegistrarInicio;
+    Fragment fragmentRegistrarConfirmacion;
 
-    Persona persona;
-    Vehiculo vehiculo;
+    private Persona persona;
+    private Vehiculo vehiculo;
+    private String tipoRegistro;
+
+    private String fechaRegistro;
+    private String horaRegistro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_vehiculo);
 
-        fragmentInicioRegistro = new RegistrarInicio();
+        fragmentRegistrarInicio = new RegistrarInicio();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragments, fragmentInicioRegistro).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragments, fragmentRegistrarInicio).commit();
     }
 
     public void limpiarPatente(String dato) {
@@ -38,16 +63,18 @@ public class RegistroVehiculo extends AppCompatActivity {
             datoTemp = datoTemp + split;
         }
 
+        datoTemp = datoTemp.toUpperCase();
+
         if (datoTemp.length() == 6) {
 
             reestructurarPatente(datoTemp);
         } else {
+
             Toast.makeText(this, "La patente debe ser unicamente de 6 digitos.", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void reestructurarPatente(String datoTemp) {
-
 
         int len = datoTemp.length();
 
@@ -55,7 +82,6 @@ public class RegistroVehiculo extends AppCompatActivity {
         int multiploPunto = 1;
 
         if(len>(verificadorPunto*multiploPunto)){
-
 
             int count = 0;
             int i = len;
@@ -117,14 +143,99 @@ public class RegistroVehiculo extends AppCompatActivity {
 
         if(persona != null){
 
-            // TODO: Fragment transaction and deploy DATA
-            /*
+            fragmentRegistrarConfirmacion = new RegistrarConfirmacion();
+            generarFecha();
+
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.contenedorFragments, fragmentInicioRegistro).addToBackStack(null).commit();*/
+                    .replace(R.id.contenedorFragments, fragmentRegistrarConfirmacion).addToBackStack(null).commit();
         }else{
 
             Toast.makeText(this, "PERSONA CON RUT: "+rut+" NO ENCONTRADA", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void generarFecha(){
+
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        this.fechaRegistro = simpleDateFormat.format(calendar.getTime());
+
+        simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
+
+        this.horaRegistro = simpleDateFormat.format(calendar.getTime());
+    }
+
+    // TODO: REQUIERE CONEXION
+    public void generarRegistro(){
+
+        Communicator communicator = new Communicator();
+
+        Registro registro = new Registro();
+
+        registro.patente = vehiculo.patente;
+        registro.responsable = persona.rut;
+        registro.fecha = fechaRegistro;
+        registro.hora = horaRegistro;
+        registro.estado = transformarTipoRegistro();
+
+        Registro registroVerificar = communicator.crearRegistro(registro);
+
+        if(registroVerificar != null){
+
+            Toast.makeText(this, "EL REGISTRO FUE INGRESADO CON EXITO", Toast.LENGTH_SHORT).show();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.contenedorFragments, fragmentRegistrarInicio).addToBackStack(null).commit();
+
+        }else{
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.contenedorFragments, fragmentRegistrarInicio).addToBackStack(null).commit();
+            Toast.makeText(this, "EL REGISTRO NO PUDO SER INGRESADO", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private Estado transformarTipoRegistro(){
+
+        if(this.tipoRegistro == "Entrada"){
+
+            return Estado.ENTRADA;
+        }else{
+
+            return Estado.SALIDA;
+        }
+    }
+
+    public void setTipoRegistro(String tipoRegistro){
+
+        this.tipoRegistro = tipoRegistro;
+    }
+
+    public String getTipoRegistro(){
+
+        return this.tipoRegistro;
+    }
+
+    public Persona getPersona(){
+
+        return this.persona;
+    }
+
+    public Vehiculo getVehiculo(){
+
+        return this.vehiculo;
+    }
+
+    public String getFechaRegistro(){
+
+        return this.fechaRegistro;
+    }
+
+    public String getHoraRegistro(){
+
+        return this.horaRegistro;
     }
 }

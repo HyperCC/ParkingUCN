@@ -2,7 +2,6 @@
 
     <div class="container">
 
-
         <a class="navbar-brand font-weight-bold text-light my-1" href="{{ route('home') }}">
             ParkingUCN
         </a>

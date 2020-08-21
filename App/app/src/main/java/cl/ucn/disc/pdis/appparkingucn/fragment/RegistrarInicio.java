@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020. Castillo - Condorcet - Pizarro Engineering Students.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package cl.ucn.disc.pdis.appparkingucn.fragment;
 
 import android.os.Bundle;
@@ -9,7 +25,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import cl.ucn.disc.pdis.appparkingucn.R;
 import cl.ucn.disc.pdis.appparkingucn.RegistroVehiculo;
@@ -23,7 +38,7 @@ public class RegistrarInicio extends Fragment {
 
     Button botonRegistrar;
     RadioGroup tipoRegistro;
-    EditText editText;
+    EditText datoPatente;
     View vista;
 
     @Override
@@ -34,7 +49,7 @@ public class RegistrarInicio extends Fragment {
 
         botonRegistrar = (Button) vista.findViewById(R.id.botonRegistrar);
         tipoRegistro = (RadioGroup) vista.findViewById(R.id.tipoRegistro);
-        editText = (EditText) vista.findViewById(R.id.textInputEditText);
+        datoPatente = (EditText) vista.findViewById(R.id.datoRegistroVehicular);
 
 
         botonRegistrar.setOnClickListener(new View.OnClickListener() {
@@ -42,13 +57,14 @@ public class RegistrarInicio extends Fragment {
             public void onClick(View v) {
                 if (tipoRegistro.getCheckedRadioButtonId() == R.id.entrada) {
 
-                    ((RegistroVehiculo)getActivity()).limpiarPatente(editText.getText().toString());
+                    ((RegistroVehiculo)getActivity()).setTipoRegistro("Entrada");
+                    ((RegistroVehiculo)getActivity()).limpiarPatente(datoPatente.getText().toString());
                 }
                 if (tipoRegistro.getCheckedRadioButtonId() == R.id.salida) {
-                    //TODO: metodo salida
-                    Toast.makeText(getContext(), "El valor seleccionado es: "+ tipoRegistro.getCheckedRadioButtonId(), Toast.LENGTH_SHORT).show();
+
+                    ((RegistroVehiculo)getActivity()).setTipoRegistro("Salida");
+                    ((RegistroVehiculo)getActivity()).limpiarPatente(datoPatente.getText().toString());
                 }
-                //TODO: limpiar datos ingresados
             }
         });
         return vista;
