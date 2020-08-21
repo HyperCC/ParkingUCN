@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SavePersonaRequest;
 use App\IdentifierValidator;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use model\ContratosPrxHelper;
 use model\Persona;
 use model\Sexo;
@@ -41,18 +43,28 @@ class PersonaController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(SavePersonaRequest $request)
     {
+        $request->validate([]);
+
+        // dar formato a la patente
         $validador = new IdentifierValidator();
+
+        // dar formato al rut del propietario
         $rutValidado = $validador->validarRut(\request('rut'));
-        $rutValidado = $rutValidado ? $rutValidado : \request('rut');
-        // TODO: agregar lanzamiento de error para formato
+
+        // verificar si el formato es valido
+        if (!$rutValidado) {
+            throw ValidationException::withMessages([
+                'El formato del Rut proporcionado no es valido, debe utilizar uno de los formatos validos: 12223334, 1222333-4 ó 1.222.333-4',
+            ]);
+        }
 
         $persona = new Persona(
         // UID y WEBID se modificaran en el servidor para concordar con los registros.
-            10001,
+            1,
             0,
-            request('name'),
+            request('nombre'),
             $rutValidado,
             request('sexo') == 'VAR' ? Sexo::_VAR : Sexo::MUJ,
             request('cargo'),

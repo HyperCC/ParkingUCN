@@ -52,7 +52,10 @@ class VehiculoController extends Controller
         $validador = new IdentifierValidator();
         $patenteValida = $validador->validarPatente(\request('patente'));
 
+        // dar formato al rut del propietario
         $rutValidado = $validador->validarRut(\request('responsable'));
+
+        // verificar si el formato es valido
         if (!$rutValidado) {
             throw ValidationException::withMessages([
                 'El formato del Rut proporcionado no es valido, debe utilizar uno de los formatos validos: 12223334, 1222333-4 ó 1.222.333-4',
@@ -69,8 +72,6 @@ class VehiculoController extends Controller
             request('observacion'),
             $rutValidado
         );
-
-        return $vehiculo;
 
         // instancia de ICE.
         $connection = new InitializeConnection();

@@ -24,7 +24,7 @@
 
                     <div class="form-group">
                         <label for="name"> Nombre </label>
-                        <input class="form-control shadow-sm bg-light" name="name" type="text">
+                        <input class="form-control shadow-sm bg-light" name="nombre" type="text">
                     </div>
 
                     <div class="form-group">

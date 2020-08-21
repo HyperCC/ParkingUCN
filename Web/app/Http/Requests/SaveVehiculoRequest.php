@@ -30,7 +30,7 @@ class SaveVehiculoRequest extends FormRequest
     }
 
     /**
-     * @return array|void
+     * @return array|string[]
      */
     public function messages()
     {
