@@ -34,45 +34,61 @@ import cl.ucn.disc.pdis.appparkingucn.R;
  */
 public class BuscarInicio extends Fragment {
 
+
+    // Variable declaration.
     Button botonBuscar;
     RadioGroup seleccion;
     EditText editText;
 
+    // View for fragment transition.
     View vista;
+
     /**
      *  Fragment constructor
      */
     public BuscarInicio() {
-        // Required empty public constructor
+        // Required empty public constructor.
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        // Variable inicialization.
         vista = inflater.inflate(R.layout.fragment_buscar_inicio, container, false);
 
         botonBuscar = (Button) vista.findViewById(R.id.botonBuscar);
         seleccion = (RadioGroup) vista.findViewById(R.id.seleccion);
         editText = (EditText) vista.findViewById(R.id.editText);
 
-
+        // On button click.
         botonBuscar.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
+                // If rut search is selected.
                 if (seleccion.getCheckedRadioButtonId() == R.id.botonRut) {
 
+                    /*
+                     * sets the tipoDato to "responsable" because it holds the "rut" of a certain persona.
+                     * and calls the method reestructurarRut.
+                     */
                     ((Buscar)getActivity()).setTipoDato("responsable");
                     ((Buscar)getActivity()).reestructurarRut(editText.getText().toString());
                 }
+
+                // If patente search is selected.
                 if (seleccion.getCheckedRadioButtonId() == R.id.botonPatente) {
 
+                    // sets the tipoDato to "patente" and calls the method limpiarPatente.
                     ((Buscar)getActivity()).setTipoDato("patente");
                     ((Buscar)getActivity()).limpiarPatente(editText.getText().toString());
                 }
             }
         });
+
+        // Returns fragment view.
         return vista;
     }
 }
