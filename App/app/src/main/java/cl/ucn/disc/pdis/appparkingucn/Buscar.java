@@ -24,15 +24,17 @@ import android.widget.Toast;
 
 import cl.ucn.disc.pdis.appparkingucn.fragment.*;
 import cl.ucn.disc.pdis.simplescraper.zeroice.model.Persona;
+import cl.ucn.disc.pdis.simplescraper.zeroice.model.Registro;
 
 
 public class Buscar extends AppCompatActivity {
 
-    Fragment fragmentInicioBuscar;
-    Fragment fragmentPersonaResultado;
-    Fragment fragmentVehiculoResultado;
+    private Fragment fragmentInicioBuscar;
+    private Fragment fragmentPersonaResultado;
 
-    Persona persona;
+    private Persona persona;
+    private Registro registro;
+    private String tipoDato;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,6 @@ public class Buscar extends AppCompatActivity {
 
         fragmentInicioBuscar = new BuscarInicio();
         fragmentPersonaResultado = new BuscarPersonaResultado();
-        fragmentVehiculoResultado = new BuscarVehiculoResultado();
 
         getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragments, fragmentInicioBuscar).commit();
 
@@ -119,40 +120,49 @@ public class Buscar extends AppCompatActivity {
             }
         }
 
-        consultarRut(datoTemp);
+        consultarRegistro(datoTemp);
     }
 
-    public void consultarRut(String datoTemp){
-
+    public void consultarRegistro(String datoTemp){
 
         Communicator communicator = new Communicator();
-        persona = communicator.obtenerPersona(datoTemp);
 
-        if(persona != null){
+        registro = communicator.obtenerUltimoRegistro(datoTemp, this.tipoDato);
 
-            resultadoPersona();
+        if(registro != null){
+
+            persona = communicator.obtenerPersona(registro.responsable);
+            buscarResultado();
         }else{
 
-            Toast.makeText(this, "PERSONA CON RUT: "+datoTemp+" NO ENCONTRADA", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "NO SE HA ENCONTRADO REGISTRO CON DATO INGRESADO", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public Persona getRegistro(){
+    public Registro getRegistro(){
+
+        return this.registro;
+    }
+
+    public Persona getPersona(){
 
         return this.persona;
     }
 
-    public void resultadoPersona() {
+    public void buscarResultado() {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.contenedorFragments, fragmentPersonaResultado).addToBackStack(null).commit();
+                .replace(R.id.contenedorFragments, fragmentPersonaResultado).commit();
     }
 
-    public void resultadoVehiculo() {
+    public void setTipoDato(String tipoDato){
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.contenedorFragments, fragmentVehiculoResultado).addToBackStack(null).commit();
+        this.tipoDato = tipoDato;
+    }
+
+    public String getTipoDato(){
+
+        return this.tipoDato;
     }
 }
