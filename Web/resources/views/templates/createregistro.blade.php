@@ -13,7 +13,7 @@
 
 <div class="form-group">
     <label for="rut"> Rut Propietario </label>
-    <input class="form-control shadow-sm bg-light" name="propietario" type="text">
+    <input class="form-control shadow-sm bg-light" name="responsable" type="text">
 </div>
 
 <input type="hidden" name="estado" value="{{ $tipoRegistro }}">

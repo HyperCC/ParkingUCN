@@ -34,7 +34,9 @@ class RegistroController extends Controller
      */
     public function createEntrada()
     {
-        return view('RegistroOperations.createentrada');
+        return view('RegistroOperations.createentrada', [
+            'registro' => new Registro
+        ]);
     }
 
     /**
@@ -44,7 +46,9 @@ class RegistroController extends Controller
      */
     public function createSalida()
     {
-        return view('RegistroOperations.createsalida');
+        return view('RegistroOperations.createsalida', [
+            'registro' => new Registro
+        ]);
     }
 
     /**
@@ -54,16 +58,15 @@ class RegistroController extends Controller
      * @return Response
      * @throws ValidationException
      */
-    public function store(SaveRegistroRequest $request)
+    public function store(SaveVehiculoRequest $request)
     {
-
         // validacion de parametros en form request
         $request->validate([]);
 
         // validaciones de formato
         $validador = new IdentifierValidator();
         // validar formato de rut
-        $rutValidado = $validador->validarRut(\request('propietario'));
+        $rutValidado = $validador->validarRut(\request('responsable'));
 
         // verificar si el formato es valido
         if (!$rutValidado) {
@@ -95,7 +98,7 @@ class RegistroController extends Controller
             (request('estado') == 'Entrada') ? Estado::ENTRADA : Estado::SALIDA
         );
 
-        //return $registro;
+        return $registro;
 
         // instancia de ICE.
         $connection = new InitializeConnection();

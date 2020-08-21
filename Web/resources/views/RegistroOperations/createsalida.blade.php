@@ -12,7 +12,7 @@
 
                 <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{ route('registro.store') }}">
 
-                    @include('templates.createregistro', ['tipoRegistro'=>'Salida'])
+                    @include('templates.createregistro', ['tipoRegistro'=>'Salida', 'registro'=>$registro])
 
                 </form>
 
