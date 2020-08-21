@@ -43,7 +43,7 @@ public class Buscar extends AppCompatActivity {
         setContentView(R.layout.activity_buscar);
 
         fragmentInicioBuscar = new BuscarInicio();
-        fragmentPersonaResultado = new BuscarPersonaResultado();
+        fragmentPersonaResultado = new BuscarResultado();
 
         getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragments, fragmentInicioBuscar).commit();
 
