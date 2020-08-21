@@ -32,8 +32,8 @@ import cl.ucn.disc.pdis.simplescraper.zeroice.model.*;
 
 public class RegistroVehiculo extends AppCompatActivity {
 
-    Fragment fragmentRegistrarInicio;
-    Fragment fragmentRegistrarConfirmacion;
+    private Fragment fragmentRegistrarInicio;
+    private Fragment fragmentRegistrarConfirmacion;
 
     private Persona persona;
     private Vehiculo vehiculo;
@@ -126,6 +126,8 @@ public class RegistroVehiculo extends AppCompatActivity {
         Communicator communicator = new Communicator();
         vehiculo = communicator.obtenerVehiculo(datoTemp);
 
+        communicator = null;
+
         if(vehiculo != null){
 
             consultarRut(vehiculo.responsable);
@@ -148,7 +150,7 @@ public class RegistroVehiculo extends AppCompatActivity {
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.contenedorFragments, fragmentRegistrarConfirmacion).addToBackStack(null).commit();
+                    .replace(R.id.contenedorFragments, fragmentRegistrarConfirmacion).commit();
         }else{
 
             Toast.makeText(this, "PERSONA CON RUT: "+rut+" NO ENCONTRADA", Toast.LENGTH_SHORT).show();
@@ -167,7 +169,6 @@ public class RegistroVehiculo extends AppCompatActivity {
         this.horaRegistro = simpleDateFormat.format(calendar.getTime());
     }
 
-    // TODO: REQUIERE CONEXION
     public void generarRegistro(){
 
         Communicator communicator = new Communicator();
@@ -187,13 +188,13 @@ public class RegistroVehiculo extends AppCompatActivity {
             Toast.makeText(this, "EL REGISTRO FUE INGRESADO CON EXITO", Toast.LENGTH_SHORT).show();
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.contenedorFragments, fragmentRegistrarInicio).addToBackStack(null).commit();
+                    .replace(R.id.contenedorFragments, fragmentRegistrarInicio).commit();
 
         }else{
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.contenedorFragments, fragmentRegistrarInicio).addToBackStack(null).commit();
+                    .replace(R.id.contenedorFragments, fragmentRegistrarInicio).commit();
             Toast.makeText(this, "EL REGISTRO NO PUDO SER INGRESADO", Toast.LENGTH_SHORT).show();
         }
     }
