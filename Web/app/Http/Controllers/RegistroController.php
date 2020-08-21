@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SaveRegistroRequest;
+use App\Http\Requests\SaveBusquedaRequest;
 use App\Http\Requests\SaveVehiculoRequest;
 use App\IdentifierValidator;
 use App\InitializeConnection;
@@ -54,7 +54,7 @@ class RegistroController extends Controller
     /**
      * Store a newly Registro created in storage.
      *
-     * @param SaveRegistroRequest $request
+     * @param SaveBusquedaRequest $request
      * @return Response
      * @throws ValidationException
      */

@@ -1,3 +1,5 @@
+@extends('templates.validateerrors')
+
 <nav class="navbar navbar-light navbar-expand-lg bg-primary">
 
     <div class="container">

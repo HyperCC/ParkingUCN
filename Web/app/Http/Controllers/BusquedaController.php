@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveBusquedaRequest;
 use App\IdentifierValidator;
 use Illuminate\Http\Request;
 use model\Persona;
@@ -23,10 +24,14 @@ class BusquedaController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param SaveBusquedaRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function search()
+    public function search(SaveBusquedaRequest $request)
     {
+        // validacion de parametros en form request
+        $request->validate([]);
+
         // generar un identificador generico
         $validarBuscado = new IdentifierValidator();
         $validado = $validarBuscado->identificarRutOPatente(request('buscado'));
