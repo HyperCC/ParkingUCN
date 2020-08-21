@@ -209,7 +209,6 @@ namespace ServerParkingUCN
             }
         }
 
-        // 
         /// <summary>
         /// Given a rut, returns a persona from Database
         /// </summary>
@@ -235,15 +234,57 @@ namespace ServerParkingUCN
                 {
                     // error in the query. return null Persona
                     _logger.LogDebug($"Error in query to search a Persona by rut: {e.GetBaseException()}");
+                    _logger.LogDebug("Persona not found in database");
                     return null;
 
-                }
-
-                _logger.LogDebug("Persona not found in database");
+                }                
                 // pc.SaveChanges();
                 return persona;
             }
         }
 
+        /// <summary>
+        /// Given a data an his type, returns a registro from Database
+        /// </summary>
+        /// <param name="dato">to search</param>
+        /// <param name="datoTipo">to search</param>
+        /// <param name="current">the context of zeroIce</param>
+        /// <returns>A Persona founded</returns>
+        public override Registro obtenerUltimoRegistro(string dato, string tipoDato, Current current = null) 
+        {
+            _logger.LogDebug("obtenerUltimoRegistro initialization..");
+
+            using (var scope = _serviceScopeFactory.CreateScope())
+            {
+                ParkingContext pc = scope.ServiceProvider.GetService<ParkingContext>();
+
+                Registro registro = new Registro();
+
+                try
+                {
+
+                    if(tipoDato == "responsable"){
+
+                        _logger.LogDebug($"Searching the Registro by rut: {dato}");
+                        registro = pc.Registros.Where(registro => registro.responsable == dato).OrderByDescending(r => r.uid).First();
+
+                    }else{
+
+                        _logger.LogDebug($"Searching the Registro by patente: {dato}");
+                        registro = pc.Registros.Where(registro => registro.patente == dato).OrderByDescending(r => r.uid).First();
+                    }                    
+                }
+                catch (System.Exception e)
+                {
+                    // error in the query. return null Registro
+                    _logger.LogDebug($"Error in query to search a Registro by dato: {e.GetBaseException()}");
+                    _logger.LogDebug("Registro not found in database");
+                    return null;
+                }   
+                             
+                // pc.SaveChanges();
+                return registro;
+            }
+        }
     }
 }
