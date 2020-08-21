@@ -12,8 +12,8 @@
 </div>
 
 <div class="form-group">
-    <label for="rut"> Rut Conductor </label>
-    <input class="form-control shadow-sm bg-light" name="rut" type="text">
+    <label for="rut"> Rut Propietario </label>
+    <input class="form-control shadow-sm bg-light" name="propietario" type="text">
 </div>
 
 <input type="hidden" name="estado" value="{{ $tipoRegistro }}">

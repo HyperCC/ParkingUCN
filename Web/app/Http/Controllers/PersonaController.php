@@ -45,6 +45,7 @@ class PersonaController extends Controller
      */
     public function store(SavePersonaRequest $request)
     {
+        // validacion de parametros en form request
         $request->validate([]);
 
         // dar formato a la patente

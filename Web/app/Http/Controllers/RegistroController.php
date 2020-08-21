@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveRegistroRequest;
+use App\Http\Requests\SaveVehiculoRequest;
 use App\IdentifierValidator;
 use App\InitializeConnection;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 use model\Estado;
 use model\Registro;
 
@@ -16,7 +20,7 @@ class RegistroController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -26,7 +30,7 @@ class RegistroController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function createEntrada()
     {
@@ -36,7 +40,7 @@ class RegistroController extends Controller
     /**
      * Show the form for create a new Registro.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function createSalida()
     {
@@ -46,20 +50,30 @@ class RegistroController extends Controller
     /**
      * Store a newly Registro created in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param SaveRegistroRequest $request
+     * @return Response
+     * @throws ValidationException
      */
-    public function store()
+    public function store(SaveRegistroRequest $request)
     {
+
+        // validacion de parametros en form request
+        $request->validate([]);
+
         // validaciones de formato
         $validador = new IdentifierValidator();
         // validar formato de rut
-        $rutValidado = $validador->validarRut(\request('rut'));
-        $rutValidado = $rutValidado ? $rutValidado : \request('rut');
+        $rutValidado = $validador->validarRut(\request('propietario'));
+
+        // verificar si el formato es valido
+        if (!$rutValidado) {
+            throw ValidationException::withMessages([
+                'El formato del Rut proporcionado no es valido, debe utilizar uno de los formatos validos: 12223334, 1222333-4 ó 1.222.333-4',
+            ]);
+        }
 
         // validar formato de patente
         $patenteValida = $validador->validarPatente(\request('patente'));
-        $patenteValida = $patenteValida ? $patenteValida : \request('patente');
 
         // date_default_timezone_set('America/Santiago');
         $fecha = getdate();
@@ -81,6 +95,8 @@ class RegistroController extends Controller
             (request('estado') == 'Entrada') ? Estado::ENTRADA : Estado::SALIDA
         );
 
+        //return $registro;
+
         // instancia de ICE.
         $connection = new InitializeConnection();
         $contratos = $connection->getContratos();
@@ -95,7 +111,7 @@ class RegistroController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -106,7 +122,7 @@ class RegistroController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
@@ -118,7 +134,7 @@ class RegistroController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -129,7 +145,7 @@ class RegistroController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {

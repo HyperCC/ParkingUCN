@@ -42,4 +42,5 @@ class SavePersonaRequest extends FormRequest
             'rut.min' => 'Debe ingresar el Rut de a lo más 12 carácteres en formato 11.222.333-4'
         ];
     }
+
 }
