@@ -36,9 +36,12 @@ import cl.ucn.disc.pdis.appparkingucn.RegistroVehiculo;
  */
 public class RegistrarInicio extends Fragment {
 
+    // Variable declaration.
     Button botonRegistrar;
     RadioGroup tipoRegistro;
     EditText datoPatente;
+
+    // View transition variable.
     View vista;
 
     @Override
@@ -47,26 +50,36 @@ public class RegistrarInicio extends Fragment {
 
         vista = inflater.inflate(R.layout.fragment_registrar_inicio, container, false);
 
+        // Variable initialization.
         botonRegistrar = (Button) vista.findViewById(R.id.botonRegistrar);
         tipoRegistro = (RadioGroup) vista.findViewById(R.id.tipoRegistro);
         datoPatente = (EditText) vista.findViewById(R.id.datoRegistroVehicular);
 
-
+        // On button click.
         botonRegistrar.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
+                // If the Registro its a Entrada.
                 if (tipoRegistro.getCheckedRadioButtonId() == R.id.entrada) {
 
+                    // Sets the tipoRegistro as Entrada and calls the method limpiarPatente.
                     ((RegistroVehiculo)getActivity()).setTipoRegistro("Entrada");
                     ((RegistroVehiculo)getActivity()).limpiarPatente(datoPatente.getText().toString());
                 }
+
+                // If the Registro its a Salida.
                 if (tipoRegistro.getCheckedRadioButtonId() == R.id.salida) {
 
+                    // Sets the tipoRegistro as Salida and calls the method limpiarpatente.
                     ((RegistroVehiculo)getActivity()).setTipoRegistro("Salida");
                     ((RegistroVehiculo)getActivity()).limpiarPatente(datoPatente.getText().toString());
                 }
             }
         });
+
+        // Returns the view.
         return vista;
     }
 }
