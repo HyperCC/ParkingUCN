@@ -196,7 +196,7 @@ module model {
          */
         Persona crearPersona(Persona persona);
 
-	/**
+		/**
          * Create a Vehiculo with a vehiculo instance.
          *
          * @param vehiculo to create
@@ -204,7 +204,7 @@ module model {
          */
         Vehiculo crearVehiculo(Vehiculo vehiculo);
 
-	/**
+		/**
          * Vehiculo entry to university.
          *
          * @param registro de vehiculo a la universidad.
@@ -220,13 +220,21 @@ module model {
          */
         Persona obtenerPersona(string rut);
 
-	/**
+		/**
          * Search a Vehiculo with a patente.
-	 *
+		 *
          * @param patente del vehiculo a buscar.
          * @return Vehiculo buscado.
          */
         Vehiculo obtenerVehiculo(string patente);
+		
+		/**
+		 * Search the last Registro with a rut or patente inserted.
+		 *
+		 * @param dato a buscar (rut o patente).
+		 * @param identificador de dato que se buscara.
+		 * @return Registro buscado.
+		 */
+		Registro obtenerUltimoRegistro(string dato, string tipoDato);
     }
-
 }
