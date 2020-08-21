@@ -25,7 +25,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import cl.ucn.disc.pdis.appparkingucn.Buscar;
 import cl.ucn.disc.pdis.appparkingucn.R;
@@ -64,15 +63,14 @@ public class BuscarInicio extends Fragment {
             public void onClick(View v) {
                 if (seleccion.getCheckedRadioButtonId() == R.id.botonRut) {
 
+                    ((Buscar)getActivity()).setTipoDato("responsable");
                     ((Buscar)getActivity()).reestructurarRut(editText.getText().toString());
                 }
                 if (seleccion.getCheckedRadioButtonId() == R.id.botonPatente) {
 
-                    //TODO: metodo salida
-                    ((Buscar)getActivity()).resultadoVehiculo();
-                    Toast.makeText(getContext(), "El valor seleccionado es: "+ seleccion.getCheckedRadioButtonId(), Toast.LENGTH_SHORT).show();
+                    ((Buscar)getActivity()).setTipoDato("patente");
+                    ((Buscar)getActivity()).limpiarPatente(editText.getText().toString());
                 }
-                //TODO: limpiar datos ingresados
             }
         });
         return vista;
