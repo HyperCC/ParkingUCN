@@ -37,24 +37,28 @@ import cl.ucn.disc.pdis.simplescraper.zeroice.model.Vehiculo;
  */
 public class RegistrarConfirmacion extends Fragment {
 
-    // Declarar variables.
+    // Variable declaration
     private Persona persona;
     private Vehiculo vehiculo;
 
+    // View declaration
     private View vista;
 
+    // Variable for Registro data display
     private TextView nomDispConfReg;
     private TextView rutDispConfReg;
     private TextView patenteDispConfReg;
 
+    // Variable for date and time type (Entrada/Salida)
     private TextView fechaConfreg;
     private TextView horaConfReg;
 
+    // Variable for date and time data
     private TextView fechaDispConfReg;
     private TextView horaDispConfReg;
 
+    // Submit button
     private Button botonConfirmar;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,42 +67,51 @@ public class RegistrarConfirmacion extends Fragment {
         // Inflate the layout for this fragment.
         vista = inflater.inflate(R.layout.fragment_registrar_confirmacion, container, false);
 
-        // Inicializar variables.
+        // Registro data display initialization
         nomDispConfReg = (TextView) vista.findViewById(R.id.nomDispConfReg);
         rutDispConfReg = (TextView) vista.findViewById(R.id.rutDispConfReg);
         patenteDispConfReg = (TextView) vista.findViewById(R.id.patenteDispConfReg);
 
+        // Date and time type display initialization (Entrada/Salida)
         fechaConfreg = (TextView) vista.findViewById(R.id.fechaConfReg);
         horaConfReg = (TextView) vista.findViewById(R.id.horaConfReg);
 
+        // Date and time data initialization
         fechaDispConfReg = (TextView) vista.findViewById(R.id.fechaDispConfReg);
         horaDispConfReg = (TextView) vista.findViewById(R.id.horaDispConfReg);
 
+        // Submit button initialization
         botonConfirmar = (Button) vista.findViewById(R.id.botonConfirmar);
 
 
-        // Llenar variables.
+        // Gets the Persona and Vehiculo data.
         persona = ((RegistroVehiculo)getActivity()).getPersona();
         vehiculo = ((RegistroVehiculo)getActivity()).getVehiculo();
 
+        // Sets the Registro data
         nomDispConfReg.setText(persona.nombre);
         rutDispConfReg.setText(persona.rut);
         patenteDispConfReg.setText(vehiculo.patente);
 
+        // Sets the date and time type display of the Registro (Entrada/Salida)
         fechaConfreg.setText("Fecha "+((RegistroVehiculo)getActivity()).getTipoRegistro()+":  ");
         horaConfReg.setText("Hora "+((RegistroVehiculo)getActivity()).getTipoRegistro()+":  ");
 
+        // Sets the date and time data
         fechaDispConfReg.setText(((RegistroVehiculo)getActivity()).getFechaRegistro());
         horaDispConfReg.setText(((RegistroVehiculo)getActivity()).getHoraRegistro());
 
+        // On button click
         botonConfirmar.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-
+                // Submits the data and creates a new Registro
                 ((RegistroVehiculo)getActivity()).generarRegistro();
             }
         });
 
+        // View return
         return vista;
     }
 }
