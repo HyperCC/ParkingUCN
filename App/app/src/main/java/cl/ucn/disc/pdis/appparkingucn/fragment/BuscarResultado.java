@@ -34,7 +34,7 @@ import cl.ucn.disc.pdis.simplescraper.zeroice.model.Registro;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BuscarPersonaResultado extends Fragment {
+public class BuscarResultado extends Fragment {
 
     // Variable declaration.
     Registro registro;
@@ -65,7 +65,7 @@ public class BuscarPersonaResultado extends Fragment {
     /**
      *  Fragment constructor
      */
-    public BuscarPersonaResultado() {
+    public BuscarResultado() {
         // Required empty public constructor
     }
 
@@ -73,7 +73,7 @@ public class BuscarPersonaResultado extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        vista = inflater.inflate(R.layout.fragment_buscar_persona_resultado, container, false);
+        vista = inflater.inflate(R.layout.fragment_buscar_resultado, container, false);
 
         // Header data display.
         tituloBuscarResultado = (TextView) vista.findViewById(R.id.tituloBuscarResultado);
