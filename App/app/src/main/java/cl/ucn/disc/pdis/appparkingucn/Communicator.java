@@ -65,4 +65,15 @@ public class Communicator {
             return null;
         }
     }
+
+    public Registro obtenerUltimoRegistro (String dato, String tipoDato){
+
+        try{
+
+            return operator.obtenerUltimoRegistro(dato, tipoDato);
+        }catch(Exception e){
+
+            return null;
+        }
+    }
 }
