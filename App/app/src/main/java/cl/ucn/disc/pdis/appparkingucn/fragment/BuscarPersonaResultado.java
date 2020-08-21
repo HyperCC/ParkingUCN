@@ -27,16 +27,33 @@ import android.widget.TextView;
 
 import cl.ucn.disc.pdis.appparkingucn.Buscar;
 import cl.ucn.disc.pdis.appparkingucn.R;
+import cl.ucn.disc.pdis.simplescraper.zeroice.model.Estado;
 import cl.ucn.disc.pdis.simplescraper.zeroice.model.Persona;
+import cl.ucn.disc.pdis.simplescraper.zeroice.model.Registro;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class BuscarPersonaResultado extends Fragment {
 
+    Registro registro;
     Persona persona;
-    TextView rutPersona;
-    TextView nombrePersona;
+
+    // Diseño vista
+    TextView tituloBuscarResultado;
+    TextView tipoDatoBuscado;
+    TextView datoBuscado;
+    TextView datoRegistroBuscado;
+
+
+
+    TextView nombrePersonaBuscada;
+
+    TextView tipoFechaRegistro;
+    TextView tipoHoraRegistro;
+
+    TextView fechaRegistro;
+    TextView horaRegistro;
 
     View vista;
 
@@ -51,19 +68,59 @@ public class BuscarPersonaResultado extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //TODO: Hacer elementos del fragmento funcionales
-
-        //TODO: Hacer funcionales las transacciones de fragmentos
 
         vista = inflater.inflate(R.layout.fragment_buscar_persona_resultado, container, false);
 
-        rutPersona = (TextView) vista.findViewById(R.id.rutPersonaBuscada);
-        nombrePersona = (TextView) vista.findViewById(R.id.nombrePersonaBuscada);
+        // Encabezado
+        tituloBuscarResultado = (TextView) vista.findViewById(R.id.tituloBuscarResultado);
+        tipoDatoBuscado = (TextView) vista.findViewById(R.id.tipoDatoBuscado);
 
-        persona = ((Buscar)getActivity()).getRegistro();
 
-        rutPersona.setText(persona.rut);
-        nombrePersona.setText(persona.nombre);
+        nombrePersonaBuscada = (TextView) vista.findViewById(R.id.nombrePersonaBuscada);
+
+        datoBuscado = (TextView) vista.findViewById(R.id.datoBuscado);
+        datoRegistroBuscado = (TextView) vista.findViewById(R.id.datoRegistroBuscado);
+
+        tipoFechaRegistro = (TextView) vista.findViewById(R.id.tipoFechaRegistro);
+        tipoHoraRegistro = (TextView) vista.findViewById(R.id.tipoHoraRegistro);
+
+        fechaRegistro = (TextView) vista.findViewById(R.id.fechaRegistro);
+        horaRegistro = (TextView) vista.findViewById(R.id.horaRegistro);
+
+        //--
+        registro = ((Buscar)getActivity()).getRegistro();
+        persona = ((Buscar)getActivity()).getPersona();
+
+        //--
+
+        nombrePersonaBuscada.setText(persona.nombre);
+
+        if(registro.estado == Estado.ENTRADA){
+
+            tipoFechaRegistro.setText("Fecha Entrada");
+            tipoHoraRegistro.setText("Hora Entrada");
+        }else{
+
+            tipoFechaRegistro.setText("Fecha Salida");
+            tipoHoraRegistro.setText("Hora Salida");
+        }
+
+        fechaRegistro.setText(registro.fecha);
+        horaRegistro.setText(registro.hora);
+
+        if(((Buscar)getActivity()).getTipoDato() == "responsable"){
+
+            tituloBuscarResultado.setText("RESULTADO PARA RUT");
+            tipoDatoBuscado.setText(registro.responsable);
+            datoBuscado.setText("Patente: ");
+            datoRegistroBuscado.setText(registro.patente);
+        }else{
+
+            tituloBuscarResultado.setText("RESULTADO PARA PATENTE");
+            tipoDatoBuscado.setText(registro.patente);
+            datoBuscado.setText("RUT: ");
+            datoRegistroBuscado.setText(registro.responsable);
+        }
 
         // Inflate the layout for this fragment
         return vista;
